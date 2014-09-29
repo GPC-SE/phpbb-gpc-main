@@ -1,0 +1,27 @@
+{
+	"name": "gpc/indexpage",
+	"type": "phpbb-extension",
+	"description": "Adds a new index page.",
+	"homepage": "http://www.penspinning.de",
+	"version": "0.0.1-DEV",
+	"time": "2014-09-29",
+	"keywords": ["phpbb", "extension", "gpc", "indexpage"],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Robert Heim",
+			"homepage": "http://blog.robert-heim.de",
+			"email": "robert@robert-heim.de",
+			"role": "Lead Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"extra": {
+		"display-name": "GPC Indexpage",
+		"soft-require": {
+			"phpbb/phpbb": "3.1.*"
+		}
+	}
+}
