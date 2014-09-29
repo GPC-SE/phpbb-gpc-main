@@ -1,8 +1,3 @@
-body {
-  padding-top: 70px;
-  padding-bottom: 30px;
-}
-
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
@@ -12,6 +7,11 @@ body {
 .theme-showcase > p > .btn {
   margin: 5px 0;
 }
+
+.theme-showcase > div {
+	padding: 15px;
+}
+
 
 .theme-showcase .navbar .container {
   width: auto;
