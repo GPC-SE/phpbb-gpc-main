@@ -1,7 +1,7 @@
-gpc_indexpage_controller:
-    pattern: /indexpage
-    defaults: { _controller: gpc.indexpage.controller:show }
-gpc_indexpage_controller2:
+gpc_main_controller:
+    pattern: /main
+    defaults: { _controller: gpc.main.controller:show }
+gpc_main_controller2:
     pattern: /
-    defaults: { _controller: gpc.indexpage.controller:show }
+    defaults: { _controller: gpc.main.controller:show }
 

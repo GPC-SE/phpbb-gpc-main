@@ -1,6 +1,6 @@
 services:
-    gpc.indexpage.controller:
-        class: gpc\indexpage\controller\main
+    gpc.main.controller:
+        class: gpc\main\controller\main
         arguments:
             - @config
             - @controller.helper

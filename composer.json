@@ -1,7 +1,7 @@
 {
-	"name": "gpc/indexpage",
+	"name": "gpc/main",
 	"type": "phpbb-extension",
-	"description": "Adds a new index page.",
+	"description": "Adds the main GPC website.",
 	"homepage": "http://www.penspinning.de",
 	"version": "0.0.1-DEV",
 	"time": "2014-09-29",
@@ -19,7 +19,7 @@
 		"php": ">=5.3.3"
 	},
 	"extra": {
-		"display-name": "GPC Indexpage",
+		"display-name": "GPC Main",
 		"soft-require": {
 			"phpbb/phpbb": "3.1.*"
 		}
