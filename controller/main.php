@@ -66,15 +66,50 @@ class main
 		$this->phpbb_root_path = $root_path;
 		$this->table_prefix = $table_prefix;
 		$this->pagination = $pagination;
+
+		// always set the general template vars
+		$this->set_general_template_vars();
 	}
 
 	/**
-	 * Demo controller for route /whitelist
+	 * Sets the general template vars which are used on (almost) every page.
+	 */
+	private function set_general_template_vars()
+	{
+		$this->template->assign_vars(array(
+		// TODO if under /community, don't add community/
+			'GPC_STYLE_PATH' => 'community/ext/gpc/main/styles/prosilver/',
+			'U_GPC_IMPRESSUM' => $this->helper->route('gpc_main_controller_impressum'),
+		));
+	}
+
+	/**
+	 * Controller for route / and /main
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
 	public function show()
 	{
 		return $this->helper->render('index.html');
+	}
+
+	/**
+	 * Controller for route /disclaimer
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function disclaimer()
+	{
+		return $this->helper->render('disclaimer.html');
+	}
+
+	/**
+	 * Controller for route /impressum
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function impressum()
+	{
+		return $this->helper->render('impressum.html');
 	}
 }

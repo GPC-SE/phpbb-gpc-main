@@ -4,4 +4,10 @@ gpc_main_controller:
 gpc_main_controller2:
     pattern: /
     defaults: { _controller: gpc.main.controller:show }
+gpc_main_controller_disclaimer:
+    pattern: /disclaimer
+    defaults: { _controller: gpc.main.controller:disclaimer }
+gpc_main_controller_impressum:
+    pattern: /impressum
+    defaults: { _controller: gpc.main.controller:impressum }
 
