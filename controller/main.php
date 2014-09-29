@@ -38,6 +38,8 @@ class main
 
 	protected $pagination;
 
+	protected $tags_manager;
+
 	/**
 	 * Constructor
 	 *
@@ -52,8 +54,9 @@ class main
 	 * @param string							$root_path	phpBB root path
 	 * @param string							$table_prefix
 	 * @param \phpbb\pagination					$pagination
+	 * @param \robertheim\topictags\service\tags_manager			$tags_manager
 	 */
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\db\driver\driver_interface $db, $php_ext, $root_path, $table_prefix, $pagination)
+	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\db\driver\driver_interface $db, $php_ext, $root_path, $table_prefix, $pagination, \robertheim\topictags\service\tags_manager $tags_manager)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
@@ -66,6 +69,7 @@ class main
 		$this->phpbb_root_path = $root_path;
 		$this->table_prefix = $table_prefix;
 		$this->pagination = $pagination;
+		$this->tags_manager = $tags_manager;
 
 		// always set the general template vars
 		$this->set_general_template_vars();
@@ -158,7 +162,36 @@ class main
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE' => true,
 		));
+
+		$this->assign_tutorial_topics_block(array('basic'), 'basic');
+		$this->assign_tutorial_topics_block(array('advanced'), 'advanced');
+		$this->assign_tutorial_topics_block(array('expert'), 'expert');
+
 		return $this->helper->render('tutorials.html');
+	}
+
+
+	private function assign_tutorial_topics_block($tags, $blockname)
+	{
+		global $phpbb_root_path, $phpEx;
+		$start = 0;
+		$limit = 10;
+		$topics = $this->tags_manager->get_topics_by_tags($tags, $start, $limit);
+
+		foreach ($topics as $topic)
+		{
+			$rating = rand(3, 5);
+
+			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
+			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
+
+			$this->template->assign_block_vars($blockname, array(
+				'TITLE'		=> $topic['topic_title'],
+				'LINK'		=> $view_topic_url,
+				'AUTHOR'	=> $topic['topic_first_poster_name'],
+				'RATING'	=> $rating,
+			));
+		}
 	}
 
 	/**

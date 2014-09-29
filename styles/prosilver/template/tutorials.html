@@ -1,5 +1,95 @@
 <!-- INCLUDE header.html -->
 
-TUTORIALS
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h1>Die Trick-Tutorials</h1>
+			<p>Aller Anfang ist schwer. Unsere Tutorials helfen dir auf dem Weg zum/r Penspinner/in. Alle Tutorials sind in Gemeinschaftsarbeit innerhalb der Community entstanden, geprüft und für gut befunden!</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+			<h2>Einfach</h2>
+			<p>Die sogenannten <em>Basics</em> lernt man in etwa einer Woche. Unsere Tutorials helfen dir dabei. Du kannst Fragen direkt im Thema des jeweilgen Tutorials stellen</p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Tutorial</th>
+						<th>Autor</th>
+						<th>Bewertung</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN basic -->
+					<tr>
+						<td><a href="{basic.LINK}">{basic.TITLE}</a></td>
+						<td>{basic.AUTHOR}</td>
+						<td>
+						{% for i in 1..(basic.RATING) %}
+						    <span class="glyphicon glyphicon-star"></span> 
+						{% endfor %}
+						</td>
+					</tr>
+					<!-- END basic -->
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-md-4">
+			<h2>Mittel</h2>
+			<p>Du kannst die Basics und suchst neue Herausforderungen? Hier geht es in die nächste Runde!</p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Tutorial</th>
+						<th>Autor</th>
+						<th>Bewertung</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN advanced -->
+					<tr>
+						<td><a href="{advanced.LINK}">{advanced.TITLE}</a></td>
+						<td>{advanced.AUTHOR}</td>
+						<td>
+						{% for i in 1..(advanced.RATING) %}
+						    <span class="glyphicon glyphicon-star"></span> 
+						{% endfor %}
+						</td>
+					</tr>
+					<!-- END advanced -->
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-md-4">
+			<h2>Schwer</h2>
+			<p>Die richtig schweren Tricks können Monate oder auch Jahre der Übung erfordern. Du solltest in jedem Fall die Basics und mittelschweren Tricks beherrschen - und vor allem dich, weil du hier viel Durchhaltevermögen brauchst!</p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Tutorial</th>
+						<th>Autor</th>
+						<th>Bewertung</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- BEGIN expert -->
+					<tr>
+						<td><a href="{expert.LINK}">{expert.TITLE}</a></td>
+						<td>{expert.AUTHOR}</td>
+						<td>
+						{% for i in 1..(expert.RATING) %}
+						    <span class="glyphicon glyphicon-star"></span> 
+						{% endfor %}
+						</td>
+					</tr>
+					<!-- END expert -->
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
 
 <!-- INCLUDE footer.html -->

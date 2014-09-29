@@ -16,6 +16,7 @@
 		}
 	],
 	"require": {
+		"robertheim/topictags": "0.0.*",
 		"php": ">=5.3.3"
 	},
 	"extra": {

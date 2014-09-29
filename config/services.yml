@@ -13,4 +13,5 @@ services:
             - %core.root_path%
             - %core.table_prefix%
             - @pagination
+            - @robertheim.topictags.tags_manager
 
