@@ -76,10 +76,20 @@ class main
 	 */
 	private function set_general_template_vars()
 	{
+		// here we know, that we are using a route of our controller and no phpBB route
+		// if the current url contains "/community/" we redirect to the same adress without "/community"
+		// because content /xyz should not be reachable at /community/xyz again
+
+		if (!strpos($this->helper->get_current_url(), '/community/') === false)
+		{
+			redirect(str_replace('/community/', '/', $this->helper->get_current_url()), false, true);
+			exit;
+		}
+
 		$this->template->assign_vars(array(
-		// TODO if under /community, don't add community/
-			'GPC_STYLE_PATH' => 'community/ext/gpc/main/styles/prosilver/',
-			'U_GPC_IMPRESSUM' => $this->helper->route('gpc_main_controller_impressum'),
+			'GPC_STYLE_PATH'	=> 'community/ext/gpc/main/styles/prosilver/',
+			'U_GPC_HOME'		=> $this->helper->route('gpc_main_controller'),
+			'U_GPC_IMPRESSUM'	=> $this->helper->route('gpc_main_controller_impressum'),
 		));
 	}
 

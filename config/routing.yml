@@ -1,5 +1,5 @@
 gpc_main_controller:
-    pattern: /main
+    pattern: main
     defaults: { _controller: gpc.main.controller:show }
 gpc_main_controller2:
     pattern: /
