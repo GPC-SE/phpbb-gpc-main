@@ -82,15 +82,24 @@ class main
 
 		if (!strpos($this->helper->get_current_url(), '/community/') === false)
 		{
-			redirect(str_replace('/community/', '/', $this->helper->get_current_url()), false, true);
+			redirect($this->remove_community($this->helper->get_current_url()), false, true);
 			exit;
 		}
 
 		$this->template->assign_vars(array(
 			'GPC_STYLE_PATH'	=> 'community/ext/gpc/main/styles/prosilver/',
-			'U_GPC_HOME'		=> $this->helper->route('gpc_main_controller'),
-			'U_GPC_IMPRESSUM'	=> $this->helper->route('gpc_main_controller_impressum'),
+			'U_GPC_HOME'		=> $this->remove_community($this->helper->route('gpc_main_controller2')).'/',
+			'U_GPC_IMPRESSUM'	=> $this->remove_community($this->helper->route('gpc_main_controller_impressum')),
+			'U_GPC_VIDEOS'		=> $this->remove_community($this->helper->route('gpc_main_controller_videos')),
+			'U_GPC_TUTORIALS'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials')),
+			'U_GPC_FAQS'		=> $this->remove_community($this->helper->route('gpc_main_controller_faqs')),
+			'U_GPC_COMMUNITY'	=> 'community/index.php',
 		));
+	}
+
+	private function remove_community($str)
+	{
+		return str_replace('community/', '', $str);
 	}
 
 	/**
@@ -100,6 +109,9 @@ class main
 	 */
 	public function show()
 	{
+		$this->template->assign_vars(array(
+			'S_GPC_HOME_ACTIVE' => true,
+		));
 		return $this->helper->render('index.html');
 	}
 
@@ -121,5 +133,44 @@ class main
 	public function impressum()
 	{
 		return $this->helper->render('impressum.html');
+	}
+
+	/**
+	 * Controller for route /videos
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function videos()
+	{
+		$this->template->assign_vars(array(
+			'S_GPC_VIDEOS_ACTIVE' => true,
+		));
+		return $this->helper->render('videos.html');
+	}
+
+	/**
+	 * Controller for route /tutorials
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function tutorials()
+	{
+		$this->template->assign_vars(array(
+			'S_GPC_TUTORIALS_ACTIVE' => true,
+		));
+		return $this->helper->render('tutorials.html');
+	}
+
+	/**
+	 * Controller for route /faqs
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function faqs()
+	{
+		$this->template->assign_vars(array(
+			'S_GPC_FAQS_ACTIVE' => true,
+		));
+		return $this->helper->render('faqs.html');
 	}
 }

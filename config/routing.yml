@@ -10,4 +10,13 @@ gpc_main_controller_disclaimer:
 gpc_main_controller_impressum:
     pattern: /impressum
     defaults: { _controller: gpc.main.controller:impressum }
+gpc_main_controller_videos:
+    pattern: /videos
+    defaults: { _controller: gpc.main.controller:videos }
+gpc_main_controller_tutorials:
+    pattern: /tutorials
+    defaults: { _controller: gpc.main.controller:tutorials }
+gpc_main_controller_faqs:
+    pattern: /faqs
+    defaults: { _controller: gpc.main.controller:faqs }
 

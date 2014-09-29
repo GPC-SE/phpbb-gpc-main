@@ -44,11 +44,11 @@
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials <span class="caret"></span></a>
+					<li<!-- IF S_GPC_HOME_ACTIVE --> class="active"<!-- ENDIF -->><a href="{U_GPC_HOME}">Home</a></li>
+					<li class="dropdown<!-- IF S_GPC_TUTORIALS_ACTIVE --> active<!-- ENDIF -->">
+						<a href="{U_GPC_TUTORIALS}" class="dropdown-toggle" data-toggle="dropdown">Tutorials <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Alle Tutorials</a></li>
+							<li><a href="{U_GPC_TUTORIALS}">Alle Tutorials</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Tricks</li>
 							<li><a href="#">Alle</a></li>
@@ -62,9 +62,9 @@
 							<li><a href="#"><span class="glyphicon glyphicon-transfer"></span> Pen-Trading</a></li>
 						</ul>
 					</li>
-					<li><a href="community">Videos</a></li>
-					<li><a href="community">FAQs</a></li>
-					<li><a href="community">Community</a></li>
+					<li<!-- IF S_GPC_VIDEOS_ACTIVE --> class="active"<!-- ENDIF -->><a href="{U_GPC_VIDEOS}">Videos</a></li>
+					<li<!-- IF S_GPC_FAQS_ACTIVE --> class="active"<!-- ENDIF -->><a href="{U_GPC_FAQS}">FAQs</a></li>
+					<li><a href="{U_GPC_COMMUNITY}">Community</a></li>
 					<li><a href="{U_CONTACT_US}">{L_CONTACT}</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
