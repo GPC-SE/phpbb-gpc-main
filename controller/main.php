@@ -89,10 +89,10 @@ class main
 			redirect($this->remove_community($this->helper->get_current_url()), false, true);
 			exit;
 		}
-
+		$home_link = $this->remove_community($this->helper->route('gpc_main_controller2')).'/';
 		$this->template->assign_vars(array(
-			'GPC_STYLE_PATH'	=> 'community/ext/gpc/main/styles/prosilver/',
-			'U_GPC_HOME'		=> $this->remove_community($this->helper->route('gpc_main_controller2')).'/',
+			'GPC_STYLE_PATH'	=> $home_link . 'community/ext/gpc/main/styles/prosilver/',
+			'U_GPC_HOME'		=> $home_link,
 			'U_GPC_IMPRESSUM'	=> $this->remove_community($this->helper->route('gpc_main_controller_impressum')),
 			'U_GPC_VIDEOS'		=> $this->remove_community($this->helper->route('gpc_main_controller_videos')),
 			'U_GPC_TUTORIALS'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials')),
@@ -194,6 +194,34 @@ class main
 		}
 	}
 
+
+	/**
+	 * Controller for route /tutorial/view/{topic_id}
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function tutorial_view($topic_id)
+	{
+		$sql = 'SELECT t.topic_title AS title, p.post_text AS text, p.bbcode_uid, p.bbcode_bitfield
+	        FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p
+	        WHERE t.topic_id = ' . (int) $topic_id . '
+				AND t.topic_first_post_id = p.post_id';
+		$result = $this->db->sql_query($sql);
+		$row = $this->db->sql_fetchrow($result);
+		$this->db->sql_freeresult($result);
+
+		$options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
+
+		$this->template->assign_vars(array(
+		    'TITLE'		=> $row['title'],
+		    'TEXT'		=> generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $options),
+		));
+		$this->template->assign_vars(array(
+			'S_GPC_TUTORIALS_ACTIVE'	=> true,
+		));
+		return $this->helper->render('tutorial_view.html');
+	}
+
 	/**
 	 * Controller for route /faqs
 	 *
@@ -205,5 +233,18 @@ class main
 			'S_GPC_FAQS_ACTIVE' => true,
 		));
 		return $this->helper->render('faqs.html');
+	}
+
+	/**
+	 * Controller for route /menu
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function menu()
+	{
+		$this->template->assign_vars(array(
+			'S_GPC_COMMUNITY_ACTIVE' => true,
+		));
+		return $this->helper->render('menu.html');
 	}
 }
