@@ -89,7 +89,9 @@ class main
 			redirect($this->remove_community($this->helper->get_current_url()), false, true);
 			exit;
 		}
-		$home_link = $this->remove_community($this->helper->route('gpc_main_controller2')).'/';
+//		FIXME helper->route might add ssid, so we cannot use it., remove gpc_main_controller2?
+//		$home_link = $this->remove_community($this->helper->route('gpc_main_controller2')).'/';
+		$home_link = '/';
 		$this->template->assign_vars(array(
 			'GPC_STYLE_PATH'	=> $home_link . 'community/ext/gpc/main/styles/prosilver/',
 			'U_GPC_HOME'		=> $home_link,
