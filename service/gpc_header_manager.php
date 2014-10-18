@@ -28,9 +28,6 @@ class gpc_header_manager
 
 	public function assign_header_vars()
 	{
-		global $phpbb_root_path;
-		// helper->route might add ssid, so we cannot use it., remove gpc_main_controller2?
-
 		$home_link = '/';
 
 		$this->template->assign_vars(array(
@@ -40,7 +37,6 @@ class gpc_header_manager
 			'U_GPC_VIDEOS'		=> $this->remove_community($this->helper->route('gpc_main_controller_videos')),
 			'U_GPC_TUTORIALS'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials')),
 			'U_GPC_FAQS'		=> $this->remove_community($this->helper->route('gpc_main_controller_faqs')),
-			'U_GPC_COMMUNITY'	=> $phpbb_root_path,
 		));
 
 		/* determine the active menu item.

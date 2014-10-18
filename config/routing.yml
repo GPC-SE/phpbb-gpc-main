@@ -1,5 +1,4 @@
-
-gpc_main_controller2:
+gpc_main_controller:
     pattern: /
     defaults: { _controller: gpc.main.controller:show }
 gpc_main_controller_disclaimer:

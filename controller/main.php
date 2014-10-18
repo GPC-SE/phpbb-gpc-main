@@ -57,10 +57,16 @@ class main
 	{
 		$this->helper = $helper;
 
+		// if current url is the board-index "/community/" we redirect to community/index.php
+		if (preg_match('/\/community\/$/i', $this->helper->get_current_url()))
+		{
+			redirect($this->helper->get_current_url() . 'index.php', false, true);
+			exit;
+		}
+
 		// here we know, that we are using a route of our controller and no phpBB route
 		// if the current url contains "/community/" we redirect to the same adress without "/community"
 		// because content /xyz should not be reachable at /community/xyz again
-
 		if (!strpos($this->helper->get_current_url(), '/community/') === false)
 		{
 			redirect($this->remove_community($this->helper->get_current_url()), false, true);
