@@ -14,4 +14,14 @@ services:
             - %core.table_prefix%
             - @pagination
             - @robertheim.topictags.tags_manager
-
+    gpc.main.gpc_header_manager:
+        class: gpc\main\service\gpc_header_manager
+        arguments:
+            - @template
+            - @controller.helper
+    gpc.main.listener:
+        class: gpc\main\event\main_listener
+        arguments:
+            - @gpc.main.gpc_header_manager
+        tags:
+            - { name: event.listener }

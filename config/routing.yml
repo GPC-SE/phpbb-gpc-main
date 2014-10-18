@@ -1,6 +1,4 @@
-gpc_main_controller:
-    pattern: main
-    defaults: { _controller: gpc.main.controller:show }
+
 gpc_main_controller2:
     pattern: /
     defaults: { _controller: gpc.main.controller:show }
@@ -22,8 +20,4 @@ gpc_main_controller_tutorial_view:
 gpc_main_controller_faqs:
     pattern: /faqs
     defaults: { _controller: gpc.main.controller:faqs }
-gpc_main_controller_menu:
-    pattern: /menu
-    defaults: { _controller: gpc.main.controller:menu }
-
 

@@ -40,26 +40,34 @@ class main
 
 	protected $tags_manager;
 
-	/**
-	 * Constructor
-	 *
-	 * @param \phpbb\config\config				$config
-	 * @param \phpbb\controller\helper			$helper
-	 * @param \phpbb\template\template			$template
-	 * @param \phpbb\user						$user
-	 * @param \phpbb\auth\auth					$auth
-	 * @param \phpbb\request\request			$request
-	 * @param \phpbb\db\driver\driver_interface	$db
-	 * @param string							$php_ext	phpEx
-	 * @param string							$root_path	phpBB root path
-	 * @param string							$table_prefix
-	 * @param \phpbb\pagination					$pagination
-	 * @param \robertheim\topictags\service\tags_manager			$tags_manager
-	 */
-	public function __construct(\phpbb\config\config $config, \phpbb\controller\helper $helper, \phpbb\template\template $template, \phpbb\user $user, \phpbb\auth\auth $auth, \phpbb\request\request $request, \phpbb\db\driver\driver_interface $db, $php_ext, $root_path, $table_prefix, $pagination, \robertheim\topictags\service\tags_manager $tags_manager)
+	public function __construct(
+		\phpbb\config\config $config,
+		\phpbb\controller\helper $helper,
+		\phpbb\template\template $template,
+		\phpbb\user $user,
+		\phpbb\auth\auth $auth,
+		\phpbb\request\request $request,
+		\phpbb\db\driver\driver_interface $db,
+		$php_ext,
+		$root_path,
+		$table_prefix,
+		$pagination,
+		\robertheim\topictags\service\tags_manager $tags_manager
+	)
 	{
-		$this->config = $config;
 		$this->helper = $helper;
+
+		// here we know, that we are using a route of our controller and no phpBB route
+		// if the current url contains "/community/" we redirect to the same adress without "/community"
+		// because content /xyz should not be reachable at /community/xyz again
+
+		if (!strpos($this->helper->get_current_url(), '/community/') === false)
+		{
+			redirect($this->remove_community($this->helper->get_current_url()), false, true);
+			exit;
+		}
+
+		$this->config = $config;
 		$this->template = $template;
 		$this->user = $user;
 		$this->auth = $auth;
@@ -70,37 +78,6 @@ class main
 		$this->table_prefix = $table_prefix;
 		$this->pagination = $pagination;
 		$this->tags_manager = $tags_manager;
-
-		// always set the general template vars
-		$this->set_general_template_vars();
-	}
-
-	/**
-	 * Sets the general template vars which are used on (almost) every page.
-	 */
-	private function set_general_template_vars()
-	{
-		// here we know, that we are using a route of our controller and no phpBB route
-		// if the current url contains "/community/" we redirect to the same adress without "/community"
-		// because content /xyz should not be reachable at /community/xyz again
-
-		if (!strpos($this->helper->get_current_url(), '/community/') === false)
-		{
-			redirect($this->remove_community($this->helper->get_current_url()), false, true);
-			exit;
-		}
-//		FIXME helper->route might add ssid, so we cannot use it., remove gpc_main_controller2?
-//		$home_link = $this->remove_community($this->helper->route('gpc_main_controller2')).'/';
-		$home_link = '/';
-		$this->template->assign_vars(array(
-			'GPC_STYLE_PATH'	=> $home_link . 'community/ext/gpc/main/styles/prosilver/',
-			'U_GPC_HOME'		=> $home_link,
-			'U_GPC_IMPRESSUM'	=> $this->remove_community($this->helper->route('gpc_main_controller_impressum')),
-			'U_GPC_VIDEOS'		=> $this->remove_community($this->helper->route('gpc_main_controller_videos')),
-			'U_GPC_TUTORIALS'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials')),
-			'U_GPC_FAQS'		=> $this->remove_community($this->helper->route('gpc_main_controller_faqs')),
-			'U_GPC_COMMUNITY'	=> 'community/index.php',
-		));
 	}
 
 	private function remove_community($str)
@@ -237,16 +214,4 @@ class main
 		return $this->helper->render('faqs.html');
 	}
 
-	/**
-	 * Controller for route /menu
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
-	 */
-	public function menu()
-	{
-		$this->template->assign_vars(array(
-			'S_GPC_COMMUNITY_ACTIVE' => true,
-		));
-		return $this->helper->render('menu.html');
-	}
 }
