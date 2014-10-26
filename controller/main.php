@@ -155,7 +155,6 @@ class main
 		return $this->helper->render('tutorials.html');
 	}
 
-
 	private function assign_tutorial_topics_block($tags, $blockname)
 	{
 		global $phpbb_root_path, $phpEx;
@@ -169,7 +168,9 @@ class main
 
 			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
-
+				
+			//$tutorial_url = $this->remove_community($this->helper->route('gpc_main_controller_tutorial_view', array('topic_id' => $topic['topic_id'])));
+			
 			$this->template->assign_block_vars($blockname, array(
 				'TITLE'		=> $topic['topic_title'],
 				'LINK'		=> $view_topic_url,
@@ -218,6 +219,19 @@ class main
 			'S_GPC_FAQS_ACTIVE' => true,
 		));
 		return $this->helper->render('faqs.html');
+	}
+	
+	/**
+	 * Controller for route /tutorials/tricks/familien
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function tutorials_tricks_families()
+	{
+		$this->template->assign_vars(array(
+			'S_GPC_TUTORIALS_ACTIVE' => true,
+		));
+		return $this->helper->render('tricks_families.html');
 	}
 
 }

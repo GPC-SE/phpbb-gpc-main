@@ -10,13 +10,14 @@ gpc_main_controller_impressum:
 gpc_main_controller_videos:
     pattern: /videos
     defaults: { _controller: gpc.main.controller:videos }
-gpc_main_controller_tutorials:
-    pattern: /tutorials
-    defaults: { _controller: gpc.main.controller:tutorials }
 gpc_main_controller_tutorial_view:
     pattern: /tutorial/view/{topic_id}
     defaults: { _controller: gpc.main.controller:tutorial_view }
 gpc_main_controller_faqs:
     pattern: /faqs
     defaults: { _controller: gpc.main.controller:faqs }
+gpc_main_controller_tutorials_tricks_families:
+    pattern: /tutorials/tricks/familien
+    defaults: { _controller: gpc.main.controller:tutorials_tricks_families }
+
 

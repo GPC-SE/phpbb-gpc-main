@@ -35,7 +35,7 @@ class gpc_header_manager
 			'U_GPC_HOME'		=> $home_link,
 			'U_GPC_IMPRESSUM'	=> $this->remove_community($this->helper->route('gpc_main_controller_impressum')),
 			'U_GPC_VIDEOS'		=> $this->remove_community($this->helper->route('gpc_main_controller_videos')),
-			'U_GPC_TUTORIALS'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials')),
+			'U_GPC_TUTORIALS_TRICKS_FAMILIES' => $this->remove_community($this->helper->route('gpc_main_controller_tutorials_tricks_families')),
 			'U_GPC_FAQS'		=> $this->remove_community($this->helper->route('gpc_main_controller_faqs')),
 		));
 
