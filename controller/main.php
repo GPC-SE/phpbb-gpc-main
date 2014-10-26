@@ -222,21 +222,47 @@ class main
 	}
 
 	/**
+	 * Generates a link to the search for the given tags.
+	 *  
+	 * @param array $tags
+	 */
+	private function get_search_link(array $tags)
+	{
+		$size = sizeof($tags);
+		if (!($size > 0))
+		{
+			return $this->helper->route('gpc_main_controller_tutorials_search');
+		}
+
+		for ($i = 0; $i < $size; $i++)
+		{
+			$tags[$i] = urlencode($tags[$i]);
+		}
+		return $this->remove_community(
+			$this->helper->route('gpc_main_controller_tutorials_search', 
+				array(
+					'tags' => join(',', $tags)
+				)));
+	}
+	
+	/**
 	 * Controller for route /tutorials/tricks/familien
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
 	public function tutorials_tricks_families()
 	{
-		$search_around_url = $this->helper->route(
-			'gpc_main_controller_tutorials_search', array(
-				'tags' => 'around'
-			));
-		$search_around_url = $this->remove_community($search_around_url);
-		
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE'	=> true,
-			'U_GPC_SEARCH_AROUND'		=> $search_around_url,
+			'U_GPC_SEARCH_AROUND'		=> $this->get_search_link(array('around')),
+			'U_GPC_SEARCH_PASS'			=> $this->get_search_link(array('pass')),
+			'U_GPC_SEARCH_SONIC'		=> $this->get_search_link(array('sonic')),
+			'U_GPC_SEARCH_CHARGE'		=> $this->get_search_link(array('charge')),
+			'U_GPC_SEARCH_INFINITY'		=> $this->get_search_link(array('infinity')),
+			'U_GPC_SEARCH_SPINS'		=> $this->get_search_link(array('spins')),
+			'U_GPC_SEARCH_SHADOW'		=> $this->get_search_link(array('shadow')),
+			'U_GPC_SEARCH_ARTISTIC'		=> $this->get_search_link(array('artistic')),
+			'U_GPC_SEARCH_OTHER'		=> $this->get_search_link(array('sonstige')),
 		));
 		return $this->helper->render('tricks_families.html');
 	}
@@ -266,10 +292,7 @@ class main
 	public function tutorials_search($tags, $mode, $casesensitive)
 	{
 		global $user, $phpbb_container, $config, $phpbb_root_path, $request;
-		$form_action_route = $this->helper->route(
-			'gpc_main_controller_tutorials_search', array(
-				'tags' => ''
-			));
+		$form_action_route = $this->get_search_link(array());
 		$form_action_route = $this->remove_community($form_action_route);
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE'				=> true,
@@ -279,7 +302,7 @@ class main
 		));
 
 		// TODO
-		$tag_suggestions = array('beginner', 'trick', 'pen');
+		$tag_suggestions = array('beginner', 'trick', 'pen', 'around', 'pass', 'sonic', 'charge', 'infinity', 'spins', 'shadow', 'artistic', 'sonstige');
 		
 		for ($i = 0, $size = sizeof($tag_suggestions); $i < $size; $i++)
 		{
@@ -302,8 +325,6 @@ class main
 		$tags = $all_tags['valid'];
 		if (sizeof($tags) > 0)
 		{
-			$tags_string = join(', ', $tags);
-			
 			$this->template->assign_var('RH_TOPICTAGS', 
 				base64_encode(json_encode($tags)));
 			
@@ -319,12 +340,7 @@ class main
 			
 			$topics = $this->tags_manager->get_topics_by_tags($tags, $start, 
 				$limit, $mode, $casesensitive);
-			$base_url = $this->helper->route(
-				'gpc_main_controller_tutorials_search', 
-				array(
-					'tags' => urlencode($tags_string)
-				));
-			$base_url = $this->remove_community($base_url);
+			$base_url = $this->get_search_link($tags);
 			
 			// $pagination->generate_template_pagination($base_url, 'pagination', 'start',
 			// $topics_count, $config['topics_per_page'], $start);
