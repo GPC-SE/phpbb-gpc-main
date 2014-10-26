@@ -220,7 +220,7 @@ class main
 		));
 		return $this->helper->render('faqs.html');
 	}
-	
+
 	/**
 	 * Controller for route /tutorials/tricks/familien
 	 *
@@ -232,6 +232,51 @@ class main
 			'S_GPC_TUTORIALS_ACTIVE' => true,
 		));
 		return $this->helper->render('tricks_families.html');
+	}
+
+	/**
+	 * Controller for route /tutorials/search
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function tutorials_search()
+	{
+		$this->template->assign_vars(array(
+			'S_GPC_TUTORIALS_ACTIVE' => true,
+			'S_RH_TOPICTAGS_INCLUDE_NG_TAGS_INPUT'		=> true,
+			'S_RH_TOPICTAGS_INCLUDE_CSS'				=> true,				
+		));
+
+		// TODO
+		$tags = array('beginner', 'trick', 'pen');
+		
+	for ($i = 0, $size = sizeof($tags); $i < $size; $i++)
+		{
+			$this->template->assign_block_vars('rh_topictags_suggestions', array(
+				'LINK' => '#',
+				'NAME' => $tags[$i],
+			));
+		}
+		
+		$tutotials = array(
+			array(
+				'link' => '#',
+				'tags' => 'asdf, asdfe',
+			),
+			array(
+				'link' => '#',
+				'tags' => 'asdf',
+			),
+		);
+		for ($i = 0, $size = sizeof($tutotials); $i < $size; $i++)
+		{
+			$this->template->assign_block_vars('tutorial', array(
+				'TITLE' => 'A title ' . $i,
+				'LINK' => $tutotials[$i]['link'],
+				'TAGS' => $tutotials[$i]['tags'],
+			));
+		}
+		return $this->helper->render('tag_search.html');
 	}
 
 }

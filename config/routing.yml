@@ -19,5 +19,7 @@ gpc_main_controller_faqs:
 gpc_main_controller_tutorials_tricks_families:
     pattern: /tutorials/tricks/familien
     defaults: { _controller: gpc.main.controller:tutorials_tricks_families }
-
+gpc_main_controller_tutorials_search:
+    pattern: /tutorials/search
+    defaults: { _controller: gpc.main.controller:tutorials_search }
 

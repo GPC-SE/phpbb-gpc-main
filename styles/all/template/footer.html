@@ -1,32 +1,47 @@
 
-	<hr/>
+<hr />
 
-	<div class="container">
+<div class="container">
 	<!-- Footer -->
 	<div class="row">
 		<div class="col-md-12">
-			<p><a href="{U_GPC_IMPRESSUM}">Impressum</a> | <a href="{U_CONTACT_US}">{L_CONTACT}</a></p>
+			<p>
+				<a href="{U_GPC_IMPRESSUM}">Impressum</a> | <a href="{U_CONTACT_US}">{L_CONTACT}</a>
+			</p>
 		</div>
 	</div>
 
-    </div> <!-- /container -->
+</div>
+<!-- /container -->
 
+<script type="text/javascript" src="{T_JQUERY_LINK}"></script>
+<!-- IF S_ALLOW_CDN -->
+<script type="text/javascript">
+	window.jQuery
+			|| document
+					.write(unescape('%3Cscript src="{T_ASSETS_PATH}/javascript/jquery.min.js?assets_version={T_ASSETS_VERSION}" type="text/javascript"%3E%3C/script%3E'));
+</script>
+<!-- ENDIF -->
 
-    <!-- INCLUDE footer_bootstrap.html -->
+{$SCRIPTS}
+
+<!-- INCLUDE footer_bootstrap.html -->
 
 <script type="text/javascript">
-function checkAdBlock() {
-	setTimeout(function(){
-		var ad = document.getElementById("psads").children;
-		if(ad.length<=2)  {
-			document.getElementById("psadsalternative").style.display="block";
-		};
-	}, 1000);
-}
-checkAdBlock();
+	function checkAdBlock() {
+		setTimeout(
+				function() {
+					var ad = document.getElementById("psads").children;
+					if (ad.length <= 2) {
+						document.getElementById("psadsalternative").style.display = "block";
+					}
+					;
+				}, 1000);
+	}
+	checkAdBlock();
 </script>
 
 
-  </body>
+</body>
 </html>
 

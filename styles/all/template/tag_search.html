@@ -1,0 +1,90 @@
+<!-- INCLUDE header.html -->
+
+<!-- IF S_RH_TOPICTAGS_INCLUDE_NG_TAGS_INPUT -->
+<!-- INCLUDEJS //ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.min.js -->
+<!-- INCLUDEJS //cdnjs.cloudflare.com/ajax/libs/ng-tags-input/2.1.1-1/ng-tags-input.min.js -->
+<!-- INCLUDEJS @robertheim_topictags/../angular/taginput.app.js -->
+<!-- INCLUDEJS @gpc_main/../select_tag.js -->
+<!-- ENDIF -->
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<h1>Die Tutorials</h1>
+					<p>Aller Anfang ist schwer. Unsere Tutorials helfen dir auf dem
+						Weg zum/r Penspinner/in. Alle Tutorials sind in
+						Gemeinschaftsarbeit innerhalb der Community entstanden, geprüft
+						und für gut befunden!</p>
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="inputTags" class="col-sm-2 control-label">Häufige
+								Tags</label>
+							<div class="col-sm-10">
+								<div class="rh_topictags_suggestions">
+									<!-- BEGIN rh_topictags_suggestions -->
+									{% include
+									'../../../../../robertheim/topictags/styles/all/template/simple_tag.html'
+									with {'NAME' : rh_topictags_suggestions.NAME, 'LINK' :
+									rh_topictags_suggestions.LINK} only %}
+									<!-- END rh_topictags_suggestions -->
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputTags" class="col-sm-2 control-label">Tags</label>
+							<div class="col-sm-10">
+								<div ng-app="rhTopicTagsInputApp"
+									ng-controller="rhTopicTagsInputCtrl"
+									data-ng-init="init('{RH_TOPICTAGS}')">
+									<div id="rhTopicTagsInputAppScope"></div>
+									<!-- allowed-tags-pattern="{RH_TOPICTAGS_ALLOWED_TAGS_REGEX}" -->
+									<tags-input ng-model="tags" add-on-comma="true"
+										replace-spaces-with-dashes="{RH_TOPICTAGS_CONVERT_SPACE_TO_MINUS}"
+										placeholder="..." tabindex="2" enable-editing-last-tag="true"
+										min-length="1"> <auto-complete
+										source="loadTags($query)"></auto-complete> </tags-input>
+									<input type="hidden" name="rh_topictags" id="rh_topictags"
+										value="{[{ jsonRep }]}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<button type="submit" class="btn btn-primary">Suchen</button>
+							</div>
+						</div>						
+					</form>
+					<hr />
+					<form class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="inputFilter" class="col-sm-1 control-label">Filter</label>
+							<div class="col-sm-11">
+								<input type="text" class="form-control" id="inputFilter"
+									placeholder="Filter">
+							</div>
+						</div>
+					</form>
+				</div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Tutorial</th>
+							<th>Tags</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- BEGIN tutorial -->
+						<tr>
+							<td><a href="{tutorial.LINK}">{tutorial.TITLE}</a></td>
+							<td>{tutorial.TAGS}</td>
+						</tr>
+						<!-- END tutorial -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- INCLUDE footer.html -->
