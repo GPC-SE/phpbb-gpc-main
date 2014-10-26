@@ -31,6 +31,17 @@ angular.module('searchApp', ['ngTagsInput'])
 				}
 			}
 		}
+		$scope.getSearchLink = function (baseUrl) {
+			var query = [];
+			for (var i = 0; i < this.tags.length; i++) {
+				query.push(encodeURIComponent(this.tags[i].text));
+			}
+			var link = baseUrl;
+			if (query.length>0) {
+				link += '/' + query.join(',');
+			}
+			return link;
+		}
 		$scope.loadTags = function(query) {
 			var data = {
 				'query': query,
@@ -60,8 +71,4 @@ angular.module('searchApp', ['ngTagsInput'])
 				.flash(200, 3);
 			}
 		}
-		$scope.jsonRep = '';
-		$scope.$watch('tags', function(t) {
-			$scope.jsonRep = btoa(JSON.stringify(t));
-		}, true);
 	});

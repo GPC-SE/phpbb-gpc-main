@@ -240,6 +240,19 @@ class main
 		));
 		return $this->helper->render('tricks_families.html');
 	}
+	
+	/**
+	 * Controller for route /tutorials/pens/familien
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function tutorials_pens_families()
+	{	
+		$this->template->assign_vars(array(
+			'S_GPC_TUTORIALS_ACTIVE'	=> true,
+		));
+		return $this->helper->render('pens_families.html');
+	}
 
 	/**
 	 * Controller for route /tutorials/search
@@ -306,9 +319,8 @@ class main
 			
 			$topics = $this->tags_manager->get_topics_by_tags($tags, $start, 
 				$limit, $mode, $casesensitive);
-			
 			$base_url = $this->helper->route(
-				'robertheim_topictags_show_tag_controller', 
+				'gpc_main_controller_tutorials_search', 
 				array(
 					'tags' => urlencode($tags_string)
 				));

@@ -19,7 +19,8 @@
 							dem Weg zum/r Penspinner/in. Alle Tutorials sind in
 							Gemeinschaftsarbeit innerhalb der Community entstanden, geprüft
 							und für gut befunden!</p>
-						<form class="form-horizontal" role="form" action="{[{ '{U_SEARCH_ROUTE}' + '/beginner,superman' }]}">
+							{U_SEARCH_ROUTE}
+						<form class="form-horizontal" role="form" action="{[{ '/'+getSearchLink('{U_SEARCH_ROUTE}') }]}">
 							<div class="form-group">
 								<label for="inputTags" class="col-sm-2 control-label">Häufige
 									Tags</label>
@@ -40,8 +41,6 @@
 										placeholder="..." tabindex="2" enable-editing-last-tag="true"
 										min-length="1"> <auto-complete
 										source="loadTags($query)"></auto-complete> </tags-input>
-									<input type="hidden" name="rh_topictags" id="rh_topictags"
-										value="{[{ jsonRep }]}" />
 								</div>
 							</div>
 							<div class="form-group">

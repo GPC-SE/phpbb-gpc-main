@@ -28,14 +28,29 @@ class gpc_header_manager
 
 	public function assign_header_vars()
 	{
+		global $phpbb_root_path, $phpEx;
 		$home_link = '/';
-
+		
+		// TODO
+		$forum_id = 1;
+		$topic_id = 1;
+		$pen_trading_tutorial_url_params = 'f=' . $forum_id . '&amp;t=' . $topic_id;
+		$pen_trading_tutorial_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $pen_trading_tutorial_url_params);
+		
 		$this->template->assign_vars(array(
 			'GPC_STYLE_PATH'	=> $home_link . 'community/ext/gpc/main/styles/all/',
 			'U_GPC_HOME'		=> $home_link,
 			'U_GPC_IMPRESSUM'	=> $this->remove_community($this->helper->route('gpc_main_controller_impressum')),
 			'U_GPC_VIDEOS'		=> $this->remove_community($this->helper->route('gpc_main_controller_videos')),
-			'U_GPC_TUTORIALS_TRICKS_FAMILIES' => $this->remove_community($this->helper->route('gpc_main_controller_tutorials_tricks_families')),
+			'U_GPC_TUTORIALS_TRICKS_ALL'		=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'trick'))),
+			'U_GPC_TUTORIALS_TRICKS_BEGINNER'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'trick,beginner'))),
+			'U_GPC_TUTORIALS_TRICKS_FAMILIES'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_tricks_families')),
+			'U_GPC_TUTORIALS_PENS_ALL'			=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'pen'))),
+			'U_GPC_TUTORIALS_PENS_BEGINNER'		=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'pen,beginner'))),
+			'U_GPC_TUTORIALS_PENS_FAMILIES'		=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_pens_families')),
+			'U_GPC_TUTORIALS_PENS_TRADING'		=> $pen_trading_tutorial_url,
+			'U_GPC_TUTORIALS_BEGINNER_GUIDES'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'beginner'))),
+			'U_GPC_TUTORIALS_OTHER'				=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'sonstige'))),
 			'U_GPC_FAQS'		=> $this->remove_community($this->helper->route('gpc_main_controller_faqs')),
 		));
 
