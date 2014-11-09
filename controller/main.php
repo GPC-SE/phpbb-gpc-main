@@ -385,8 +385,7 @@ class main
 						 $topic_tracking_info[$topic_id]) ? true : false;
 				}
 				// Generate all the URIs ...
-				$view_topic_url_params = 'f=' . $row['forum_id'] . '&amp;t=' .
-					 $topic_id;
+				$view_topic_url_params = 'f=' . $row['forum_id'] . '&t=' . $topic_id;
 				$view_topic_url = append_sid(
 					"{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
 				
