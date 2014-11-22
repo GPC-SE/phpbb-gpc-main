@@ -37,6 +37,9 @@ class gpc_header_manager
 		$pen_trading_tutorial_url_params = 'f=' . $forum_id . '&amp;t=' . $topic_id;
 		$pen_trading_tutorial_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $pen_trading_tutorial_url_params);
 		
+		// on page server_costs we won't show the hint to disable adblocker (but we show ads if not blocked)
+		$show_ads_alternative_if_blocked = !(!strpos($this->helper->get_current_url(), 'server_costs') === false);
+
 		$this->template->assign_vars(array(
 			'GPC_STYLE_PATH'	=> $home_link . 'community/ext/gpc/main/styles/all/',
 			'U_GPC_HOME'		=> $home_link,
@@ -51,7 +54,9 @@ class gpc_header_manager
 			'U_GPC_TUTORIALS_PENS_TRADING'		=> $pen_trading_tutorial_url,
 			'U_GPC_TUTORIALS_BEGINNER_GUIDES'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'beginner'))),
 			'U_GPC_TUTORIALS_OTHER'				=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'sonstige'))),
-			'U_GPC_FAQS'		=> $this->remove_community($this->helper->route('gpc_main_controller_faqs')),
+			'U_GPC_FAQS'						=> $this->remove_community($this->helper->route('gpc_main_controller_faqs')),
+			'U_SERVER_COSTS'					=> $this->remove_community($this->helper->route('gpc_main_controller_server_costs')),
+			'S_WERBUNG_ALTERNATIVE'				=> $show_ads_alternative_if_blocked,
 		));
 
 		/* determine the active menu item.

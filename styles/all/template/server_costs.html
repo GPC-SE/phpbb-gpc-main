@@ -1,0 +1,158 @@
+<!-- INCLUDECSS ../theme/server_costs.css -->
+<!-- INCLUDE header.html -->
+
+<!-- INCLUDEJS //code.angularjs.org/1.3.0-beta.5/angular.js -->
+<!-- INCLUDEJS @gpc_main/../angular/dirPagination.js -->
+<!-- INCLUDEJS @gpc_main/../angular/server_costs.app.js -->
+
+<div class="container" ng-app="server_costs">
+<div class="row">
+<div class="col-md-12" ng-controller="PsCtrl">
+
+<h1>Finanzierung der GPC</h1>
+
+<p>Die Kosten der GPC bestehen hauptsächlich aus den Server- und Domainkosten. 
+Diese betragen zur Zeit <strong>7,90 € pro Monat</strong> (für einen VServer mit 512 MB RAM, 20 GB HDD, 1 TB Traffic (danach Drosselung) und die Hauptdomain http://www.penspinning.de). Wir müssen diese Kosten decken, <strong>damit die Website und die Community erhalten bleiben.</strong>
+
+<p>
+Um diese Kosten zu decken, vermieten wir Teile der Website für Werbung und sammeln Trinkgeld. Wir sind auf die Trinkgelder angewiesen, da die Werbeeinnahmen in der Regel nicht genügen (s.u. Tabelle). Wie Du uns unterstützen kannst:</p>
+
+<ul>
+	<li>Werbeblocker für die Website und das Forum ausschalten</li>
+	<li>Community-Arbeit</li>
+	<li>Trinkgeld geben</li>
+</ul>
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#communityarbeit" aria-controls="communityarbeit" role="tab" data-toggle="tab">Community-Arbeit</a></li>
+    <li role="presentation"><a href="#trinkgeld" aria-controls="trinkgeld" role="tab" data-toggle="tab">Trinkgeld geben</a></li>
+    <li role="presentation"><a href="#tabelle" aria-controls="tabelle" role="tab" data-toggle="tab">Finanzierungstabelle</a></li>
+    <li role="presentation"><a href="#rangliste" aria-controls="rangliste" role="tab" data-toggle="tab">Rangliste</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="communityarbeit">
+    	<h2>Community-Arbeit</h2>
+		Um mit Werbung die GPC zu finanzieren, müssen wir Inhalte (Tutorials, Videos, Pen-Mods, Tipps, etc.) bereitstellen. Je mehr, je bessere und je interessantere Inhalte wir bieten, desto öfter und länger bleiben Personen auf der Website - und sehen / klicken auf Werbung.
+		<p>Indem Du im Forum aktiv bist oder sonstige Ideen produktiv einbringst, kannst Du uns also unterstützen! Einbringen kannst Du Dich z.B.:</p>
+		<ul>
+			<li>wenn Du Neulingen im Forum hilfst,</li>
+			<li>Tutorials verfasst (Tricks, Pen-Mods),</li>
+			<li>Projekte in der Community initiierst, betreust und voranbringst (Turniere, Videos, GPC-News, etc.),</li>
+			<li>über uns sprichst (sodass mehr Leute die Community besuchen und unterstützen).</li>
+		</ul>
+	</div>
+    <div role="tabpanel" class="tab-pane fade" id="trinkgeld">
+    	<h2>Trinkgeld geben</h2>
+		Trinkgelder sind die direkteste Art die Community zu unterstützten, weil hiermit unmittelbar die Kosten gedeckt werden können. Alle anderen Maßnahmen bringen eine unbekannte Zeitverzögerung mit sich, weshalb Trinkgelder die sicherste Variante sind. Du kannst über den Button ein Trinkgeld geben. Wie hoch dieses ausfällt, entscheidest Du. Möchtest Du für ein Trinkgeld namentlich aufgeführt werden, so gib dies unbedingt an. Sobald wir das Trinkgeld erhalten haben, wirst du eingetragen - entweder mit Namen oder als anonymer Geber.
+		<div id="psadsalternative" style="margin-top:10px">
+			<form style="width:260px">
+				<div class="form-group">
+					<div class="input-group">
+						<div class="input-group-addon" style="min-width:40px">♟</div>
+						<input class="form-control" type="text" ng-model="geberName" ng-change="updateTrinkgeldMsg()" placeholder="Name oder Nickname">
+					</div>
+			
+					<div class="input-group">
+						<div class="input-group-addon" style="min-width:40px">€</div>
+						<input class="form-control"  type="number" ng-change="updateTrinkgeld()" ng-model="trinkgeld" placeholder="Dein Trinkgeld">
+					</div>
+				</div>
+			</form>
+			
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_xclick">
+				<input type="hidden" name="business" value="robert@penspinning.de">
+				<input type="hidden" name="lc" value="DE">
+				<input type="hidden" name="item_name" value="{[{ trinkgeldMessage }]}">
+				<input type="hidden" name="no_note" value="0">
+				<input type="hidden" name="cn" value="Message">
+				<input type="hidden" name="no_shipping" value="1">
+				<input type="hidden" name="rm" value="1">
+				<input type="hidden" name="return" value="http://penspinning.de">
+				<input type="hidden" name="cancel_return" value="http://penspinning.de">
+				<input type="hidden" name="currency_code" value="EUR">
+				<input type="hidden" name="amount" value="{[{ trinkgeld }]}">
+				
+				<button style="background-color: #51a351; color:white" class="btn btn-success">⇒ {[{ trinkgeld }]} € {[{ trinkgeldMessage }]} geben</button>
+			</form>
+		</div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="tabelle">
+		<h2>Finanzierungstabelle</h2>
+		<p>Stand: {[{ standDatum }]}</p>
+		<p>In der Tabelle ist aufgeführt, wie die Kosten seit Januar 2011 gedeckt wurden. Die Kostendeckung setzt sich zusammen aus den Werbeeinnahmen und Trinkgeldern. Da die Serverkosten sich über die Zeit stark verändert haben (zeitweise lagen diese bei 200€/Monat!), wird nur das Verhältnis zwischen Werbe- und Trinkgeldeinnahmen angegeben. Zu Planungszwecken reicht die Tabelle ein paar Monate in die Zukunft. Trinkgelder, die bereits für zukünftige Monate gegeben wurden, werden automatisch in zukünftige Monate transferiert, wenn Werbeeinnahmen in den Monaten entstehen.</p>
+		<div class="datagrid">
+		  <table>
+			<thead>
+				<tr><th>Jahr</th><th>Monat</th><th>Status</th><th>Anteil Werbung</th><th>Anteil Trinkgeld</th><th>Name(n)</th></tr>
+			</thead>
+			<tbody>
+		        <tr dir-paginate="item in data | orderBy:['-jahr', '-monat'] | itemsPerPage: 6">
+		            <td>
+		                {[{ item.jahr }]}
+		            </td>
+		            <td>
+		                {[{ item.monat }]}
+		            </td>
+		            <td class={[{ item.status }]} width="70px">
+				<div ng-if="item.status == 'finanziert'" class="finanziert">{[{ item.status }]}</div>
+				<div ng-if="item.status != 'finanziert'" class="offen">{[{ item.status }]}</div>
+		            </td>
+		            <td>
+		                {[{ item.werbung * 100 | number:2 }]} %
+		            </td>
+		            <td>
+		                {[{ item.trinkgeld * 100 | number:2 }]} %
+		            </td>
+		            <td>
+		                {[{ item.geber }]}
+		            </td>
+		        </tr>
+			</tbody>
+		    </table>
+		<div id="table-controls">
+			<dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+		</div>
+		</div>
+	</div>
+    <div role="tabpanel" class="tab-pane fade" id="rangliste">
+    	<h2>Rangliste</h2>
+    	<p>Stand: {[{ standDatum }]}</p>
+		<p>In der nachfolgenden Tabelle sind alle Personen seit Januar 2011 aufgeführt, die ein Trinkgeld gegeben haben. Sortiert ist die Tabelle danach, wie viel die einzelnen Personen insgesamt zur Kostendeckung beigetragen haben.</p>
+		<div class="datagrid">
+		  <table>
+			<thead>
+				<tr><th>Rang</th><th>Name</th><th>Anzahl</th><th>Gesamtes Trinkgeld</th></tr>
+			</thead>
+			<tbody>
+		        <tr ng-repeat="item in geber | orderBy:['-trinkgeld', '-anzahl']">
+		            <td>
+		                # {[{ $index+1 }]}
+		            </td>
+		            <td>
+		                {[{ item.name }]}
+		            </td>
+		            <td>
+		                {[{ item.anzahl }]}
+		            </td>
+		            <td>
+		                {[{ item.trinkgeld | number:2 }]} €
+		            </td>
+		        </tr>
+			</tbody>
+		    </table>
+		</div>
+    </div>
+  </div>
+</div>
+           
+
+
+</div>
+</div>
+</div>
+<!-- INCLUDE footer.html -->

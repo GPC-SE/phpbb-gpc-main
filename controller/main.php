@@ -113,7 +113,20 @@ class main
 	{
 		return $this->helper->render('disclaimer.html');
 	}
-
+	
+	/**
+	 * Controller for route /server_costs
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function server_costs()
+	{
+		$this->template->assign_vars(array(
+			'S_SERVER_COSTS_INCLUDE_CSS' => true,
+		));
+		return $this->helper->render('server_costs.html');
+	}
+	
 	/**
 	 * Controller for route /impressum
 	 *
