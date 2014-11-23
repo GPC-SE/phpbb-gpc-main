@@ -105,16 +105,6 @@ class main
 	}
 
 	/**
-	 * Controller for route /disclaimer
-	 *
-	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
-	 */
-	public function disclaimer()
-	{
-		return $this->helper->render('disclaimer.html');
-	}
-	
-	/**
 	 * Controller for route /server_costs
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object

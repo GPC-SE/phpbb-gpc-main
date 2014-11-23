@@ -4,9 +4,6 @@ gpc_main_controller:
 gpc_main_controller_server_costs:
     pattern: /server_costs
     defaults: { _controller: gpc.main.controller:server_costs }
-gpc_main_controller_disclaimer:
-    pattern: /disclaimer
-    defaults: { _controller: gpc.main.controller:disclaimer }
 gpc_main_controller_impressum:
     pattern: /impressum
     defaults: { _controller: gpc.main.controller:impressum }
