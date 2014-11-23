@@ -31,11 +31,13 @@ class gpc_header_manager
 		global $phpbb_root_path, $phpEx;
 		$home_link = '/';
 		
-		// TODO
-		$forum_id = 1;
-		$topic_id = 1;
+		// TODO pen_trading_link
+		$forum_id = 27;
+		$topic_id = 26217;
 		$pen_trading_tutorial_url_params = 'f=' . $forum_id . '&amp;t=' . $topic_id;
 		$pen_trading_tutorial_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $pen_trading_tutorial_url_params);
+		// TODO current thread (the next line needs to be removed, once the thread exists in the new board)
+		$pen_trading_tutorial_url  = "http://forum.penspinning.de/viewtopic.php?f=27&t=26217";
 		
 		// on page server_costs we won't show the hint to disable adblocker (but we show ads if not blocked)
 		$show_ads_alternative_if_blocked = !(!strpos($this->helper->get_current_url(), 'server_costs') === false);
