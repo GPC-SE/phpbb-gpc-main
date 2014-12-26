@@ -9,6 +9,8 @@
 
 namespace gpc\main\controller;
 
+use gpc\main\CONSTANTS;
+
 class main
 {
 	/* @var \phpbb\config\config */
@@ -245,19 +247,46 @@ class main
 	 */
 	public function tutorial_view($topic_id)
 	{
-		$sql = 'SELECT t.topic_title AS title, p.post_text AS text, p.bbcode_uid, p.bbcode_bitfield
+		$sql = 'SELECT t.topic_title AS title, p.post_text AS text, p.post_id, t.forum_id, p.bbcode_uid, p.bbcode_bitfield, p.post_attachment
 	        FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p
 	        WHERE t.topic_id = ' . (int) $topic_id . '
 				AND t.topic_first_post_id = p.post_id';
 		$result = $this->db->sql_query($sql);
 		$row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
-
+		
+		$forum_id = (int) $row['forum_id'];
+		if (!in_array($forum_id, split(',', CONSTANTS::TUTORIALS_FORUM_IDS))) {
+			trigger_error("The requested Tutorial could not be found.");
+		}
+		
 		$options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
+		$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $options);
+		
+		if ($row['post_attachment']) {
+			$attach_list[] = (int) $row['post_id'];
+			$sql = 'SELECT *
+				FROM ' . ATTACHMENTS_TABLE . '
+				WHERE ' . $this->db->sql_in_set('post_msg_id', $attach_list) . '
+					AND in_message = 0
+				ORDER BY filetime DESC, post_msg_id ASC';
+			$result = $this->db->sql_query($sql);
+			
+			$attachments = array();
+			while ($attachment = $this->db->sql_fetchrow($result))
+			{
+				$attachments[] = $attachment;
+			}
+			$this->db->sql_freeresult($result);
 
+			// $update_count holds the ids of attachments that normally would need to get an update of their view count, but we ignore it here.
+			$update_count = array();
+			parse_attachments($forum_id, $text, $attachments, $update_count);
+		}
+		
 		$this->template->assign_vars(array(
 		    'TITLE'		=> $row['title'],
-		    'TEXT'		=> generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $options),
+		    'TEXT'		=> $text,
 		));
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE'	=> true,
@@ -442,10 +471,9 @@ class main
 						 $topic_tracking_info[$topic_id]) ? true : false;
 				}
 				// Generate all the URIs ...
-				$view_topic_url_params = 'f=' . $row['forum_id'] . '&t=' . $topic_id;
-				$view_topic_url = append_sid(
-					"{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
-				
+				//$view_topic_url_params = 'f=' . $row['forum_id'] . '&t=' . $topic_id;
+				//$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
+				$view_topic_url = $this->remove_community($this->helper->route('gpc_main_controller_tutorial_view', array('topic_id' => $topic_id)));
 				$tutorials[] = array(
 					'title' => censor_text($row['topic_title']),
 					'link' => $view_topic_url,
