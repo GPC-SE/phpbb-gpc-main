@@ -68,8 +68,8 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="tutorial in tutorials | filter:filterText">
-								<td><a href="{[{ tutorial.link }]}">{[{ tutorial.title }]}</a></td>
-								<td>{[{ tutorial.tags }]}</td>
+								<td><a ng-href="{[{ tutorial.link }]}" ng-bind="tutorial.title"></a></td>
+								<td ng-bind="tutorial.tags"></td>
 							</tr>
 						</tbody>
 					</table>
