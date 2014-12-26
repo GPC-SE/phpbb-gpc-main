@@ -39,6 +39,8 @@ class main
 	protected $pagination;
 
 	protected $tags_manager;
+	
+	protected $preview_helper;
 
 	public function __construct(
 		\phpbb\config\config $config,
@@ -52,7 +54,8 @@ class main
 		$root_path,
 		$table_prefix,
 		$pagination,
-		\robertheim\topictags\service\tags_manager $tags_manager
+		\robertheim\topictags\service\tags_manager $tags_manager,
+		\gpc\main\service\preview_helper $preview_helper
 	)
 	{
 		$this->helper = $helper;
@@ -84,6 +87,7 @@ class main
 		$this->table_prefix = $table_prefix;
 		$this->pagination = $pagination;
 		$this->tags_manager = $tags_manager;
+		$this->preview_helper = $preview_helper;
 	}
 
 	private function remove_community($str)
@@ -98,9 +102,42 @@ class main
 	 */
 	public function show()
 	{
+		global $phpbb_root_path, $phpEx;
+		
 		$this->template->assign_vars(array(
 			'S_GPC_HOME_ACTIVE' => true,
+			'U_GPC_TUTORIALS_ALL' => $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'tutorial'))),
 		));
+		
+		// news
+		$tags = array('news');
+		$limit_topics = 3;
+		$limit_preview_text = 100;
+		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
+		foreach ($topics as $topic)
+		{
+			$this->template->assign_block_vars('news', array(
+				'TITLE'			=> $topic['title'],
+				'URL'			=> $topic['url'],
+				'PREVIEW_TEXT'	=> $topic['preview_text'],
+				'AUTHOR'		=> $topic['first_poster_name'],
+			));
+		}
+
+		// tutorials
+		$tags = array('tutorial');
+		$limit_topics = 3;
+		$limit_preview_text = 100;
+		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
+		foreach ($topics as $topic)
+		{
+			$this->template->assign_block_vars('tutorials', array(
+				'TITLE'			=> $topic['title'],
+				'URL'			=> $topic['url'],
+				'PREVIEW_TEXT'	=> $topic['preview_text'],
+				'AUTHOR'		=> $topic['first_poster_name'],
+			));
+		}
 		return $this->helper->render('index.html');
 	}
 

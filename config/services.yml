@@ -14,11 +14,19 @@ services:
             - %core.table_prefix%
             - @pagination
             - @robertheim.topictags.tags_manager
+            - @gpc.main.preview_helper
     gpc.main.gpc_header_manager:
         class: gpc\main\service\gpc_header_manager
         arguments:
             - @template
             - @controller.helper
+    gpc.main.preview_helper:
+        class: gpc\main\service\preview_helper
+        arguments:
+            - @dbal.conn
+            - @robertheim.topictags.tags_manager
+            - %core.root_path%
+            - %core.php_ext%
     gpc.main.listener:
         class: gpc\main\event\main_listener
         arguments:
