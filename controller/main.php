@@ -284,9 +284,12 @@ class main
 			parse_attachments($forum_id, $text, $attachments, $update_count);
 		}
 		
+		$back_link = $this->request->server('HTTP_REFERER', 'javascript:history.go(-1)');
+		
 		$this->template->assign_vars(array(
-		    'TITLE'		=> $row['title'],
-		    'TEXT'		=> $text,
+		    'TITLE'			=> $row['title'],
+		    'TEXT'			=> $text,
+			'U_BACK_LINK'	=> $back_link,
 		));
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE'	=> true,
