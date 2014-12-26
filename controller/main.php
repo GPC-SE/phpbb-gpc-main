@@ -138,6 +138,23 @@ class main
 				'AUTHOR'		=> $topic['first_poster_name'],
 			));
 		}
+
+		// videos
+		// TODO getting videos by a tag is not so ideal. Maybe get all topics of predefined forums?
+		$tags = array('video');
+		$limit_topics = 3;
+		$limit_preview_text = 100;
+		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
+		foreach ($topics as $topic)
+		{
+			$this->template->assign_block_vars('videos', array(
+				'TITLE'			=> $topic['title'],
+				'URL'			=> $topic['url'],
+				'PREVIEW_TEXT'	=> $topic['preview_text'],
+				'AUTHOR'		=> $topic['first_poster_name'],
+			));
+		}
+		
 		return $this->helper->render('index.html');
 	}
 
