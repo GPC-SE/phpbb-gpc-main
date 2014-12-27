@@ -10,6 +10,7 @@
 namespace gpc\main\controller;
 
 use gpc\main\CONSTANTS;
+use robertheim\videos\model\rh_oembed;
 
 class main
 {
@@ -42,6 +43,8 @@ class main
 
 	protected $tags_manager;
 	
+	protected $gpc_videos_manager;
+	
 	protected $preview_helper;
 
 	public function __construct(
@@ -57,6 +60,7 @@ class main
 		$table_prefix,
 		$pagination,
 		\robertheim\topictags\service\tags_manager $tags_manager,
+		\gpc\main\service\gpc_videos_manager $gpc_videos_manager,
 		\gpc\main\service\preview_helper $preview_helper
 	)
 	{
@@ -89,6 +93,7 @@ class main
 		$this->table_prefix = $table_prefix;
 		$this->pagination = $pagination;
 		$this->tags_manager = $tags_manager;
+		$this->gpc_videos_manager = $gpc_videos_manager;
 		$this->preview_helper = $preview_helper;
 	}
 
@@ -190,6 +195,56 @@ class main
 	 */
 	public function videos()
 	{
+		global $phpbb_root_path, $phpEx;
+		$topics = $this->gpc_videos_manager->get_topics_with_video();
+		$video_url_field = $this->gpc_videos_manager->get_video_url_field();;
+		$i=0;
+		foreach ($topics as $topic)
+		{
+			$error = false;
+			$video_url = $topic[$video_url_field];
+			try
+			{
+				$video = new rh_oembed($video_url);
+				if (empty($video->get_html()))
+				{
+					$error = true;
+				}
+			}
+			catch (\Exception $e)
+			{
+				$error = true;
+			}
+				
+			$template_block_vars = array();
+			if ($error)
+			{
+				$video_link = "<a href=\"$video_url\">$video_url</a>";
+				$error_msg = $this->user->lang('RH_VIDEOS_VIDEO_COULD_NOT_BE_LOADED', $video_link);
+				$template_block_vars = array_merge($template_block_vars, array(
+						'S_RH_VIDEOS_ERROR' => true,
+						'ERROR_MSG' => $error_msg,
+					));
+			} else {
+				$template_block_vars = array_merge($template_block_vars, array(
+						'RH_VIDEOS_VIDEO_URL' => $video_url,
+						'RH_VIDEOS_VIDEO_TITLE' => $video->get_title(),
+						'RH_VIDEOS_VIDEO_HTML' => $video->get_html(),
+						'THUMBNAIL_URL' => $video->get_thumbnail_url(),
+					));
+			}
+			
+			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
+			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
+
+			$template_block_vars = array_merge($template_block_vars, array (
+				'TOPIC_TITLE' => $topic['topic_title'],
+				'TOPIC_URL' => $view_topic_url,
+				'INDEX' => $i,
+			));
+			$i++;
+			$this->template->assign_block_vars('videos', $template_block_vars);
+		}
 		$this->template->assign_vars(array(
 			'S_GPC_VIDEOS_ACTIVE' => true,
 		));

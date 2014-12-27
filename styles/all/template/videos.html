@@ -1,5 +1,50 @@
 <!-- INCLUDE header.html -->
 
-VIDEOS
+<div class="container">
+	<div class="row">
+		<div class="col-md-7" style="padding-left:30px;">
+
+			<h2>Videos</h2>
+			<p>
+				TODO.
+			</p>
+
+		</div>
+		<div class="col-md-5">
+			<img src="http://placehold.it/720x290" class="img-responsive" style="width:100%"/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr />
+		</div>
+	</div>
+</div>
+
+<div class="container">
+<!-- BEGIN videos -->
+	<!-- IF videos.INDEX % 3 == 0 -->
+	<div class="row">
+	<!-- ENDIF -->
+		<div class="col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading text-center">
+					<h2 class="panel-title">{videos.TOPIC_TITLE}</h2>
+			    </div>
+			    <!-- IF videos.S_RH_VIDEOS_ERROR -->
+			    {videos.ERROR_MSG}
+			    <!-- ELSE -->
+				<a href="{videos.TOPIC_URL}" class="thumbnail">
+					<img src="{videos.THUMBNAIL_URL}" alt="{videos.TOPIC_TITLE}" >
+				</a>
+				<!-- ENDIF -->
+			</div>
+		</div>
+	<!-- IF videos.INDEX % 3 == 2 -->
+	</div>
+	<!-- ENDIF -->
+<!-- END videos -->
+</div>
+
 
 <!-- INCLUDE footer.html -->

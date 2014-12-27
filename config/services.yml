@@ -14,6 +14,7 @@ services:
             - %core.table_prefix%
             - @pagination
             - @robertheim.topictags.tags_manager
+            - @gpc.main.gpc_videos_manager
             - @gpc.main.preview_helper
     gpc.main.gpc_header_manager:
         class: gpc\main\service\gpc_header_manager
@@ -27,6 +28,13 @@ services:
             - @robertheim.topictags.tags_manager
             - %core.root_path%
             - %core.php_ext%
+    gpc.main.gpc_videos_manager:
+        class: gpc\main\service\gpc_videos_manager
+        arguments:
+            - @dbal.conn.driver
+            - @config
+            - @auth
+            - %core.table_prefix%
     gpc.main.listener:
         class: gpc\main\event\main_listener
         arguments:
