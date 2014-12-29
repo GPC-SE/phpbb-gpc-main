@@ -42,7 +42,7 @@ class gpc_videos_manager
 	
 	/**
 	 * 
-	 * @return array containing the rows of topics table + field 'rh_video' 
+	 * @return array mapping topic_id => topic-row + field 'rh_video' 
 	 */
 	public function get_topics_with_video()
 	{
