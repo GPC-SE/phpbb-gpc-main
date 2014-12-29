@@ -34,6 +34,7 @@ services:
             - @dbal.conn.driver
             - @config
             - @auth
+            - @robertheim.videos.videos_manager
             - %core.table_prefix%
     gpc.main.listener:
         class: gpc\main\event\main_listener

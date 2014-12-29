@@ -197,27 +197,13 @@ class main
 	{
 		global $phpbb_root_path, $phpEx;
 		$topics = $this->gpc_videos_manager->get_topics_with_video();
-		$video_url_field = $this->gpc_videos_manager->get_video_url_field();;
 		$i=0;
 		foreach ($topics as $topic)
 		{
-			$error = false;
-			$video_url = $topic[$video_url_field];
-			try
-			{
-				$video = new rh_oembed($video_url);
-				if (empty($video->get_html()))
-				{
-					$error = true;
-				}
-			}
-			catch (\Exception $e)
-			{
-				$error = true;
-			}
-				
+			$video = $topic['rh_video'];
+			$video_url = $video->get_url();
 			$template_block_vars = array();
-			if ($error)
+			if ($video->has_error())
 			{
 				$video_link = "<a href=\"$video_url\">$video_url</a>";
 				$error_msg = $this->user->lang('RH_VIDEOS_VIDEO_COULD_NOT_BE_LOADED', $video_link);

@@ -12,7 +12,7 @@ namespace gpc\main\service;
 /**
  * @ignore
  */
-use robertheim\videos\PREFIXES;
+use robertheim\videos\TABLES as RH_VIDEOS_TABLES;
 
 /**
 * Manager for the videos section of the GPC website.
@@ -24,43 +24,54 @@ class gpc_videos_manager
 	private $config;
 	private $auth;
 	private $table_prefix;
+	private $videos_manager;
 
 	public function __construct(
 					\phpbb\db\driver\driver_interface $db,
 					\phpbb\config\config $config,
 					\phpbb\auth\auth $auth,
+					\robertheim\videos\service\videos_manager $videos_manager,
 					$table_prefix)
 	{
-		$this->db			= $db;
-		$this->config		= $config;
-		$this->auth			= $auth;
-		$this->table_prefix	= $table_prefix;
+		$this->db				= $db;
+		$this->config			= $config;
+		$this->auth				= $auth;
+		$this->videos_manager	= $videos_manager;
+		$this->table_prefix		= $table_prefix;
 	}
 	
+	/**
+	 * 
+	 * @return array containing the rows of topics table + field 'rh_video' 
+	 */
 	public function get_topics_with_video()
 	{
-		$video_url_field = $this->get_video_url_field();
 		$sql_array = array(
-			'SELECT'	=>  '*',
+			'SELECT'	=>  't.*',
 			'FROM'		=> array(
+				$this->table_prefix . RH_VIDEOS_TABLES::VIDEOS => 'v',
 				TOPICS_TABLE => 't',
 			),
-			'WHERE'		=> "t.$video_url_field<>''",
+			'WHERE'		=> "t.topic_id=v.topic_id",
 		);
 		$sql = $this->db->sql_build_query('SELECT_DISTINCT', $sql_array);
 		$result = $this->db->sql_query_limit($sql, 10);
 		$topics = array();
+		$topic_ids = array();
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$topics[] = $row;
+			$topic_id = (int) $row['topic_id']; 
+			$topics[$topic_id] = $row;
+			$topic_ids[] = $topic_id;
 		}
 		$this->db->sql_freeresult($result);
+		
+		$videos = $this->videos_manager->get_videos_for_topic_ids($topic_ids);
+		foreach ($videos as $video)
+		{
+			$topics[$video['topic_id']]['rh_video'] = $video['video'];
+		}
 		return $topics;
-	}
-	
-	public function get_video_url_field()
-	{
-		return PREFIXES::CONFIG . '_url';
 	}
 }
 
