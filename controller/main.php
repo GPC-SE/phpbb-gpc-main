@@ -42,9 +42,9 @@ class main
 	protected $pagination;
 
 	protected $tags_manager;
-	
+
 	protected $gpc_videos_manager;
-	
+
 	protected $preview_helper;
 
 	public function __construct(
@@ -110,12 +110,12 @@ class main
 	public function show()
 	{
 		global $phpbb_root_path, $phpEx;
-		
+
 		$this->template->assign_vars(array(
 			'S_GPC_HOME_ACTIVE' => true,
 			'U_GPC_TUTORIALS_ALL' => $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'tutorial'))),
 		));
-		
+
 		// news
 		$tags = array('news');
 		$limit_topics = 3;
@@ -161,7 +161,7 @@ class main
 				'AUTHOR'		=> $topic['first_poster_name'],
 			));
 		}
-		
+
 		return $this->helper->render('index.html');
 	}
 
@@ -177,7 +177,7 @@ class main
 		));
 		return $this->helper->render('server_costs.html');
 	}
-	
+
 	/**
 	 * Controller for route /impressum
 	 *
@@ -219,7 +219,7 @@ class main
 						'THUMBNAIL_URL' => $video->get_thumbnail_url(),
 					));
 			}
-			
+
 			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
 
@@ -268,9 +268,9 @@ class main
 
 			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
-				
+
 			//$tutorial_url = $this->remove_community($this->helper->route('gpc_main_controller_tutorial_view', array('topic_id' => $topic['topic_id'])));
-			
+
 			$this->template->assign_block_vars($blockname, array(
 				'TITLE'		=> $topic['topic_title'],
 				'LINK'		=> $view_topic_url,
@@ -295,15 +295,15 @@ class main
 		$result = $this->db->sql_query($sql);
 		$row = $this->db->sql_fetchrow($result);
 		$this->db->sql_freeresult($result);
-		
+
 		$forum_id = (int) $row['forum_id'];
 		if (!in_array($forum_id, split(',', CONSTANTS::TUTORIALS_FORUM_IDS))) {
 			trigger_error("The requested Tutorial could not be found.");
 		}
-		
+
 		$options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 		$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $options);
-		
+
 		if ($row['post_attachment']) {
 			$attach_list[] = (int) $row['post_id'];
 			$sql = 'SELECT *
@@ -312,7 +312,7 @@ class main
 					AND in_message = 0
 				ORDER BY filetime DESC, post_msg_id ASC';
 			$result = $this->db->sql_query($sql);
-			
+
 			$attachments = array();
 			while ($attachment = $this->db->sql_fetchrow($result))
 			{
@@ -324,9 +324,9 @@ class main
 			$update_count = array();
 			parse_attachments($forum_id, $text, $attachments, $update_count);
 		}
-		
+
 		$back_link = $this->request->server('HTTP_REFERER', 'javascript:history.go(-1)');
-		
+
 		$this->template->assign_vars(array(
 		    'TITLE'			=> $row['title'],
 		    'TEXT'			=> $text,
@@ -353,7 +353,7 @@ class main
 
 	/**
 	 * Generates a link to the search for the given tags.
-	 *  
+	 *
 	 * @param array $tags
 	 */
 	private function get_search_link(array $tags)
@@ -369,12 +369,12 @@ class main
 			$tags[$i] = urlencode($tags[$i]);
 		}
 		return $this->remove_community(
-			$this->helper->route('gpc_main_controller_tutorials_search', 
+			$this->helper->route('gpc_main_controller_tutorials_search',
 				array(
 					'tags' => join(',', $tags)
 				)));
 	}
-	
+
 	/**
 	 * Controller for route /tutorials/tricks/familien
 	 *
@@ -396,14 +396,14 @@ class main
 		));
 		return $this->helper->render('tricks_families.html');
 	}
-	
+
 	/**
 	 * Controller for route /tutorials/pens/familien
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
 	public function tutorials_pens_families()
-	{	
+	{
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE'	=> true,
 		));
@@ -433,7 +433,7 @@ class main
 
 		// TODO
 		$tag_suggestions = array('beginner', 'trick', 'pen', 'around', 'pass', 'sonic', 'charge', 'infinity', 'spins', 'shadow', 'artistic', 'sonstige');
-		
+
 		for ($i = 0, $size = sizeof($tag_suggestions); $i < $size; $i++)
 		{
 			$this->template->assign_block_vars('rh_topictags_suggestions', array(
@@ -441,68 +441,68 @@ class main
 				'NAME' => $tag_suggestions[$i],
 			));
 		}
-		
+
 		// validate mode
 		// default == AND
 		$mode = ($mode == 'OR' ? 'OR' : 'AND');
-	
+
 		$tags = explode(',', urldecode($tags));
 		// remove possible duplicates
 		$tags = array_unique($tags);
 		$all_tags = $this->tags_manager->split_valid_tags($tags);
-			
+
 		$tutorials = array();
 		$tags = $all_tags['valid'];
 		if (sizeof($tags) > 0)
 		{
-			$this->template->assign_var('RH_TOPICTAGS', 
+			$this->template->assign_var('RH_TOPICTAGS',
 				base64_encode(json_encode($tags)));
-			
+
 			$pagination = $phpbb_container->get('pagination');
-			
+
 			$start = $request->variable('start', 0);
 			$limit = 100; // $config['topics_per_page'];
-			
-			$topics_count = $this->tags_manager->count_topics_by_tags($tags, 
+
+			$topics_count = $this->tags_manager->count_topics_by_tags($tags,
 				$start, $limit, $mode, $casesensitive);
-			$start = $pagination->validate_start($start, 
+			$start = $pagination->validate_start($start,
 				$config['topics_per_page'], $topics_count);
-			
-			$topics = $this->tags_manager->get_topics_by_tags($tags, $start, 
+
+			$topics = $this->tags_manager->get_topics_by_tags($tags, $start,
 				$limit, $mode, $casesensitive);
 			$base_url = $this->get_search_link($tags);
-			
+
 			// $pagination->generate_template_pagination($base_url, 'pagination', 'start',
 			// $topics_count, $config['topics_per_page'], $start);
-			
+
 			$user->add_lang('viewforum');
 			// $this->template->assign_var('TOTAL_TOPICS', $user->lang('VIEW_FORUM_TOPICS',
 			// $topics_count));
-			
+
 			global $phpEx, $auth, $phpbb_dispatcher, $template;
-			
+
 			$phpbb_content_visibility = $phpbb_container->get(
 				'content.visibility');
 			include_once ($phpbb_root_path . 'includes/functions_display.' .
 				 $phpEx);
-			
+
 			foreach ($topics as $topic)
 			{
 				$topic_id = $topic['topic_id'];
 				$row = $topic;
 				$s_type_switch = 0;
-				
+
 				$topic_forum_id = ($row['forum_id']) ? (int) $row['forum_id'] : $forum_id;
-				
+
 				// This will allow the style designer to output a different header
 				// or even separate the list of announcements from sticky and normal topics
 				$s_type_switch_test = ($row['topic_type'] == POST_ANNOUNCE ||
 					 $row['topic_type'] == POST_GLOBAL) ? 1 : 0;
-				
+
 				// Replies
-				$replies = $phpbb_content_visibility->get_count('topic_posts', 
+				$replies = $phpbb_content_visibility->get_count('topic_posts',
 					$row, $topic_forum_id) - 1;
-				
+
 				if ($row['topic_status'] == ITEM_MOVED)
 				{
 					$topic_id = $row['topic_moved_id'];
@@ -522,12 +522,12 @@ class main
 					'title' => censor_text($row['topic_title']),
 					'link' => $view_topic_url,
 					'topic_id' => $topic_id,
-					'tags' => join(', ', 
+					'tags' => join(', ',
 						$this->tags_manager->get_assigned_tags($topic_id)),
 					'replies' => $replies,
 					'views' => $row['topic_views'],
-					'author' => get_username_string('full', 
-						$row['topic_poster'], $row['topic_first_poster_name'], 
+					'author' => get_username_string('full',
+						$row['topic_poster'], $row['topic_first_poster_name'],
 						$row['topic_first_poster_colour'])
 				);
 			}

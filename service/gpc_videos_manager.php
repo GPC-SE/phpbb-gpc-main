@@ -39,10 +39,10 @@ class gpc_videos_manager
 		$this->videos_manager	= $videos_manager;
 		$this->table_prefix		= $table_prefix;
 	}
-	
+
 	/**
-	 * 
-	 * @return array mapping topic_id => topic-row + field 'rh_video' 
+	 *
+	 * @return array mapping topic_id => topic-row + field 'rh_video'
 	 */
 	public function get_topics_with_video()
 	{
@@ -60,12 +60,12 @@ class gpc_videos_manager
 		$topic_ids = array();
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$topic_id = (int) $row['topic_id']; 
+			$topic_id = (int) $row['topic_id'];
 			$topics[$topic_id] = $row;
 			$topic_ids[] = $topic_id;
 		}
 		$this->db->sql_freeresult($result);
-		
+
 		$videos = $this->videos_manager->get_videos_for_topic_ids($topic_ids);
 		foreach ($videos as $video)
 		{
@@ -74,4 +74,3 @@ class gpc_videos_manager
 		return $topics;
 	}
 }
-
