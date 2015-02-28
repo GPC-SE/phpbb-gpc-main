@@ -12,7 +12,7 @@ namespace gpc\main\service;
 /**
  * @ignore
  */
-use robertheim\videos\TABLES as RH_VIDEOS_TABLES;
+use robertheim\videos\tables as RH_VIDEOS_TABLES;
 
 /**
 * Manager for the videos section of the GPC website.
@@ -51,8 +51,11 @@ class gpc_videos_manager
 			'FROM'		=> array(
 				$this->table_prefix . RH_VIDEOS_TABLES::VIDEOS => 'v',
 				TOPICS_TABLE => 't',
+				FORUMS_TABLE => 'f',
 			),
-			'WHERE'		=> "t.topic_id=v.topic_id",
+			'WHERE'		=> 't.topic_id = v.topic_id
+				AND f.forum_id = t.forum_id
+				AND f.rh_videos_enabled',
 		);
 		$sql = $this->db->sql_build_query('SELECT_DISTINCT', $sql_array);
 		$result = $this->db->sql_query_limit($sql, 10);
