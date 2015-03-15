@@ -210,6 +210,7 @@ class main
 		$start = ($page - 1) * $videos_perpage;
 		$limit = $videos_perpage;
 		$topics = $this->gpc_videos_manager->get_topics_with_video($start, $limit);
+		$topics_count = sizeof($topics);
 		$i = 0;
 		foreach ($topics as $topic)
 		{
@@ -240,6 +241,7 @@ class main
 				'TOPIC_TITLE' => $topic['topic_title'],
 				'TOPIC_URL' => $view_topic_url,
 				'INDEX' => $i,
+				'IS_LAST' => $i == ($topics_count - 1),
 			));
 			$i++;
 			$this->template->assign_block_vars('videos', $template_block_vars);
