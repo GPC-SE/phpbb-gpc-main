@@ -197,15 +197,15 @@ class main
 		$this->user->add_lang_ext('gpc/main', 'videos');
 
 		$videos_perpage = 9;
-		if ($page < 1)
-		{
-			$page = 1;
-		}
 		$total_videos = $this->gpc_videos_manager->count_total_videos();
 		$max_page = ceil($total_videos/$videos_perpage);
 		if ($page > $max_page)
 		{
 			$page = $max_page;
+		}
+		if ($page < 1)
+		{
+			$page = 1;
 		}
 		$start = ($page - 1) * $videos_perpage;
 		$limit = $videos_perpage;
@@ -279,7 +279,7 @@ class main
 					'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => $max_page)),
 					'TEXT'	=> '&raquo;',
 				));
-		}
+			}
 		}
 		$this->template->assign_vars(array(
 			'S_GPC_VIDEOS_ACTIVE'	=> true,
