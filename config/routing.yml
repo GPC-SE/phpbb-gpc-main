@@ -1,28 +1,36 @@
 gpc_main_controller:
-    pattern: /
+    path: /
     defaults: { _controller: gpc.main.controller:show }
+
 gpc_main_controller_server_costs:
-    pattern: /server_costs
+    path: /server_costs
     defaults: { _controller: gpc.main.controller:server_costs }
+
 gpc_main_controller_impressum:
-    pattern: /impressum
+    path: /impressum
     defaults: { _controller: gpc.main.controller:impressum }
+
 gpc_main_controller_videos:
-    pattern: /videos
+    path: /videos
     defaults: { _controller: gpc.main.controller:videos }
+
 gpc_main_controller_tutorial_view:
-    pattern: /tutorial/view/{topic_id}
+    path: /tutorial/view/{topic_id}
     defaults: { _controller: gpc.main.controller:tutorial_view }
+
 gpc_main_controller_faqs:
-    pattern: /faqs
+    path: /faqs
     defaults: { _controller: gpc.main.controller:faqs }
+
 gpc_main_controller_tutorials_tricks_families:
-    pattern: /tutorials/tricks/familien
+    path: /tutorials/tricks/familien
     defaults: { _controller: gpc.main.controller:tutorials_tricks_families }
+
 gpc_main_controller_tutorials_pens_families:
-    pattern: /tutorials/pens/familien
+    path: /tutorials/pens/familien
     defaults: { _controller: gpc.main.controller:tutorials_pens_families }
+
 gpc_main_controller_tutorials_search:
-    pattern: /tutorials/search/{tags}/{mode}/{casesensitive}
+    path: /tutorials/search/{tags}/{mode}/{casesensitive}
     defaults: { _controller: gpc.main.controller:tutorials_search, tags: '', mode: 'AND', casesensitive : false }
 
