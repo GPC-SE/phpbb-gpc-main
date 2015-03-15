@@ -71,7 +71,7 @@ class preview_helper
 
 	public function preview_topics_by_tags(array $tags, $max_topics, $max_preview_text_length = 100)
 	{
-		$sql = $this->tags_manager->get_topics_build_query($tags, $mode, $casesensitive);
+		$sql = $this->tags_manager->get_topics_build_query($tags);
 
 		$order_by = ' ORDER BY topics.topic_time DESC';
 		$sql .= $order_by;
