@@ -9,7 +9,7 @@
 
 namespace gpc\main\controller;
 
-use gpc\main\CONSTANTS;
+use gpc\main\constants;
 use robertheim\videos\model\rh_oembed;
 
 class main
@@ -297,7 +297,7 @@ class main
 		$this->db->sql_freeresult($result);
 
 		$forum_id = (int) $row['forum_id'];
-		if (!in_array($forum_id, split(',', CONSTANTS::TUTORIALS_FORUM_IDS))) {
+		if (!in_array($forum_id, split(',', constants::TUTORIALS_FORUM_IDS))) {
 			trigger_error("The requested Tutorial could not be found.");
 		}
 

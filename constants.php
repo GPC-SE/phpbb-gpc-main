@@ -9,7 +9,7 @@
 
 namespace gpc\main;
 
-abstract class CONSTANTS
+abstract class constants
 {
 	// arrays not supported as class constants
 	const TUTORIALS_FORUM_IDS = '1,2';

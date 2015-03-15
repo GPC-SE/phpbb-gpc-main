@@ -9,19 +9,20 @@
 
 namespace gpc\main\util;
 
-class PhpbbUtils {
+class phpbbutils {
 	/**
 	 * Trims bbcode containing text to $limit characters by removing all bbcodes.
-	 * 
+	 *
 	 * @param String $post_text the text of the post to trim
 	 * @param String $bbcode_uid the bbcode_uid of the post row
 	 * @param int $limit the maximum length of the preview text
 	 * @return the trimmed preview text.
-	 * 
+	 *
 	 * @static
 	 * @author MichaelC, Robert Heim
 	 */
-	public static function make_preview_text_from_post($post_text, $bbcode_uid, $limit) {
+	public static function make_preview_text_from_post($post_text, $bbcode_uid, $limit)
+	{
 		$preview = $post_text;
 		$preview = self::bbcodeStripping($preview, $bbcode_uid);
 		$preview = trim(preg_replace('#http(?:\:|&\#58;)//\S+#', '', $preview));
@@ -38,7 +39,7 @@ class PhpbbUtils {
 			}
 			// Truncate to the maximum length
 			$preview = substr($preview, 0, $preview_max_len);
-			
+
 			// See if there is a nice place to break close to the max length
 			$breakchars = array(' ', ',', '.');
 			$clean_break_pos = 0;
@@ -53,7 +54,6 @@ class PhpbbUtils {
 		}
 		return $preview;
 	}
-	
 
 	/**
 	 * Strip bbcodes from a post content
