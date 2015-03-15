@@ -1,27 +1,27 @@
 <!-- INCLUDE header.html -->
 
 <div class="container">
+<!-- IF CURRENT_PAGE == 1 -->
 	<div class="row">
 		<div class="col-md-7" style="padding-left:30px;">
-
 			<h2>Videos</h2>
 			<p>
-				TODO.
+				Hier findest du eine Sammlung von Penspinning Videos.
 			</p>
-
-		</div>
-		<div class="col-md-5">
-			<img src="http://placehold.it/720x290" class="img-responsive" style="width:100%"/>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<hr />
-		</div>
-	</div>
+<!-- ENDIF -->
+<div class="row">
+<div class="text-right">{TOTAL_VIDEOS}</div>
+<ul class="pagination pull-right">
+	<!-- BEGIN pages -->
+	<li<!-- IF pages.ACTIVE --> class="active"<!-- ENDIF -->>
+		<a href="{pages.URL}">{pages.TEXT}</a>
+	</li>
+	<!-- END pages -->
+</ul>
 </div>
 
-<div class="container">
 <!-- BEGIN videos -->
 	<!-- IF videos.INDEX % 3 == 0 -->
 	<div class="row">
@@ -30,10 +30,10 @@
 			<div class="panel panel-default">
 				<div class="panel-heading text-center">
 					<h2 class="panel-title">{videos.TOPIC_TITLE}</h2>
-			    </div>
-			    <!-- IF videos.S_RH_VIDEOS_ERROR -->
-			    {videos.ERROR_MSG}
-			    <!-- ELSE -->
+				</div>
+				<!-- IF videos.S_RH_VIDEOS_ERROR -->
+				{videos.ERROR_MSG}
+				<!-- ELSE -->
 				<a href="{videos.TOPIC_URL}" class="thumbnail">
 					<img src="{videos.THUMBNAIL_URL}" alt="{videos.TOPIC_TITLE}" >
 				</a>
@@ -44,7 +44,16 @@
 	</div>
 	<!-- ENDIF -->
 <!-- END videos -->
+<div class="row">
+<div class="text-right">{TOTAL_VIDEOS}</div>
+<ul class="pagination pull-right">
+	<!-- BEGIN pages -->
+	<li<!-- IF pages.ACTIVE --> class="active"<!-- ENDIF -->>
+		<a href="{pages.URL}">{pages.TEXT}</a>
+	</li>
+	<!-- END pages -->
+</ul>
 </div>
-
+</div>
 
 <!-- INCLUDE footer.html -->

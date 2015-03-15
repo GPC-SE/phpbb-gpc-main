@@ -190,14 +190,25 @@ class main
 
 	/**
 	 * Controller for route /videos
-	 *
+	 * @param $page the page
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
-	public function videos()
+	public function videos($page)
 	{
 		global $phpbb_root_path, $phpEx;
-		$topics = $this->gpc_videos_manager->get_topics_with_video();
-		$i=0;
+
+		$this->user->add_lang_ext('gpc/main', 'videos');
+
+		$videos_perpage = 9;
+		if ($page < 1)
+		{
+			$page = 1;
+		}
+		$start = ($page - 1) * $videos_perpage;
+		$limit = $videos_perpage;
+		$topics = $this->gpc_videos_manager->get_topics_with_video($start, $limit);
+		$total_videos = $this->gpc_videos_manager->count_total_videos();
+		$i = 0;
 		foreach ($topics as $topic)
 		{
 			$video = $topic['rh_video'];
@@ -231,8 +242,47 @@ class main
 			$i++;
 			$this->template->assign_block_vars('videos', $template_block_vars);
 		}
+
+		$max_page = ceil($total_videos/$videos_perpage);
+
+		$min_shown_page = $page > 2 ? $page - 2 : 1;
+		$max_shown_page = $page < $max_page -2 ? $page + 2 : $max_page;
+
+		if ($page != 1)
+		{
+			$this->template->assign_block_vars('pages', array(
+				'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => 1)),
+				'TEXT'	=> '&laquo;',
+			));
+			$this->template->assign_block_vars('pages', array(
+				'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => 1)),
+				'TEXT'	=> '&lsaquo;',
+			));
+		}
+		for ($i = $min_shown_page; $i <= $max_shown_page; $i++)
+		{
+			$this->template->assign_block_vars('pages', array(
+				'URL'		=> $this->helper->route('gpc_main_controller_videos', array('page' => $i)),
+				'TEXT'		=> $i,
+				'ACTIVE'	=> $i == $page,
+			));
+		}
+		if ($page != $max_page)
+		{
+			$this->template->assign_block_vars('pages', array(
+				'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => $page + 1)),
+				'TEXT'	=> '&rsaquo;',
+			));
+			$this->template->assign_block_vars('pages', array(
+				'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => $max_page)),
+				'TEXT'	=> '&raquo;',
+			));
+		}
+
 		$this->template->assign_vars(array(
-			'S_GPC_VIDEOS_ACTIVE' => true,
+			'S_GPC_VIDEOS_ACTIVE'	=> true,
+			'CURRENT_PAGE'			=> $page,
+			'TOTAL_VIDEOS'			=> $this->user->lang('VIDEOS_COUNT', $total_videos),
 		));
 		return $this->helper->render('videos.html');
 	}

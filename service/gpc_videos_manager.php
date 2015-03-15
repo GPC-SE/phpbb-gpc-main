@@ -41,10 +41,34 @@ class gpc_videos_manager
 	}
 
 	/**
-	 *
+	 * @return int count of all videos
+	 */
+	public function count_total_videos()
+	{
+		$sql_array = array(
+			'SELECT'	=>  'COUNT(*) as count',
+			'FROM'		=> array(
+				$this->table_prefix . RH_VIDEOS_TABLES::VIDEOS => 'v',
+				TOPICS_TABLE => 't',
+				FORUMS_TABLE => 'f',
+			),
+			'WHERE'		=> 't.topic_id = v.topic_id
+				AND f.forum_id = t.forum_id
+				AND f.rh_videos_enabled',
+		);
+		$sql = $this->db->sql_build_query('SELECT', $sql_array);
+		$result = $this->db->sql_query($sql);
+		$count = $this->db->sql_fetchfield('count');
+		$this->db->sql_freeresult($result);
+		return (int) $count;
+	}
+
+	/**
+	 * @param $start start of videos
+	 * @param $limit max count of videos to return
 	 * @return array mapping topic_id => topic-row + field 'rh_video'
 	 */
-	public function get_topics_with_video()
+	public function get_topics_with_video($start, $limit)
 	{
 		$sql_array = array(
 			'SELECT'	=>  't.*',
@@ -58,7 +82,7 @@ class gpc_videos_manager
 				AND f.rh_videos_enabled',
 		);
 		$sql = $this->db->sql_build_query('SELECT_DISTINCT', $sql_array);
-		$result = $this->db->sql_query_limit($sql, 10);
+		$result = $this->db->sql_query_limit($sql, $limit, $start);
 		$topics = array();
 		$topic_ids = array();
 		while ($row = $this->db->sql_fetchrow($result))
