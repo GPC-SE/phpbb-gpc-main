@@ -80,6 +80,7 @@ class gpc_videos_manager
 			'WHERE'		=> 't.topic_id = v.topic_id
 				AND f.forum_id = t.forum_id
 				AND f.rh_videos_enabled',
+			'ORDER_BY'	=> 't.topic_time DESC',
 		);
 		$sql = $this->db->sql_build_query('SELECT_DISTINCT', $sql_array);
 		$result = $this->db->sql_query_limit($sql, $limit, $start);

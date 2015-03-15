@@ -116,10 +116,11 @@ class main
 			'U_GPC_TUTORIALS_ALL' => $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'tutorial'))),
 		));
 
-		// news
-		$tags = array('news');
 		$limit_topics = 3;
 		$limit_preview_text = 100;
+
+		// news
+		$tags = array('news');
 		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
 		foreach ($topics as $topic)
 		{
@@ -133,8 +134,6 @@ class main
 
 		// tutorials
 		$tags = array('tutorial');
-		$limit_topics = 3;
-		$limit_preview_text = 100;
 		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
 		foreach ($topics as $topic)
 		{
@@ -147,11 +146,9 @@ class main
 		}
 
 		// videos
-		// TODO getting videos by a tag is not so ideal. Maybe get all topics of predefined forums?
-		$tags = array('video');
-		$limit_topics = 3;
-		$limit_preview_text = 100;
-		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
+		$start = 1;
+		$topics = $this->gpc_videos_manager->get_topics_with_video($start, $limit_topics);
+		$topics = $this->preview_helper->preview_topics($topics, $limit_preview_text);
 		foreach ($topics as $topic)
 		{
 			$this->template->assign_block_vars('videos', array(

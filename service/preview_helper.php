@@ -34,19 +34,21 @@ class preview_helper
 		$this->php_ext = $php_ext;
 	}
 
-	public function preview_topics_by_tags(array $tags, $max_topics, $max_preview_text_length = 100)
+	/**
+	 * Creates previews of given topics
+	 *
+	 * @param array $topics holding all topic information of the topics to preview
+	 * @return array with title, url, preview_text and first_poster_name
+	 */
+	public function preview_topics(array $topics, $max_preview_text_length = 100)
 	{
-		$start = 0;
-		$topics = $this->tags_manager->get_topics_by_tags($tags, $start, $max_topics);
-
 		$preview_topics = array();
 		foreach ($topics as $topic)
 		{
 			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
 			$view_topic_url = append_sid("{$this->phpbb_root_path}viewtopic.{$this->php_ext}", $view_topic_url_params);
 
-			//$tutorial_url = $this->remove_community($this->helper->route('gpc_main_controller_tutorial_view', array('topic_id' => $topic['topic_id'])));
-
+			// get text of first post
 			$sql = 'SELECT p.post_text AS text, p.bbcode_uid, p.bbcode_bitfield
 				FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p
 				WHERE t.topic_id = ' . (int) $topic['topic_id'] . '
@@ -65,6 +67,24 @@ class preview_helper
 			);
 		}
 		return $preview_topics;
+	}
+
+	public function preview_topics_by_tags(array $tags, $max_topics, $max_preview_text_length = 100)
+	{
+		$sql = $this->tags_manager->get_topics_build_query($tags, $mode, $casesensitive);
+
+		$order_by = ' ORDER BY topics.topic_time DESC';
+		$sql .= $order_by;
+
+		$start = 0;
+		$result = $this->db->sql_query_limit($sql, $max_topics, $start);
+		$topics = array();
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$topics[] = $row;
+		}
+		$this->db->sql_freeresult($result);
+		return $this->preview_topics($topics, $max_preview_text_length);
 	}
 
 }
