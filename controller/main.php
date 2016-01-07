@@ -558,9 +558,9 @@ class main
 		$this->template->assign_block_vars('pencategories', array(
 			'NUMBER'		=> $i,
 			'IMG'			=>	'theme/images/pens/RSVP.png',
-			'NAME'			=> 'Cap-Mods',
-			'DESCRIPTION'	=> 'Cap-Mods sind Stifte mit einer Kappe (engl. Cap). Einer der ältesten unter ihnen ist der im Bild zu sehende RSVP MX.',
-			'URL'			=> $this->get_search_link(array('cap', 'mods')),
+			'NAME'			=> 'Single-Cap-Mods',
+			'DESCRIPTION'	=> 'Single-Cap-Mods sind Stifte mit nur einer Kappe. Einer der ältesten dieser Mods ist der im Bild zu sehende RSVP MX.',
+			'URL'			=> $this->get_search_link(array('single-cap', 'mods')),
 			'IS_LAST'		=> false,
 		));
 
