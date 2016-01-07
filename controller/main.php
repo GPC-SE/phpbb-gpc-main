@@ -438,15 +438,6 @@ class main
 	{
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE'	=> true,
-			'U_GPC_SEARCH_AROUND'		=> $this->get_search_link(array('around')),
-			'U_GPC_SEARCH_PASS'			=> $this->get_search_link(array('pass')),
-			'U_GPC_SEARCH_SONIC'		=> $this->get_search_link(array('sonic')),
-			'U_GPC_SEARCH_CHARGE'		=> $this->get_search_link(array('charge')),
-			'U_GPC_SEARCH_INFINITY'		=> $this->get_search_link(array('infinity')),
-			'U_GPC_SEARCH_SPINS'		=> $this->get_search_link(array('spins')),
-			'U_GPC_SEARCH_SHADOW'		=> $this->get_search_link(array('shadow')),
-			'U_GPC_SEARCH_ARTISTIC'		=> $this->get_search_link(array('artistic')),
-			'U_GPC_SEARCH_OTHER'		=> $this->get_search_link(array('sonstige')),
 		));
 
 		$i = 0;
