@@ -19,8 +19,8 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
-  padding-top: 50px;
-  padding-bottom: 20px;
+	padding-top: 50px;
+	padding-bottom: 20px;
 }
 
 #front_video {
@@ -31,6 +31,10 @@ body {
 	padding-top: 10px;
 }
 
+.trick_families img {
+	padding: 2px;
+}
+
 .trick_family img {
-	width: 100%;
+	padding: 2px;
 }

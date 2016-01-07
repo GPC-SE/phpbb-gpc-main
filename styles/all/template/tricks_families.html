@@ -16,7 +16,9 @@
 
 		</div>
 		<div class="col-md-5">
-			<img src="http://placehold.it/720x290" class="img-responsive" style="width:100%"/>
+			<div class="panel panel-default trick_families">
+				<img src="{GPC_STYLE_PATH}/theme/images/tricks/ta_720x290.png" class="img-responsive img-rounded"/>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -27,149 +29,29 @@
 </div>
 
 <div class="container">
+<!-- BEGIN trickcategories -->
+	<!-- IF trickcategories.NUMBER % 3 == 0 -->
 	<div class="row">
+	<!-- ENDIF -->
 		<div class="col-md-4">
 			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
+				<a href="{trickcategories.URL}">
+					<img src="{GPC_STYLE_PATH}/{trickcategories.IMG}"
+						class="img-responsive img-rounded" />
+				</a>
 				<div class="panel-body">
-					<h2 style="margin: 0">Around</h2>
-					<p>Arounds sind Tricks, bei denen sich der Stift durch einen
-						Push im 90° Winkel zum jeweiligen Finger um diesen dreht.</p>
+					<h2 style="margin: 0">{trickcategories.NAME}</h2>
+					<p>{trickcategories.DESCRIPTION}</p>
 				</div>
 				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_AROUND}">Around-Tricks »</a>
+					Zu den <a href="{trickcategories.URL}">{trickcategories.NAME}-Tricks »</a>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Pass</h2>
-					<p>Bei (Finger-)Passes wird der Stift von einem Zwischenraum zu
-						einem anderen gegeben, indem ein Finger den Stift runter oder hoch
-						drückt und er dann von einem weiteren Finger angenommen wird.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_PASS}">Pass-Tricks »</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://placehold.it/720x240"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Sonic</h2>
-					<p>In der Trickfamilie Sonic werden Stifte von einem
-						Zwischenraum in einen Anderen gegeben - zum Beispiel durch eine
-						Kombination aus einer Charge-Drehung und einem Pass.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_SONIC}">Sonic-Tricks »</a>
-				</div>
-			</div>
-		</div>
+	<!-- IF trickcategories.NUMBER % 3 == 2 -->
 	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Charge</h2>
-					<p>Charges sind Kreisförmige Bewegungen des Stiftes zwischen
-						zwei Fingern, wobei der Stift den Zwischenraum nie verlässt.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_CHARGE}">Charge-Tricks »</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Infinity</h2>
-					<p>Das Merkmal der Infinity-Familie ist, dass der Stift im
-						Gegensatz zu den anderen Familien, an der Spitze (bzw. am Ende)
-						des Stiftes angefasst wird. Dadurch wird es schwerer diese in
-						Combos einzubauen. Es sei aber angemerkt, dass die verschiedenen
-						Infinity-Variationen recht einfach miteinander kombinierbar sind.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_INFINITY}">Infinity-Tricks »</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Spins</h2>
-					<p>Diese Trickfamilie beinhaltet all jene Tricks, welche sich
-						auf einem bestimmten Punkt auf der Hand oder den Fingern drehen.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_SPINS}">Spins-Tricks »</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Shadow</h2>
-					<p>Shadows sind Tricks, die mit einem Push aus einem
-						Zwischenraum heraus starten, dann eine Drehung auf einem Punkt auf
-						Hand oder Finger machen und danach in einem Zwischenraum wieder
-						gefangen werden.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_SHADOW}">Shadow-Tricks »</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Artistic</h2>
-					<p>Artistic-Tricks sind meistens Aerials. Für diese ist
-						charakteristisch, dass sie mindestens eine halbe Drehung in der
-						Luft machen ohne das sie in Kontakt mit der Hand stehen. Eine
-						weitere Form der Artistic-Tricks sind Tricks, die aus einer
-						Kombination mit beiden Händen und dem Stift gewisse Formen
-						darstellen, die einen Show-Effekt haben.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_ARTISTIC}">Artistic-Tricks »</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="panel panel-default trick_family">
-				<img src="http://wiki.penspinning.de/images/Ct_tricks.jpg"
-					class="img-responsive" />
-				<div class="panel-body">
-					<h2 style="margin: 0">Sonstige</h2>
-					<p>Hier finden alle Tricks Platz, die in keine der anderen
-						Familien gehören.</p>
-				</div>
-				<div class="panel-footer">
-					Zu den <a href="{U_GPC_SEARCH_OTHER}">Sonstigen-Tricks »</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	<!-- ENDIF -->
+<!-- END trickcategories -->
 </div>
 
 <!-- INCLUDE footer.html -->

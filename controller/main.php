@@ -448,6 +448,88 @@ class main
 			'U_GPC_SEARCH_ARTISTIC'		=> $this->get_search_link(array('artistic')),
 			'U_GPC_SEARCH_OTHER'		=> $this->get_search_link(array('sonstige')),
 		));
+
+		$i = 0;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/around.png',
+			'NAME'			=> 'Around',
+			'DESCRIPTION'	=> 'Arounds sind Tricks, bei denen sich der Stift durch einen Push im 90° Winkel zum jeweiligen Finger um diesen dreht.',
+			'URL'			=> $this->get_search_link(array('around')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/pass.png',
+			'NAME'			=> 'Pass',
+			'DESCRIPTION'	=> 'Bei (Finger-)Passes wird der Stift von einem Zwischenraum zu einem anderen gegeben, indem ein Finger den Stift runter oder hoch drückt und er dann von einem weiteren Finger angenommen wird.',
+			'URL'			=> $this->get_search_link(array('pass')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/sonic.png',
+			'NAME'			=> 'Sonic',
+			'DESCRIPTION'	=> 'In der Trick-Familie Sonic werden Stifte von einem Zwischenraum in einen Anderen gegeben - zum Beispiel durch eine Kombination aus einer Charge-Drehung und einem Pass.',
+			'URL'			=> $this->get_search_link(array('sonic')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/charge.png',
+			'NAME'			=> 'Charge',
+			'DESCRIPTION'	=> 'Charges sind Kreisförmige Bewegungen des Stiftes zwischen zwei Fingern, wobei der Stift den Zwischenraum nie verlässt.',
+			'URL'			=> $this->get_search_link(array('charge')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/infinity.png',
+			'NAME'			=> 'Infinity',
+			'DESCRIPTION'	=> 'Das Merkmal der Infinity-Familie ist, dass der Stift im Gegensatz zu den anderen Familien, an der Spitze (bzw. am Ende) des Stiftes angefasst wird. Dadurch wird es schwerer diese in Combos einzubauen. Es sei aber angemerkt, dass die verschiedenen Infinity-Variationen recht einfach miteinander kombinierbar sind.',
+			'URL'			=> $this->get_search_link(array('infinity')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/spins.png',
+			'NAME'			=> 'Spins',
+			'DESCRIPTION'	=> 'Diese Trick-Familie beinhaltet all jene Tricks, welche sich auf einem bestimmten Punkt auf der Hand oder den Fingern drehen.',
+			'URL'			=> $this->get_search_link(array('spins')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/shadow.png',
+			'NAME'			=> 'Shadow',
+			'DESCRIPTION'	=> 'Shadows sind Tricks, die mit einem Push aus einem Zwischenraum heraus starten, dann eine Drehung auf einem Punkt auf Hand oder Finger machen und danach in einem Zwischenraum wieder gefangen werden.',
+			'URL'			=> $this->get_search_link(array('shadow')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/artistic.png',
+			'NAME'			=> 'Artistic',
+			'DESCRIPTION'	=> 'Artistic-Tricks sind meistens Aerials. Für diese ist charakteristisch, dass sie mindestens eine halbe Drehung in der Luft machen ohne das sie in Kontakt mit der Hand stehen. Eine weitere Form der Artistic-Tricks sind Tricks, die aus einer Kombination mit beiden Händen und dem Stift gewisse Formen darstellen, die einen Show-Effekt haben.',
+			'URL'			=> $this->get_search_link(array('artistic')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('trickcategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/tricks/others.png',
+			'NAME'			=> 'Sonstige',
+			'DESCRIPTION'	=> 'Hier finden alle Tricks Platz, die in keine der anderen Trick-Familien gehören.',
+			'URL'			=> $this->get_search_link(array('sonstige')),
+		));
+
 		return $this->helper->render('tricks_families.html');
 	}
 
