@@ -534,6 +534,42 @@ class main
 		$this->template->assign_vars(array(
 			'S_GPC_TUTORIALS_ACTIVE'	=> true,
 		));
+
+		$i = 0;
+		$this->template->assign_block_vars('pencategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/pens/beginners.png',
+			'NAME'			=> 'Anfänger-Mods',
+			'DESCRIPTION'	=> 'In dieser Familie findet sind Stifte, die sich aus in deutschland handelsüblichen Stiften zusammenbauen lassen.',
+			'URL'			=> $this->get_search_link(array('beginner', 'mods')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('pencategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/pens/RSVP.png',
+			'NAME'			=> 'Cap-Mods',
+			'DESCRIPTION'	=> 'Cap-Mods sind Stifte mit einer Kappe (engl. Cap). Einer der ältesten unter ihnen ist der im Bild zu sehende RSVP MX.',
+			'URL'			=> $this->get_search_link(array('cap', 'mods')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('pencategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/pens/comssa.png',
+			'NAME'			=> 'ComSsas',
+			'DESCRIPTION'	=> 'Einer der bekanntesten Pen-Mods ist der ComSsa. Viele andere Mods stammen von diesem ab.',
+			'URL'			=> $this->get_search_link(array('comssa', 'mods')),
+		));
+
+		$i++;
+		$this->template->assign_block_vars('pencategories', array(
+			'NUMBER'		=> $i,
+			'IMG'			=>	'theme/images/pens/others.png',
+			'NAME'			=> 'Sonstige-Mods',
+			'DESCRIPTION'	=> 'Alle Mods, die keiner anderen Familie angehören, sind hier zu finden.',
+			'URL'			=> $this->get_search_link(array('sonstige', 'mods')),
+		));
 		return $this->helper->render('pens_families.html');
 	}
 

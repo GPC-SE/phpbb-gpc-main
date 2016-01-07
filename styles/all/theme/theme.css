@@ -31,10 +31,10 @@ body {
 	padding-top: 10px;
 }
 
-.trick_families img {
+.pen_families img, .trick_families img {
 	padding: 2px;
 }
 
-.trick_family img {
+.pen_family img, .trick_family img {
 	padding: 2px;
 }

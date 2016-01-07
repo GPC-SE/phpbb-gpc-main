@@ -1,3 +1,54 @@
 <!-- INCLUDE header.html -->
-pens families TODO
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-7" style="padding-left:30px;">
+			<h2>Pen-Familien</h2>
+			<p>
+				Pennsinging-Stifte lassen sich grob in die unten aufgeführten Familien unterteilen.
+				Jede Familie hat ein besonderes Merkmal. Dieses ergibt sich in der Regel durch die Konstruktion des
+				Stiftes, seiner Bauteile oder einer besonderen Historie. Für Anfänger sind leicht modifizierte
+				Tinten-Killer gut geeignet. Ein modifizierter Stift wird auch "Mod" genannt.
+				Bauanleitungen und andere interessante Tipps findest Du in der jeweiligen Pen-Familie.
+			</p>
+		</div>
+		<div class="col-md-5">
+			<div class="panel panel-default pen_families">
+				<img src="{GPC_STYLE_PATH}/theme/images/pens/collection.png" class="img-responsive img-rounded"/>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<hr />
+		</div>
+	</div>
+</div>
+
+<div class="container">
+<!-- BEGIN pencategories -->
+	<!-- IF pencategories.NUMBER % 3 == 0 -->
+	<div class="row">
+	<!-- ENDIF -->
+		<div class="col-md-4">
+			<div class="panel panel-default pen_family">
+				<a href="{pencategories.URL}">
+					<img src="{GPC_STYLE_PATH}/{pencategories.IMG}"
+						class="img-responsive img-rounded" />
+				</a>
+				<div class="panel-body">
+					<h2 style="margin: 0">{pencategories.NAME}</h2>
+					<p>{pencategories.DESCRIPTION}</p>
+				</div>
+				<div class="panel-footer">
+					Zu den <a href="{pencategories.URL}">{pencategories.NAME} »</a>
+				</div>
+			</div>
+		</div>
+	<!-- IF pencategories.NUMBER % 3 == 2 -->
+	</div>
+	<!-- ENDIF -->
+<!-- END pencategories -->
+</div>
+
 <!-- INCLUDE footer.html -->
