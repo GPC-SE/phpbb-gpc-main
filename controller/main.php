@@ -215,36 +215,36 @@ class main
 		foreach ($topics as $topic)
 		{
 			$video = $topic['rh_video'];
-			$video_url = $video->get_url();
-			$template_block_vars = array();
 			if ($video->has_error())
 			{
-				$video_link = "<a href=\"$video_url\">$video_url</a>";
-				$error_msg = $this->user->lang('RH_VIDEOS_VIDEO_COULD_NOT_BE_LOADED', $video_link);
-				$template_block_vars = array_merge($template_block_vars, array(
-						'S_RH_VIDEOS_ERROR' => true,
-						'ERROR_MSG' => $error_msg,
-					));
-			} else {
+				// We do not show videos that cannot be loaded. This means
+				// that the page might lack some videos, but we do not need
+				// to change paging, but adjust the shown counters
+				$topics_count--;
+				$total_videos--;
+			}
+			else
+			{
+				$video_url = $video->get_url();
+				$template_block_vars = array();
 				$template_block_vars = array_merge($template_block_vars, array(
 						'RH_VIDEOS_VIDEO_URL' => $video_url,
 						'RH_VIDEOS_VIDEO_TITLE' => $video->get_title(),
 						'RH_VIDEOS_VIDEO_HTML' => $video->get_html(),
 						'THUMBNAIL_URL' => $video->get_thumbnail_url(),
 					));
+				$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
+				$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
+
+				$template_block_vars = array_merge($template_block_vars, array (
+					'TOPIC_TITLE' => $topic['topic_title'],
+					'TOPIC_URL' => $view_topic_url,
+					'INDEX' => $i,
+					'IS_LAST' => $i == ($topics_count - 1),
+				));
+				$i++;
+				$this->template->assign_block_vars('videos', $template_block_vars);
 			}
-
-			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
-			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
-
-			$template_block_vars = array_merge($template_block_vars, array (
-				'TOPIC_TITLE' => $topic['topic_title'],
-				'TOPIC_URL' => $view_topic_url,
-				'INDEX' => $i,
-				'IS_LAST' => $i == ($topics_count - 1),
-			));
-			$i++;
-			$this->template->assign_block_vars('videos', $template_block_vars);
 		}
 
 		if ($total_videos > 0)
