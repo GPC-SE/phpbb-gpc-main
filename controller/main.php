@@ -351,7 +351,7 @@ class main
 		$this->db->sql_freeresult($result);
 
 		$forum_id = (int) $row['forum_id'];
-		if (!in_array($forum_id, split(',', constants::TUTORIALS_FORUM_IDS))) {
+		if (!in_array($forum_id, explode(',', constants::TUTORIALS_FORUM_IDS))) {
 			trigger_error("The requested Tutorial could not be found.");
 		}
 
