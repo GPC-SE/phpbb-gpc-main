@@ -46,6 +46,7 @@ class gpc_header_manager
 			'GPC_STYLE_PATH'	=> $home_link . 'community/ext/gpc/main/styles/all/',
 			'U_GPC_HOME'		=> $home_link,
 			'U_GPC_IMPRESSUM'	=> $this->remove_community($this->helper->route('gpc_main_controller_impressum')),
+			'U_GPC_PRIVACY'		=> $this->remove_community($this->helper->route('gpc_main_controller_privacy')),
 			'U_GPC_VIDEOS'		=> $this->remove_community($this->helper->route('gpc_main_controller_videos')),
 			'U_GPC_TUTORIALS_TRICKS_ALL'		=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'trick'))),
 			'U_GPC_TUTORIALS_TRICKS_BEGINNER'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'trick,beginner'))),
@@ -68,14 +69,8 @@ class gpc_header_manager
 		// if the current url contains "/community/"
 		if (!strpos($this->helper->get_current_url(), '/community/') === false)
 		{
-			$active_str = 'S_GPC_COMMUNITY_ACTIVE';
-			// contact page? if the current url contains "'community/memberlist.php?mode=contactadmin'"
-			if (!strpos($this->helper->get_current_url(), 'community/memberlist.php?mode=contactadmin') === false)
-			{
-				$active_str = 'S_GPC_CONTACT_ACTIVE';
-			}
 			$this->template->assign_vars(array(
-				$active_str => true,
+				'S_GPC_COMMUNITY_ACTIVE' => true,
 			));
 		}
 	}

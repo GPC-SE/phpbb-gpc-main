@@ -1,28 +1,24 @@
-$('#myTab a').click(function (e) {
-  e.preventDefault()
-  $(this).tab('show')
-})
-var server_costs = angular.module('server_costs', ['angularUtils.directives.dirPagination'])
-    .config(function($interpolateProvider, $httpProvider) {
-        $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
-    })
-    .controller('PsCtrl', PsCtrl);
+var server_costs = angular.module('server_costs', [ 'angularUtils.directives.dirPagination' ])
+	.config(
+			function($interpolateProvider, $httpProvider) {
+			$interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+		})
+	.controller('PsCtrl', PsCtrl);
 
-function PsCtrl ($scope) {
+function PsCtrl($scope) {
 	$scope.trinkgeldMessage = "";
-	$scope.trinkgeld = 8;
+	$scope.trinkgeld = 5;
 	$scope.geberName = "";
-	$scope.updateTrinkgeldMsg = function () {
-		if ($scope.geberName=="") {
-			$scope.trinkgeldMessage="Anonymes Trinkgeld";
+	$scope.updateTrinkgeldMsg = function() {
+		if ($scope.geberName == "") {
+			$scope.trinkgeldMessage = "Anonymes Trinkgeld";
 		} else {
-			$scope.trinkgeldMessage="Trinkgeld von " + $scope.geberName;
+			$scope.trinkgeldMessage = "Trinkgeld von " + $scope.geberName;
 		}
-		$scope.standDatum = "03.11.2014";
 	};
-	$scope.updateTrinkgeld = function () {
-		if ($scope.trinkgeld<1) {
-			$scope.trinkgeld=1;
+	$scope.updateTrinkgeld = function() {
+		if ($scope.trinkgeld < 1) {
+			$scope.trinkgeld = 1;
 		}
 	};
 	$scope.updateTrinkgeldMsg();
@@ -92,7 +88,7 @@ function PsCtrl ($scope) {
 		{'jahr': 2016, monat: 3, geber: 'KerlPinselTreibholz, president', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2016, monat: 4, geber: 'president, Comssa Penna, Sponge', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2016, monat: 5, geber: 'Sponge', werbung: 0.00000000, trinkgeld: 0.36455696, status: '5.02 € offen'},
-		{'jahr': 2016, monat: 6, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '7.90 € offen'}
+		{'jahr': 2016, monat: 6, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
 	];
 	$scope.geber = [
 		{name: 'Robert Heim', anzahl: 43, trinkgeld: 872.3699999999999},

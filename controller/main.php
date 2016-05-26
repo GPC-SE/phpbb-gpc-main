@@ -182,7 +182,20 @@ class main
 	 */
 	public function impressum()
 	{
+		$this->template->assign_vars(array(
+			'S_GPC_CONTACT_ACTIVE'	=> true,
+		));
 		return $this->helper->render('impressum.html');
+	}
+
+	/**
+	 * Controller for route /privacy
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function privacy()
+	{
+		return $this->helper->render('privacy.html');
 	}
 
 	/**

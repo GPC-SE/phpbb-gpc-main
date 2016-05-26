@@ -10,6 +10,10 @@ gpc_main_controller_impressum:
     path: /impressum
     defaults: { _controller: gpc.main.controller:impressum }
 
+gpc_main_controller_privacy:
+    path: /privacy
+    defaults: { _controller: gpc.main.controller:privacy }
+
 gpc_main_controller_videos:
     path: /videos/{page}
     defaults: { _controller: gpc.main.controller:videos, page: 1 }

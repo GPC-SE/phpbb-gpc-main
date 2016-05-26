@@ -22,13 +22,18 @@
  padding:2px;
  color:white;
  text-align: center;
+ white-space: nowrap;
 }
 .offen {
  background-color: #FA6464;
- padding:2px;
+ padding:2px 10px;
  color:white;
  text-align: center;
  white-space: nowrap;
+}
+.rang {
+ padding:2px;
+ font-weight:bold;
 }
 #table-controls {
 	text-align: center;

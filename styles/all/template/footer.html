@@ -1,18 +1,7 @@
 
 <hr />
 
-<div class="container">
-	<!-- Footer -->
-	<div class="row">
-		<div class="col-md-12">
-			<p>
-				<a href="{U_GPC_IMPRESSUM}">Impressum</a> | <a href="{U_CONTACT_US}">{L_CONTACT}</a>
-			</p>
-		</div>
-	</div>
-
-</div>
-<!-- /container -->
+<!-- INCLUDE footer_links.html -->
 
 <script type="text/javascript" src="{T_JQUERY_LINK}"></script>
 <!-- IF S_ALLOW_CDN -->
@@ -34,15 +23,20 @@
 				function() {
 					var ad = document.getElementById("psads").children;
 					if (ad.length <= 2) {
-						document.getElementById("psadsalternative").style.display = "block";
+						$("#psadsalternative")
+							.css('opacity', 0)
+							.slideDown('slow')
+							.animate(
+								{ opacity: 1 },
+								{ queue: false, duration: 1500 }
+							);
 					}
-					;
-				}, 1000);
+				}, 2500);
 	}
 	checkAdBlock();
 </script>
 <!-- ENDIF -->
-
+<!-- INCLUDE cookieconsent.html -->
 </body>
 </html>
 
