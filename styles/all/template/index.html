@@ -1,22 +1,28 @@
 <!-- INCLUDE header.html -->
-
+<!-- INCLUDEJS @gpc_main/../img_fader/img_fader.js -->
+<!-- INCLUDECSS @gpc_main/../img_fader/img_fader.css -->
 	<div class="container theme-showcase" role="main">
-		<!-- Main jumbotron for a primary marketing message or call to action -->
 		<div class="jumbotron">
+			<h1>Penspinning</h1>
 			<div class="row">
 				<div class="col-md-8">
-					<h1>Penspinning</h1>
+					<div id="img_fader" style="padding-bottom: 36%;">
+						<!-- BEGIN ps_imgs --> 
+						<img class="<!-- IF ps_imgs.NUMBER == 0 -->active<!-- ENDIF --> img-responsive img-rounded " src="{GPC_STYLE_PATH}/{ps_imgs.RELATIVE_URL}" />
+						<!-- END ps_imgs -->
+					</div>
 					<p><em>&hellip; ist die Kunst einen Strift zu drehen</em>.</p>
 					<p>Die <em>German Penspinning Community</em> (GPC) ist die deutsche Anlaufstelle zum Thema Penspinning. Du kannst von unserer jahrelangen Erfahrung profitieren und in wenigen Tagen die Basics und andere faszinierende Tricks mit Stiften lernen.</p>
 					<p><a href="{U_GPC_TUTORIALS_TRICKS_FAMILIES}" class="btn btn-primary btn-lg" role="button">Zu den Tutorials &raquo;</a></p>
+				</a>
 				</div>
 				<div class="col-md-4">
 					<div class="panel panel-default pen_families">
 						<div class="panel-heading text-center">
-							<h2 class="panel-title">Featured-Video<br/>GPC's 2nd Collaboration Video</h2>
+							<h2 class="panel-title">Featured Video<br/>GPC's 2nd Collaboration Video</h2>
 						</div>
 						<a href="./community/viewtopic.php?f=2&amp;t=60">
-							<img src="https://i.ytimg.com/vi/yaeKRnwP7_I/hqdefault.jpg" alt="GPC's 2nd Collaboration Video" class="img-responsive img-rounded">
+							<img src="https://i.ytimg.com/vi/yaeKRnwP7_I/hqdefault.jpg" alt="GPC's 2nd Collaboration Video" class="img-responsive img-rounded center-block">
 						</a>
 						<div class="panel-footer">
 							<p><a class="btn btn-default" href="{U_GPC_VIDEOS}" role="button">Zu den Videos &raquo;</a></p>
@@ -27,10 +33,12 @@
 		</div>
 	</div>
 
-	<hr/>
-
-    <!-- News -->
 	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- INCLUDE werbung.html -->
+			</div>
+		</div>
       <div class="row">
         <div class="col-md-4">
           <h2>News</h2>

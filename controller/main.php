@@ -4,16 +4,16 @@
  * @package phpBB Extension - GPC Main
  * @copyright (c) 2014 Robet Heim
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
- *
  */
-
 namespace gpc\main\controller;
 
 use gpc\main\constants;
+use gpc\main\model\trick_family_provider;
 use robertheim\videos\model\rh_oembed;
 
 class main
 {
+
 	/* @var \phpbb\config\config */
 	protected $config;
 
@@ -61,25 +61,27 @@ class main
 		$pagination,
 		\robertheim\topictags\service\tags_manager $tags_manager,
 		\gpc\main\service\gpc_videos_manager $gpc_videos_manager,
-		\gpc\main\service\preview_helper $preview_helper
-	)
+		\gpc\main\service\preview_helper $preview_helper)
 	{
 		$this->helper = $helper;
 
 		// if current url is the board-index "/community/" we redirect to community/index.php
 		if (preg_match('/\/community\/$/i', $this->helper->get_current_url()))
 		{
-			redirect($this->helper->get_current_url() . 'index.php', false, true);
-			exit;
+			redirect($this->helper->get_current_url() . 'index.php', false,
+				true);
+			exit();
 		}
 
 		// here we know, that we are using a route of our controller and no phpBB route
-		// if the current url contains "/community/" we redirect to the same adress without "/community"
+		// if the current url contains "/community/" we redirect to the same adress without
+		// "/community"
 		// because content /xyz should not be reachable at /community/xyz again
 		if (!strpos($this->helper->get_current_url(), '/community/') === false)
 		{
-			redirect($this->remove_community($this->helper->get_current_url()), false, true);
-			exit;
+			redirect($this->remove_community($this->helper->get_current_url()),
+				false, true);
+			exit();
 		}
 
 		$this->config = $config;
@@ -111,52 +113,84 @@ class main
 	{
 		global $phpbb_root_path, $phpEx;
 
-		$this->template->assign_vars(array(
-			'S_GPC_HOME_ACTIVE' => true,
-			'U_GPC_TUTORIALS_ALL' => $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'tutorial'))),
-		));
+		$trick_families = trick_family_provider::get_all();
+		$trick_families = array_filter($trick_families,
+			function ($tf) {
+				return $tf->get_name() != 'Sonstige';
+			});
+		$i = 0;
+		foreach ($trick_families as $tf)
+		{
+			$this->template->assign_block_vars('ps_imgs',
+				array(
+					'NUMBER' => $i,
+					'RELATIVE_URL' => $tf->get_relative_img_url()
+				));
+			$i++;
+		}
+
+		$this->template->assign_vars(
+			array(
+				'S_GPC_HOME_ACTIVE' => true,
+				'U_GPC_TUTORIALS_ALL' => $this->remove_community(
+					$this->helper->route('gpc_main_controller_tutorials_search',
+						array(
+							'tags' => 'tutorial'
+						)))
+			));
 
 		$limit_topics = 3;
 		$limit_preview_text = 100;
 
 		// news
-		$tags = array('news');
-		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
+		$tags = array(
+			'news'
+		);
+		$topics = $this->preview_helper->preview_topics_by_tags($tags,
+			$limit_topics, $limit_preview_text);
 		foreach ($topics as $topic)
 		{
-			$this->template->assign_block_vars('news', array(
-				'TITLE'			=> $topic['title'],
-				'URL'			=> $topic['url'],
-				'PREVIEW_TEXT'	=> $topic['preview_text'],
-				'AUTHOR'		=> $topic['first_poster_name'],
-			));
+			$this->template->assign_block_vars('news',
+				array(
+					'TITLE' => $topic['title'],
+					'URL' => $topic['url'],
+					'PREVIEW_TEXT' => $topic['preview_text'],
+					'AUTHOR' => $topic['first_poster_name']
+				));
 		}
 
 		// tutorials
-		$tags = array('tutorial');
-		$topics = $this->preview_helper->preview_topics_by_tags($tags, $limit_topics, $limit_preview_text);
+		$tags = array(
+			'tutorial'
+		);
+		$topics = $this->preview_helper->preview_topics_by_tags($tags,
+			$limit_topics, $limit_preview_text);
 		foreach ($topics as $topic)
 		{
-			$this->template->assign_block_vars('tutorials', array(
-				'TITLE'			=> $topic['title'],
-				'URL'			=> $topic['url'],
-				'PREVIEW_TEXT'	=> $topic['preview_text'],
-				'AUTHOR'		=> $topic['first_poster_name'],
-			));
+			$this->template->assign_block_vars('tutorials',
+				array(
+					'TITLE' => $topic['title'],
+					'URL' => $topic['url'],
+					'PREVIEW_TEXT' => $topic['preview_text'],
+					'AUTHOR' => $topic['first_poster_name']
+				));
 		}
 
 		// videos
 		$start = 1;
-		$topics = $this->gpc_videos_manager->get_topics_with_video($start, $limit_topics);
-		$topics = $this->preview_helper->preview_topics($topics, $limit_preview_text);
+		$topics = $this->gpc_videos_manager->get_topics_with_video($start,
+			$limit_topics);
+		$topics = $this->preview_helper->preview_topics($topics,
+			$limit_preview_text);
 		foreach ($topics as $topic)
 		{
-			$this->template->assign_block_vars('videos', array(
-				'TITLE'			=> $topic['title'],
-				'URL'			=> $topic['url'],
-				'PREVIEW_TEXT'	=> $topic['preview_text'],
-				'AUTHOR'		=> $topic['first_poster_name'],
-			));
+			$this->template->assign_block_vars('videos',
+				array(
+					'TITLE' => $topic['title'],
+					'URL' => $topic['url'],
+					'PREVIEW_TEXT' => $topic['preview_text'],
+					'AUTHOR' => $topic['first_poster_name']
+				));
 		}
 
 		return $this->helper->render('index.html');
@@ -169,9 +203,10 @@ class main
 	 */
 	public function server_costs()
 	{
-		$this->template->assign_vars(array(
-			'S_SERVER_COSTS_INCLUDE_CSS' => true,
-		));
+		$this->template->assign_vars(
+			array(
+				'S_SERVER_COSTS_INCLUDE_CSS' => true
+			));
 		return $this->helper->render('server_costs.html');
 	}
 
@@ -182,9 +217,10 @@ class main
 	 */
 	public function impressum()
 	{
-		$this->template->assign_vars(array(
-			'S_GPC_CONTACT_ACTIVE'	=> true,
-		));
+		$this->template->assign_vars(
+			array(
+				'S_GPC_CONTACT_ACTIVE' => true
+			));
 		return $this->helper->render('impressum.html');
 	}
 
@@ -200,7 +236,9 @@ class main
 
 	/**
 	 * Controller for route /videos
-	 * @param $page the page
+	 *
+	 * @param $page the
+	 *        	page
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
 	public function videos($page)
@@ -211,7 +249,7 @@ class main
 
 		$videos_perpage = 9;
 		$total_videos = $this->gpc_videos_manager->count_total_videos();
-		$max_page = ceil($total_videos/$videos_perpage);
+		$max_page = ceil($total_videos / $videos_perpage);
 		if ($page > $max_page)
 		{
 			$page = $max_page;
@@ -222,7 +260,8 @@ class main
 		}
 		$start = ($page - 1) * $videos_perpage;
 		$limit = $videos_perpage;
-		$topics = $this->gpc_videos_manager->get_topics_with_video($start, $limit);
+		$topics = $this->gpc_videos_manager->get_topics_with_video($start,
+			$limit);
 		$topics_count = sizeof($topics);
 		$i = 0;
 		foreach ($topics as $topic)
@@ -240,67 +279,99 @@ class main
 			{
 				$video_url = $video->get_url();
 				$template_block_vars = array();
-				$template_block_vars = array_merge($template_block_vars, array(
+				$template_block_vars = array_merge($template_block_vars,
+					array(
 						'RH_VIDEOS_VIDEO_URL' => $video_url,
 						'RH_VIDEOS_VIDEO_TITLE' => $video->get_title(),
 						'RH_VIDEOS_VIDEO_HTML' => $video->get_html(),
-						'THUMBNAIL_URL' => $video->get_thumbnail_url(),
+						'THUMBNAIL_URL' => $video->get_thumbnail_url()
 					));
-				$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
-				$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
+				$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' .
+					 $topic['topic_id'];
+				$view_topic_url = append_sid(
+					"{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
 
-				$template_block_vars = array_merge($template_block_vars, array (
-					'TOPIC_TITLE' => $topic['topic_title'],
-					'TOPIC_URL' => $view_topic_url,
-					'INDEX' => $i,
-					'IS_LAST' => $i == ($topics_count - 1),
-				));
+				$template_block_vars = array_merge($template_block_vars,
+					array(
+						'TOPIC_TITLE' => $topic['topic_title'],
+						'TOPIC_URL' => $view_topic_url,
+						'INDEX' => $i,
+						'IS_LAST' => $i == ($topics_count - 1)
+					));
 				$i++;
-				$this->template->assign_block_vars('videos', $template_block_vars);
+				$this->template->assign_block_vars('videos',
+					$template_block_vars);
 			}
 		}
 
 		if ($total_videos > 0)
 		{
 			$min_shown_page = $page > 2 ? $page - 2 : 1;
-			$max_shown_page = $page < $max_page -2 ? $page + 2 : $max_page;
+			$max_shown_page = $page < $max_page - 2 ? $page + 2 : $max_page;
 
 			if ($page != 1)
 			{
-				$this->template->assign_block_vars('pages', array(
-					'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => 1)),
-					'TEXT'	=> '&laquo;',
-				));
-				$this->template->assign_block_vars('pages', array(
-					'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => 1)),
-					'TEXT'	=> '&lsaquo;',
-				));
+				$this->template->assign_block_vars('pages',
+					array(
+						'URL' => $this->helper->route(
+							'gpc_main_controller_videos',
+							array(
+								'page' => 1
+							)),
+						'TEXT' => '&laquo;'
+					));
+				$this->template->assign_block_vars('pages',
+					array(
+						'URL' => $this->helper->route(
+							'gpc_main_controller_videos',
+							array(
+								'page' => 1
+							)),
+						'TEXT' => '&lsaquo;'
+					));
 			}
 			for ($i = $min_shown_page; $i <= $max_shown_page; $i++)
 			{
-				$this->template->assign_block_vars('pages', array(
-					'URL'		=> $this->helper->route('gpc_main_controller_videos', array('page' => $i)),
-					'TEXT'		=> $i,
-					'ACTIVE'	=> $i == $page,
-				));
+				$this->template->assign_block_vars('pages',
+					array(
+						'URL' => $this->helper->route(
+							'gpc_main_controller_videos',
+							array(
+								'page' => $i
+							)),
+						'TEXT' => $i,
+						'ACTIVE' => $i == $page
+					));
 			}
 			if ($page != $max_page)
 			{
-				$this->template->assign_block_vars('pages', array(
-					'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => $page + 1)),
-					'TEXT'	=> '&rsaquo;',
-				));
-				$this->template->assign_block_vars('pages', array(
-					'URL'	=> $this->helper->route('gpc_main_controller_videos', array('page' => $max_page)),
-					'TEXT'	=> '&raquo;',
-				));
+				$this->template->assign_block_vars('pages',
+					array(
+						'URL' => $this->helper->route(
+							'gpc_main_controller_videos',
+							array(
+								'page' => $page + 1
+							)),
+						'TEXT' => '&rsaquo;'
+					));
+				$this->template->assign_block_vars('pages',
+					array(
+						'URL' => $this->helper->route(
+							'gpc_main_controller_videos',
+							array(
+								'page' => $max_page
+							)),
+						'TEXT' => '&raquo;'
+					));
 			}
 		}
-		$this->template->assign_vars(array(
-			'S_GPC_VIDEOS_ACTIVE'	=> true,
-			'CURRENT_PAGE'			=> $page,
-			'TOTAL_VIDEOS'			=> $this->user->lang('VIDEOS_COUNT', $total_videos),
-		));
+		$this->template->assign_vars(
+			array(
+				'S_GPC_VIDEOS_ACTIVE' => true,
+				'CURRENT_PAGE' => $page,
+				'TOTAL_VIDEOS' => $this->user->lang('VIDEOS_COUNT',
+					$total_videos)
+			));
 		return $this->helper->render('videos.html');
 	}
 
@@ -311,13 +382,20 @@ class main
 	 */
 	public function tutorials()
 	{
-		$this->template->assign_vars(array(
-			'S_GPC_TUTORIALS_ACTIVE' => true,
-		));
+		$this->template->assign_vars(
+			array(
+				'S_GPC_TUTORIALS_ACTIVE' => true
+			));
 
-		$this->assign_tutorial_topics_block(array('basic'), 'basic');
-		$this->assign_tutorial_topics_block(array('advanced'), 'advanced');
-		$this->assign_tutorial_topics_block(array('expert'), 'expert');
+		$this->assign_tutorial_topics_block(array(
+			'basic'
+		), 'basic');
+		$this->assign_tutorial_topics_block(array(
+			'advanced'
+		), 'advanced');
+		$this->assign_tutorial_topics_block(array(
+			'expert'
+		), 'expert');
 
 		return $this->helper->render('tutorials.html');
 	}
@@ -333,20 +411,24 @@ class main
 		{
 			$rating = rand(3, 5);
 
-			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' . $topic['topic_id'] ;
-			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
+			$view_topic_url_params = 'f=' . $topic['forum_id'] . '&amp;t=' .
+				 $topic['topic_id'];
+			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx",
+				$view_topic_url_params);
 
-			//$tutorial_url = $this->remove_community($this->helper->route('gpc_main_controller_tutorial_view', array('topic_id' => $topic['topic_id'])));
+			// $tutorial_url =
+			// $this->remove_community($this->helper->route('gpc_main_controller_tutorial_view',
+			// array('topic_id' => $topic['topic_id'])));
 
-			$this->template->assign_block_vars($blockname, array(
-				'TITLE'		=> $topic['topic_title'],
-				'LINK'		=> $view_topic_url,
-				'AUTHOR'	=> $topic['topic_first_poster_name'],
-				'RATING'	=> $rating,
-			));
+			$this->template->assign_block_vars($blockname,
+				array(
+					'TITLE' => $topic['topic_title'],
+					'LINK' => $view_topic_url,
+					'AUTHOR' => $topic['topic_first_poster_name'],
+					'RATING' => $rating
+				));
 		}
 	}
-
 
 	/**
 	 * Controller for route /tutorial/view/{topic_id}
@@ -356,7 +438,8 @@ class main
 	public function tutorial_view($topic_id)
 	{
 		$sql = 'SELECT t.topic_title AS title, p.post_text AS text, p.post_id, t.forum_id, p.bbcode_uid, p.bbcode_bitfield, p.post_attachment
-	        FROM ' . TOPICS_TABLE . ' t, ' . POSTS_TABLE . ' p
+	        FROM ' . TOPICS_TABLE .
+			 ' t, ' . POSTS_TABLE . ' p
 	        WHERE t.topic_id = ' . (int) $topic_id . '
 				AND t.topic_first_post_id = p.post_id';
 		$result = $this->db->sql_query($sql);
@@ -364,18 +447,22 @@ class main
 		$this->db->sql_freeresult($result);
 
 		$forum_id = (int) $row['forum_id'];
-		if (!in_array($forum_id, explode(',', constants::TUTORIALS_FORUM_IDS))) {
+		if (!in_array($forum_id, explode(',', constants::TUTORIALS_FORUM_IDS)))
+		{
 			trigger_error("The requested Tutorial could not be found.");
 		}
 
 		$options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
-		$text = generate_text_for_display($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $options);
+		$text = generate_text_for_display($row['text'], $row['bbcode_uid'],
+			$row['bbcode_bitfield'], $options);
 
-		if ($row['post_attachment']) {
+		if ($row['post_attachment'])
+		{
 			$attach_list[] = (int) $row['post_id'];
 			$sql = 'SELECT *
 				FROM ' . ATTACHMENTS_TABLE . '
-				WHERE ' . $this->db->sql_in_set('post_msg_id', $attach_list) . '
+				WHERE ' .
+				 $this->db->sql_in_set('post_msg_id', $attach_list) . '
 					AND in_message = 0
 				ORDER BY filetime DESC, post_msg_id ASC';
 			$result = $this->db->sql_query($sql);
@@ -387,21 +474,25 @@ class main
 			}
 			$this->db->sql_freeresult($result);
 
-			// $update_count holds the ids of attachments that normally would need to get an update of their view count, but we ignore it here.
+			// $update_count holds the ids of attachments that normally would need to get an update
+			// of their view count, but we ignore it here.
 			$update_count = array();
 			parse_attachments($forum_id, $text, $attachments, $update_count);
 		}
 
-		$back_link = $this->request->server('HTTP_REFERER', 'javascript:history.go(-1)');
+		$back_link = $this->request->server('HTTP_REFERER',
+			'javascript:history.go(-1)');
 
-		$this->template->assign_vars(array(
-		    'TITLE'			=> $row['title'],
-		    'TEXT'			=> $text,
-			'U_BACK_LINK'	=> $back_link,
-		));
-		$this->template->assign_vars(array(
-			'S_GPC_TUTORIALS_ACTIVE'	=> true,
-		));
+		$this->template->assign_vars(
+			array(
+				'TITLE' => $row['title'],
+				'TEXT' => $text,
+				'U_BACK_LINK' => $back_link
+			));
+		$this->template->assign_vars(
+			array(
+				'S_GPC_TUTORIALS_ACTIVE' => true
+			));
 		return $this->helper->render('tutorial_view.html');
 	}
 
@@ -413,7 +504,7 @@ class main
 	public function faqs()
 	{
 		$this->template->assign_vars(array(
-			'S_GPC_FAQS_ACTIVE' => true,
+			'S_GPC_FAQS_ACTIVE' => true
 		));
 		return $this->helper->render('faqs.html');
 	}
@@ -449,99 +540,27 @@ class main
 	 */
 	public function tutorials_tricks_families()
 	{
-		$this->template->assign_vars(array(
-			'S_GPC_TUTORIALS_ACTIVE'	=> true,
-		));
+		$this->template->assign_vars(
+			array(
+				'S_GPC_TUTORIALS_ACTIVE' => true
+			));
 
-		$i = 0;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/around.png',
-			'NAME'			=> 'Around',
-			'DESCRIPTION'	=> 'Arounds sind Tricks, bei denen sich der Stift durch einen Push im 90° Winkel zum jeweiligen Finger um diesen dreht.',
-			'URL'			=> $this->get_search_link(array('around')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/pass.png',
-			'NAME'			=> 'Pass',
-			'DESCRIPTION'	=> 'Bei (Finger-)Passes wird der Stift von einem Zwischenraum zu einem anderen gegeben, indem ein Finger den Stift runter oder hoch drückt und er dann von einem weiteren Finger angenommen wird.',
-			'URL'			=> $this->get_search_link(array('pass')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/sonic.png',
-			'NAME'			=> 'Sonic',
-			'DESCRIPTION'	=> 'In der Trick-Familie Sonic werden Stifte von einem Zwischenraum in einen Anderen gegeben - zum Beispiel durch eine Kombination aus einer Charge-Drehung und einem Pass.',
-			'URL'			=> $this->get_search_link(array('sonic')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/charge.png',
-			'NAME'			=> 'Charge',
-			'DESCRIPTION'	=> 'Charges sind Kreisförmige Bewegungen des Stiftes zwischen zwei Fingern, wobei der Stift den Zwischenraum nie verlässt.',
-			'URL'			=> $this->get_search_link(array('charge')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/infinity.png',
-			'NAME'			=> 'Infinity',
-			'DESCRIPTION'	=> 'Das Merkmal der Infinity-Familie ist, dass der Stift im Gegensatz zu den anderen Familien, an der Spitze (bzw. am Ende) des Stiftes angefasst wird. Dadurch wird es schwerer diese in Combos einzubauen. Es sei aber angemerkt, dass die verschiedenen Infinity-Variationen recht einfach miteinander kombinierbar sind.',
-			'URL'			=> $this->get_search_link(array('infinity')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/spins.png',
-			'NAME'			=> 'Spins',
-			'DESCRIPTION'	=> 'Diese Trick-Familie beinhaltet all jene Tricks, welche sich auf einem bestimmten Punkt auf der Hand oder den Fingern drehen.',
-			'URL'			=> $this->get_search_link(array('spins')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/shadow.png',
-			'NAME'			=> 'Shadow',
-			'DESCRIPTION'	=> 'Shadows sind Tricks, die mit einem Push aus einem Zwischenraum heraus starten, dann eine Drehung auf einem Punkt auf Hand oder Finger machen und danach in einem Zwischenraum wieder gefangen werden.',
-			'URL'			=> $this->get_search_link(array('shadow')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/artistic.png',
-			'NAME'			=> 'Artistic',
-			'DESCRIPTION'	=> 'Artistic-Tricks sind meistens Aerials. Für diese ist charakteristisch, dass sie mindestens eine halbe Drehung in der Luft machen ohne das sie in Kontakt mit der Hand stehen. Eine weitere Form der Artistic-Tricks sind Tricks, die aus einer Kombination mit beiden Händen und dem Stift gewisse Formen darstellen, die einen Show-Effekt haben.',
-			'URL'			=> $this->get_search_link(array('artistic')),
-			'IS_LAST'		=> false,
-		));
-
-		$i++;
-		$this->template->assign_block_vars('trickcategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/tricks/others.png',
-			'NAME'			=> 'Sonstige',
-			'DESCRIPTION'	=> 'Hier finden alle Tricks Platz, die in keine der anderen Trick-Familien gehören.',
-			'URL'			=> $this->get_search_link(array('sonstige')),
-			'IS_LAST'		=> true,
-		));
+		$trick_families = trick_family_provider::get_all();
+		foreach ($trick_families as $number => $tf)
+		{
+			$this->template->assign_block_vars('trickcategories',
+				array(
+					'NUMBER' => $number,
+					'IMG' => $tf->get_relative_img_url(),
+					'NAME' => $tf->get_name(),
+					'DESCRIPTION' => $tf->get_description(),
+					'URL' => $this->get_search_link(
+						array(
+							$tf->get_tagname()
+						)),
+					'IS_LAST' => false
+				));
+		}
 
 		return $this->helper->render('tricks_families.html');
 	}
@@ -553,49 +572,70 @@ class main
 	 */
 	public function tutorials_pens_families()
 	{
-		$this->template->assign_vars(array(
-			'S_GPC_TUTORIALS_ACTIVE'	=> true,
-		));
+		$this->template->assign_vars(
+			array(
+				'S_GPC_TUTORIALS_ACTIVE' => true
+			));
 
 		$i = 0;
-		$this->template->assign_block_vars('pencategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/pens/beginners.png',
-			'NAME'			=> 'Anfänger-Mods',
-			'DESCRIPTION'	=> 'In dieser Familie findet sind Stifte, die sich aus in deutschland handelsüblichen Stiften zusammenbauen lassen.',
-			'URL'			=> $this->get_search_link(array('beginner', 'mods')),
-			'IS_LAST'		=> false,
-		));
+		$this->template->assign_block_vars('pencategories',
+			array(
+				'NUMBER' => $i,
+				'IMG' => 'theme/images/pens/beginners.png',
+				'NAME' => 'Anfänger-Mods',
+				'DESCRIPTION' => 'In dieser Familie findet sind Stifte, die sich aus in deutschland handelsüblichen Stiften zusammenbauen lassen.',
+				'URL' => $this->get_search_link(
+					array(
+						'beginner',
+						'mods'
+					)),
+				'IS_LAST' => false
+			));
 
 		$i++;
-		$this->template->assign_block_vars('pencategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/pens/RSVP.png',
-			'NAME'			=> 'Single-Cap-Mods',
-			'DESCRIPTION'	=> 'Single-Cap-Mods sind Stifte mit nur einer Kappe. Einer der ältesten dieser Mods ist der im Bild zu sehende RSVP MX.',
-			'URL'			=> $this->get_search_link(array('single-cap', 'mods')),
-			'IS_LAST'		=> false,
-		));
+		$this->template->assign_block_vars('pencategories',
+			array(
+				'NUMBER' => $i,
+				'IMG' => 'theme/images/pens/RSVP.png',
+				'NAME' => 'Single-Cap-Mods',
+				'DESCRIPTION' => 'Single-Cap-Mods sind Stifte mit nur einer Kappe. Einer der ältesten dieser Mods ist der im Bild zu sehende RSVP MX.',
+				'URL' => $this->get_search_link(
+					array(
+						'single-cap',
+						'mods'
+					)),
+				'IS_LAST' => false
+			));
 
 		$i++;
-		$this->template->assign_block_vars('pencategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/pens/comssa.png',
-			'NAME'			=> 'ComSsas',
-			'DESCRIPTION'	=> 'Einer der bekanntesten Pen-Mods ist der ComSsa. Viele andere Mods stammen von diesem ab.',
-			'URL'			=> $this->get_search_link(array('comssa', 'mods')),
-			'IS_LAST'		=> false,
-		));
+		$this->template->assign_block_vars('pencategories',
+			array(
+				'NUMBER' => $i,
+				'IMG' => 'theme/images/pens/comssa.png',
+				'NAME' => 'ComSsas',
+				'DESCRIPTION' => 'Einer der bekanntesten Pen-Mods ist der ComSsa. Viele andere Mods stammen von diesem ab.',
+				'URL' => $this->get_search_link(
+					array(
+						'comssa',
+						'mods'
+					)),
+				'IS_LAST' => false
+			));
 
 		$i++;
-		$this->template->assign_block_vars('pencategories', array(
-			'NUMBER'		=> $i,
-			'IMG'			=>	'theme/images/pens/others.png',
-			'NAME'			=> 'Sonstige-Mods',
-			'DESCRIPTION'	=> 'Alle Mods, die keiner anderen Familie angehören, sind hier zu finden.',
-			'URL'			=> $this->get_search_link(array('sonstige', 'mods')),
-			'IS_LAST'		=> true,
-		));
+		$this->template->assign_block_vars('pencategories',
+			array(
+				'NUMBER' => $i,
+				'IMG' => 'theme/images/pens/others.png',
+				'NAME' => 'Sonstige-Mods',
+				'DESCRIPTION' => 'Alle Mods, die keiner anderen Familie angehören, sind hier zu finden.',
+				'URL' => $this->get_search_link(
+					array(
+						'sonstige',
+						'mods'
+					)),
+				'IS_LAST' => true
+			));
 		return $this->helper->render('pens_families.html');
 	}
 
@@ -603,9 +643,14 @@ class main
 	 * Controller for route /tutorials/search
 	 * shows a list of topics that have the given $tags assigned
 	 *
-	 * @param $tags tags seperated by comma (",")
-	 * @param $mode the mode indicates whether all tags (AND, default) or any tag (OR) should be assigned to the resulting topics
-	 * @param casesensitive wether to search case-sensitive (true) or -insensitive (false, default)
+	 * @param $tags tags
+	 *        	seperated by comma (",")
+	 * @param $mode the
+	 *        	mode indicates whether all tags (AND, default) or any tag (OR) should be assigned
+	 *        	to the resulting topics
+	 * @param
+	 *        	casesensitive wether to search case-sensitive (true) or -insensitive (false,
+	 *        	default)
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
 	public function tutorials_search($tags, $mode, $casesensitive)
@@ -613,22 +658,37 @@ class main
 		global $user, $phpbb_container, $config, $phpbb_root_path, $request;
 		$form_action_route = $this->get_search_link(array());
 		$form_action_route = $this->remove_community($form_action_route);
-		$this->template->assign_vars(array(
-			'S_GPC_TUTORIALS_ACTIVE'				=> true,
-			'S_RH_TOPICTAGS_INCLUDE_NG_TAGS_INPUT'	=> true,
-			'S_RH_TOPICTAGS_INCLUDE_CSS'			=> true,
-			'U_SEARCH_ROUTE'						=> $form_action_route,
-		));
+		$this->template->assign_vars(
+			array(
+				'S_GPC_TUTORIALS_ACTIVE' => true,
+				'S_RH_TOPICTAGS_INCLUDE_NG_TAGS_INPUT' => true,
+				'S_RH_TOPICTAGS_INCLUDE_CSS' => true,
+				'U_SEARCH_ROUTE' => $form_action_route
+			));
 
 		// TODO
-		$tag_suggestions = array('beginner', 'trick', 'pen', 'around', 'pass', 'sonic', 'charge', 'infinity', 'spins', 'shadow', 'artistic', 'sonstige');
+		$tag_suggestions = array(
+			'beginner',
+			'trick',
+			'pen',
+			'around',
+			'pass',
+			'sonic',
+			'charge',
+			'infinity',
+			'spins',
+			'shadow',
+			'artistic',
+			'sonstige'
+		);
 
 		for ($i = 0, $size = sizeof($tag_suggestions); $i < $size; $i++)
 		{
-			$this->template->assign_block_vars('rh_topictags_suggestions', array(
-				'LINK' => '#',
-				'NAME' => $tag_suggestions[$i],
-			));
+			$this->template->assign_block_vars('rh_topictags_suggestions',
+				array(
+					'LINK' => '#',
+					'NAME' => $tag_suggestions[$i]
+				));
 		}
 
 		// validate mode
@@ -699,14 +759,18 @@ class main
 				}
 				else
 				{
-					$unread_topic = (isset($topic_tracking_info[$topic_id]) &&
-						 $row['topic_last_post_time'] >
+					$unread_topic = (isset($topic_tracking_info[$topic_id]) && $row['topic_last_post_time'] >
 						 $topic_tracking_info[$topic_id]) ? true : false;
 				}
 				// Generate all the URIs ...
-				//$view_topic_url_params = 'f=' . $row['forum_id'] . '&t=' . $topic_id;
-				//$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
-				$view_topic_url = $this->remove_community($this->helper->route('gpc_main_controller_tutorial_view', array('topic_id' => $topic_id)));
+				// $view_topic_url_params = 'f=' . $row['forum_id'] . '&t=' . $topic_id;
+				// $view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx",
+				// $view_topic_url_params);
+				$view_topic_url = $this->remove_community(
+					$this->helper->route('gpc_main_controller_tutorial_view',
+						array(
+							'topic_id' => $topic_id
+						)));
 				$tutorials[] = array(
 					'title' => censor_text($row['topic_title']),
 					'link' => $view_topic_url,
@@ -721,7 +785,8 @@ class main
 				);
 			}
 		}
-		$this->template->assign_var('TUTORIALS', base64_encode(json_encode($tutorials)));
+		$this->template->assign_var('TUTORIALS',
+			base64_encode(json_encode($tutorials)));
 
 		return $this->helper->render('tag_search.html');
 	}

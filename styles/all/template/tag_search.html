@@ -13,60 +13,67 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-md-5">
-						<div class="panel panel-default trick_families">
-							<img src="{GPC_STYLE_PATH}/theme/images/tricks/ta_720x290.png" class="img-responsive img-rounded"/>
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-md-5">
+								<h1>Die Tutorials</h1>
+								<p>Aller Anfang ist schwer. Unsere Tutorials helfen dir auf
+									dem Weg zum/r Penspinner/in. Alle Tutorials sind in
+									Gemeinschaftsarbeit innerhalb der Community entstanden, geprüft
+									und für gut befunden!</p>
+							</div>
+							<div class="col-md-7">
+								<div class="panel panel-default trick_families">
+									<img src="{GPC_STYLE_PATH}/theme/images/tricks/ta_720x290.png" class="img-responsive img-rounded"/>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="col-md-7">
-						<h1>Die Tutorials</h1>
-						<p>Aller Anfang ist schwer. Unsere Tutorials helfen dir auf
-							dem Weg zum/r Penspinner/in. Alle Tutorials sind in
-							Gemeinschaftsarbeit innerhalb der Community entstanden, geprüft
-							und für gut befunden!</p>
-					</div>
-				</div>
-				<form class="form-horizontal" role="form" action="{[{ getSearchLink('{U_SEARCH_ROUTE}') }]}">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="inputTags" class="col-sm-2 control-label">Häufige Tags</label>
-								<div class="col-sm-9">
-									<div class="rh_topictags_suggestions">
-										<!-- BEGIN rh_topictags_suggestions -->
-										{% include '../../../../../robertheim/topictags/styles/all/template/simple_tag.html' with {'NAME' : rh_topictags_suggestions.NAME, 'LINK' : rh_topictags_suggestions.LINK} only %}
-										<!-- END rh_topictags_suggestions -->
+						<form class="form-horizontal" role="form" action="{[{ getSearchLink('{U_SEARCH_ROUTE}') }]}">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="inputTags" class="col-sm-2 control-label">Häufige Tags</label>
+										<div class="col-sm-9">
+											<div class="rh_topictags_suggestions">
+												<!-- BEGIN rh_topictags_suggestions -->
+												{% include '../../../../../robertheim/topictags/styles/all/template/simple_tag.html' with {'NAME' : rh_topictags_suggestions.NAME, 'LINK' : rh_topictags_suggestions.LINK} only %}
+												<!-- END rh_topictags_suggestions -->
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label for="inputTags" class="col-sm-2 control-label">Tags</label>
-								<div class="col-sm-9">
-									<!-- allowed-tags-pattern="{RH_TOPICTAGS_ALLOWED_TAGS_REGEX}" -->
-									<tags-input ng-model="tags" add-on-comma="true"
-										replace-spaces-with-dashes="{RH_TOPICTAGS_CONVERT_SPACE_TO_MINUS}"
-										placeholder="..." tabindex="2" enable-editing-last-tag="true"
-										min-length="1">
-											<auto-complete source="loadTags($query)"></auto-complete>
-									</tags-input>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="inputTags" class="col-sm-2 control-label">Tags</label>
+										<div class="col-sm-9">
+											<!-- allowed-tags-pattern="{RH_TOPICTAGS_ALLOWED_TAGS_REGEX}" -->
+											<tags-input ng-model="tags" add-on-comma="true"
+												replace-spaces-with-dashes="{RH_TOPICTAGS_CONVERT_SPACE_TO_MINUS}"
+												placeholder="..." tabindex="2" enable-editing-last-tag="true"
+												min-length="1">
+													<auto-complete source="loadTags($query)"></auto-complete>
+											</tags-input>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-9">
-									<button type="submit" class="btn btn-primary">Suchen</button>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-9">
+											<button type="submit" class="btn btn-primary">Suchen</button>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
+						</form>
 					</div>
-				</form>
+					<div class="col-md-4">
+						<!-- INCLUDE werbung.html -->
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="panel panel-default">

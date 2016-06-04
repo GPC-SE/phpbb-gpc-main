@@ -1,0 +1,12 @@
+#img_fader {
+	position: relative;
+}
+
+#img_fader img {
+	position: absolute;
+	z-index: 1
+}
+
+#img_fader img.active {
+	z-index: 3
+}
