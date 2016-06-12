@@ -497,16 +497,16 @@ class main
 	}
 
 	/**
-	 * Controller for route /faqs
+	 * Controller for route /faq
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
 	 */
-	public function faqs()
+	public function faq()
 	{
 		$this->template->assign_vars(array(
-			'S_GPC_FAQS_ACTIVE' => true
+			'S_GPC_FAQ_ACTIVE' => true
 		));
-		return $this->helper->render('faqs.html');
+		return $this->helper->render('faq.html');
 	}
 
 	/**

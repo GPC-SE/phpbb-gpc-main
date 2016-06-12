@@ -24,9 +24,9 @@ gpc_main_controller_tutorial_view:
     path: /tutorial/view/{topic_id}
     defaults: { _controller: gpc.main.controller:tutorial_view }
 
-gpc_main_controller_faqs:
-    path: /faqs
-    defaults: { _controller: gpc.main.controller:faqs }
+gpc_main_controller_faq:
+    path: /faq
+    defaults: { _controller: gpc.main.controller:faq }
 
 gpc_main_controller_tutorials_tricks_families:
     path: /tutorials/tricks/familien
