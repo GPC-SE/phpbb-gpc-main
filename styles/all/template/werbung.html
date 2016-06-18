@@ -3,26 +3,40 @@
 		<h2 class="panel-title">Werbung</h2>
 	</div>
 	
-		<div id="psads">
-			<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-			<!-- gpc5 -->
-			<ins class="adsbygoogle"
-				style="display:block"
-				data-ad-client="ca-pub-4400528632078039"
-				data-ad-slot="4691248703"
-				data-ad-format="auto"></ins>
-			<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-		</div>
+	<div id="psads">
 		<!-- IF S_WERBUNG_ALTERNATIVE -->
-		<div id="psadsalternative" style="display:none;">
-			<div class="row psadsalternative">
-				<div class="col-md-offset-1 col-md-10">
-					<div class="alert alert-info">
-						<!-- INCLUDE werbungalternative.html -->
-					</div>
+		<script type="text/javascript">
+			function adBlockFunction() {
+				setTimeout(function() {
+					$("#psadsalternative")
+					.css('opacity', 0)
+					.slideDown('slow')
+					.animate(
+						{ opacity: 1 },
+						{ queue: false, duration: 1500 }
+					);
+				}, 2500);
+			}
+		</script>
+		<!-- ENDIF -->
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" onerror="adBlockFunction();"></script>
+		<!-- gpc5 -->
+		<ins class="adsbygoogle"
+			style="display:block"
+			data-ad-client="ca-pub-4400528632078039"
+			data-ad-slot="4691248703"
+			data-ad-format="auto"></ins>
+		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+	</div>
+	<!-- IF S_WERBUNG_ALTERNATIVE -->
+	<div id="psadsalternative" style="display:none;">
+		<div class="row psadsalternative">
+			<div class="col-md-offset-1 col-md-10">
+				<div class="alert alert-info">
+					<!-- INCLUDE werbungalternative.html -->
 				</div>
 			</div>
 		</div>
-		<!-- ENDIF -->
-	
+	</div>
+	<!-- ENDIF -->
 </div>

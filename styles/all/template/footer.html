@@ -15,28 +15,6 @@
 {$SCRIPTS}
 
 <!-- INCLUDE footer_bootstrap.html -->
-
-<!-- IF S_WERBUNG_ALTERNATIVE -->
-<script type="text/javascript">
-	function checkAdBlock() {
-		setTimeout(
-				function() {
-					var ad = document.getElementById("psads").children;
-					if (ad.length <= 3) {
-						$("#psadsalternative")
-							.css('opacity', 0)
-							.slideDown('slow')
-							.animate(
-								{ opacity: 1 },
-								{ queue: false, duration: 1500 }
-							);
-					}
-				}, 2500);
-	}
-	checkAdBlock();
-</script>
-<!-- ENDIF -->
-
 <!-- INCLUDE cookieconsent.html -->
 </body>
 </html>
