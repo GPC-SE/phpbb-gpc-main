@@ -763,14 +763,13 @@ class main
 						 $topic_tracking_info[$topic_id]) ? true : false;
 				}
 				// Generate all the URIs ...
-				// $view_topic_url_params = 'f=' . $row['forum_id'] . '&t=' . $topic_id;
-				// $view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx",
-				// $view_topic_url_params);
-				$view_topic_url = $this->remove_community(
-					$this->helper->route('gpc_main_controller_tutorial_view',
-						array(
-							'topic_id' => $topic_id
-						)));
+				 $view_topic_url_params = 'f=' . $row['forum_id'] . '&t=' . $topic_id;
+				 $view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
+				//$view_topic_url = $this->remove_community(
+				//	$this->helper->route('gpc_main_controller_tutorial_view',
+				//		array(
+				//			'topic_id' => $topic_id
+				//		)));
 				$tutorials[] = array(
 					'title' => censor_text($row['topic_title']),
 					'link' => $view_topic_url,
