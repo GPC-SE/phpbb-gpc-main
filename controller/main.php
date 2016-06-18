@@ -679,7 +679,8 @@ class main
 			'spins',
 			'shadow',
 			'artistic',
-			'sonstige'
+			'sonstige',
+			'advanced'
 		);
 
 		for ($i = 0, $size = sizeof($tag_suggestions); $i < $size; $i++)
