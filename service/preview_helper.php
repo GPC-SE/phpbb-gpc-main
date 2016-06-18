@@ -69,12 +69,24 @@ class preview_helper
 		return $preview_topics;
 	}
 
-	public function preview_topics_by_tags(array $tags, $max_topics, $max_preview_text_length = 100)
+	/**
+	 *
+	 * @param array $tags
+	 * @param unknown $max_topics
+	 * @param number $max_preview_text_length
+	 * @param string $order_by valid arguments: topic_last_post_time, topic_time
+	 */
+	public function preview_topics_by_tags(array $tags, $max_topics, $max_preview_text_length = 100, $order_by = 'topic_last_post_time')
 	{
 		$sql = $this->tags_manager->get_topics_build_query($tags);
 
-		$order_by = ' ORDER BY topics.topic_time DESC';
-		$sql .= $order_by;
+		if ('topic_last_post_time' == $order_by) {
+			$order_by = ' ORDER BY topics.topic_last_post_time DESC';
+			$sql .= $order_by;
+		} else if ('topic_time' == $order_by) {
+			$order_by = ' ORDER BY topics.topic_time DESC';
+			$sql .= $order_by;
+		}
 
 		$start = 0;
 		$result = $this->db->sql_query_limit($sql, $max_topics, $start);
