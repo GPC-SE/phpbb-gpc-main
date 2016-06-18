@@ -680,7 +680,8 @@ class main
 			'shadow',
 			'artistic',
 			'sonstige',
-			'advanced'
+			'advanced',
+			'expert'
 		);
 
 		for ($i = 0, $size = sizeof($tag_suggestions); $i < $size; $i++)
