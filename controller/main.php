@@ -177,7 +177,7 @@ class main
 		}
 
 		// videos
-		$start = 1;
+		$start = 0;
 		$topics = $this->gpc_videos_manager->get_topics_with_video($start,
 			$limit_topics);
 		$topics = $this->preview_helper->preview_topics($topics,
