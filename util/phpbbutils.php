@@ -28,8 +28,8 @@ class phpbbutils {
 		$bbcode_options = OPTION_FLAG_BBCODE + OPTION_FLAG_SMILIES + OPTION_FLAG_LINKS;
 		$preview = generate_text_for_display($preview, $bbcode_uid, $bbcode_bitfield, $bbcode_options);
 		$preview = self::cut_html($preview, $limit);
-		// remove youtube objects
-		$preview = preg_replace('/<object(.*)<\/object>/is', '', $preview);
+		// remove youtube
+		$preview = preg_replace('/<iframe(.*)<\/iframe>/is', '', $preview);
 		return $preview;
 	}
 
