@@ -182,7 +182,7 @@ class main
 			$limit_topics);
 		$thumbnails = array();
 		foreach ($topics as $key => $topic) {
-			$thumbnails[$key] = $topic['rh_video'].get_thumbnail_url();
+			$thumbnails[$key] = $topic['rh_video']->get_thumbnail_url();
 		}
 		$topics = $this->preview_helper->preview_topics($topics,
 			$limit_preview_text);
