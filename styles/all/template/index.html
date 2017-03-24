@@ -64,7 +64,12 @@
           <!-- BEGIN videos -->
           <div>
           	<h3><span class="glyphicon glyphicon-film small"></span> {videos.TITLE}</h3>
-          	<p>{videos.PREVIEW_TEXT} <a href="{videos.URL}">angucken &raquo;</a></p>
+          	<p>
+			<a href="{videos.URL}">
+				<img src="{videos.THUMBNAIL_URL}" alt="{videos.TITLE}" class="img-responsive img-rounded" style="width:100%">
+			</a>
+			{videos.PREVIEW_TEXT} <a href="{videos.URL}">angucken &raquo;</a>
+		  </p>
           </div>
           <!-- END videos -->
           <p><a class="btn btn-default" href="{U_GPC_VIDEOS}" role="button">Alle Videos &raquo;</a></p>
