@@ -180,16 +180,21 @@ class main
 		$start = 0;
 		$topics = $this->gpc_videos_manager->get_topics_with_video($start,
 			$limit_topics);
+		$thumbnails = array();
+		for ($topics as $key => $topic) {
+			$thumbnails[$key] = $topic['rh_video'].get_thumbnail_url();
+		}
 		$topics = $this->preview_helper->preview_topics($topics,
 			$limit_preview_text);
-		foreach ($topics as $topic)
+		foreach ($topics as $key => $topic)
 		{
 			$this->template->assign_block_vars('videos',
 				array(
 					'TITLE' => $topic['title'],
 					'URL' => $topic['url'],
 					'PREVIEW_TEXT' => $topic['preview_text'],
-					'AUTHOR' => $topic['first_poster_name']
+					'AUTHOR' => $topic['first_poster_name'],
+					'THUMBNAIL_URL' => $thumbnails[$key]
 				));
 		}
 
