@@ -57,7 +57,7 @@ class preview_helper
 			$row = $this->db->sql_fetchrow($result);
 			$this->db->sql_freeresult($result);
 
-			$text = phpbbutils::make_preview_text_from_post($row['text'], $row['bbcode_uid'], $max_preview_text_length);
+			$text = phpbbutils::make_preview_text_from_post($row['text'], $row['bbcode_uid'], $row['bbcode_bitfield'], $max_preview_text_length);
 
 			$preview_topics[] = array(
 				'title'				=> $topic['topic_title'],
