@@ -26,7 +26,7 @@ class phpbbutils {
 	{
 		$preview = $post_text;
 		// remove youtube completely
-		$preview = trim(preg_replace('/(\[youtube\])(.*)(\[\/youtube\])/i', '', $preview));
+		//$preview = trim(preg_replace('/(\[youtube\])(.*)(\[\/youtube\])/i', '', $preview));
 		$preview = self::bbcodeStripping($preview, $bbcode_uid);
 		$preview = trim(preg_replace('#http(?:\:|&\#58;)//\S+#', '', $preview));
 		// Decide how large the preview text should be
