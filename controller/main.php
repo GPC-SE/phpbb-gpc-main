@@ -181,7 +181,7 @@ class main
 		$topics = $this->gpc_videos_manager->get_topics_with_video($start,
 			$limit_topics);
 		$thumbnails = array();
-		for ($topics as $key => $topic) {
+		foreach ($topics as $key => $topic) {
 			$thumbnails[$key] = $topic['rh_video'].get_thumbnail_url();
 		}
 		$topics = $this->preview_helper->preview_topics($topics,
