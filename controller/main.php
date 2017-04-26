@@ -202,6 +202,20 @@ class main
 	}
 
 	/**
+	 * Controller for route /shop
+	 *
+	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object
+	 */
+	public function shop()
+	{
+		$this->template->assign_vars(
+			array(
+				'S_GPC_SHOP_ACTIVE' => true
+			));
+		return $this->helper->render('shop.html');
+	}
+
+	/**
 	 * Controller for route /server_costs
 	 *
 	 * @return \Symfony\Component\HttpFoundation\Response A Symfony Response object

@@ -1,7 +1,6 @@
 gpc_main_controller:
     path: /
     defaults: { _controller: gpc.main.controller:show }
-
 gpc_main_controller_server_costs:
     path: /server_costs
     defaults: { _controller: gpc.main.controller:server_costs }
@@ -40,3 +39,6 @@ gpc_main_controller_tutorials_search:
     path: /tutorials/search/{tags}/{mode}/{casesensitive}
     defaults: { _controller: gpc.main.controller:tutorials_search, tags: '', mode: 'AND', casesensitive : false }
 
+gpc_main_controller_shop:
+    path: /shop
+    defaults: { _controller: gpc.main.controller:shop }
