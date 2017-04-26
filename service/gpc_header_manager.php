@@ -58,7 +58,8 @@ class gpc_header_manager
 			'U_GPC_TUTORIALS_BEGINNER_GUIDES'	=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'beginner'))),
 			'U_GPC_TUTORIALS_OTHER'				=> $this->remove_community($this->helper->route('gpc_main_controller_tutorials_search', array('tags' => 'sonstige'))),
 			'U_GPC_FAQ'						=> $this->remove_community($this->helper->route('gpc_main_controller_faq')),
-			'U_SERVER_COSTS'					=> $this->remove_community($this->helper->route('gpc_main_controller_server_costs')),
+			'U_GPC_SHOP'						=> $this->remove_community($this->helper->route('gpc_main_controller_shop')),
+			'U_SERVER_COSTS'	=> $this->remove_community($this->helper->route('gpc_main_controller_server_costs')),
 			'S_WERBUNG_ALTERNATIVE'				=> $show_ads_alternative_if_blocked,
 		));
 

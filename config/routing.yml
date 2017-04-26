@@ -1,6 +1,7 @@
 gpc_main_controller:
     path: /
     defaults: { _controller: gpc.main.controller:show }
+
 gpc_main_controller_server_costs:
     path: /server_costs
     defaults: { _controller: gpc.main.controller:server_costs }
