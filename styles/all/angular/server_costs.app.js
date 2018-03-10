@@ -103,17 +103,23 @@ function PsCtrl($scope) {
 		{'jahr': 2017, monat: 6, geber: 'Maniok', werbung: 0.29232643, trinkgeld: 0.70767357, status: 'finanziert'},
 		{'jahr': 2017, monat: 7, geber: 'Maniok, deathfish', werbung: 0.44579781, trinkgeld: 0.55420219, status: 'finanziert'},
 		{'jahr': 2017, monat: 8, geber: 'deathfish, Anonym', werbung: 0.20584653, trinkgeld: 0.79415347, status: 'finanziert'},
-		{'jahr': 2017, monat: 9, geber: 'Anonym, Yi-Quang', werbung: 0.43970767, trinkgeld: 0.56029233, status: 'finanziert'},
-		{'jahr': 2017, monat: 10, geber: 'Yi-Quang, syntax_error', werbung: 0.10475030, trinkgeld: 0.89524970, status: 'finanziert'},
-		{'jahr': 2017, monat: 11, geber: 'syntax_error', werbung: 0.24238733, trinkgeld: 0.24482339, status: '4.21 € offen'},
+		{'jahr': 2017, monat: 9, geber: 'Anonym, Yi-Quang', werbung: 0.28425197, trinkgeld: 0.71574803, status: 'finanziert'},
+		{'jahr': 2017, monat: 10, geber: 'Yi-Quang, syntax_error', werbung: 0.10475030, trinkgeld: 0.59317905, status: '2.48 € offen'},
+		{'jahr': 2017, monat: 11, geber: '', werbung: 0.24238733, trinkgeld: 0.00000000, status: '6.22 € offen'},
 		{'jahr': 2017, monat: 12, geber: '', werbung: 0.35079172, trinkgeld: 0.00000000, status: '5.33 € offen'},
-		{'jahr': 2018, monat: 1, geber: 'computer70', werbung: 0.02679659, trinkgeld: 0.60901340, status: '2.99 € offen'},
-		{'jahr': 2018, monat: 2, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-		{'jahr': 2018, monat: 3, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-		{'jahr': 2018, monat: 4, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
+		{'jahr': 2018, monat: 1, geber: 'computer70', werbung: 0.10962241, trinkgeld: 0.60901340, status: '2.31 € offen'},
+		{'jahr': 2018, monat: 2, geber: '', werbung: 0.21802680, trinkgeld: 0.00000000, status: '6.42 € offen'},
+		{'jahr': 2018, monat: 3, geber: ':) peda :)', werbung: 0.01096224, trinkgeld: 0.98903776, status: 'finanziert'},
+		{'jahr': 2018, monat: 4, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2018, monat: 5, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 0.44701583, status: '4.54 € offen'},
+		{'jahr': 2018, monat: 6, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
+		{'jahr': 2018, monat: 7, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
+		{'jahr': 2018, monat: 8, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
+		{'jahr': 2018, monat: 9, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
 	];
 	$scope.geber = [
 		{name: 'Robert Heim', anzahl: 43, trinkgeld: 872.3699999999999},
+		{name: ':) peda :)', anzahl: 3, trinkgeld: 25.009999999999998},
 		{name: 'Huy aka Skiller', anzahl: 1, trinkgeld: 25.0},
 		{name: 'Yi-Quang', anzahl: 2, trinkgeld: 20.0},
 		{name: 'ChainBreak', anzahl: 1, trinkgeld: 16.0},
@@ -121,7 +127,6 @@ function PsCtrl($scope) {
 		{name: 'president', anzahl: 1, trinkgeld: 10.0},
 		{name: 'Maniok', anzahl: 1, trinkgeld: 10.0},
 		{name: 'KerlPinselTreibholz', anzahl: 1, trinkgeld: 8.0},
-		{name: ':) peda :)', anzahl: 1, trinkgeld: 5.01},
 		{name: 'Syrti', anzahl: 1, trinkgeld: 5.0},
 		{name: 'deathfish', anzahl: 1, trinkgeld: 5.0},
 		{name: 'Anonym', anzahl: 1, trinkgeld: 5.0},
@@ -135,6 +140,6 @@ function PsCtrl($scope) {
 		{name: 'wazzabi', anzahl: 1, trinkgeld: 2.0},
 		{name: 'Mayu', anzahl: 1, trinkgeld: 1.56}
 	];
-	$scope.standDatum = "04.01.2018";
+	$scope.standDatum = "10.03.2018";
 };
 
