@@ -124,9 +124,7 @@ function PsCtrl($scope) {
 		{'jahr': 2019, monat: 3, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
 		{'jahr': 2019, monat: 4, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
 		{'jahr': 2019, monat: 5, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-		{'jahr': 2019, monat: 6, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-		{'jahr': 2019, monat: 7, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-		{'jahr': 2019, monat: 8, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
+		{'jahr': 2019, monat: 6, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
 	];
 	$scope.geber = [
 		{name: 'Robert Heim', anzahl: 43, trinkgeld: 872.37},
