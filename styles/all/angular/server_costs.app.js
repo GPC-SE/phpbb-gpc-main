@@ -123,36 +123,38 @@ function PsCtrl($scope) {
                 {'jahr': 2020, monat: 2, geber: 'Uxz', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
                 {'jahr': 2020, monat: 3, geber: 'Uxz, jopi', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
                 {'jahr': 2020, monat: 4, geber: 'jopi', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-                {'jahr': 2020, monat: 5, geber: 'jopi', werbung: 0.00000000, trinkgeld: 0.68209501, status: '2.61 € offen'},
-                {'jahr': 2020, monat: 6, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-                {'jahr': 2020, monat: 7, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
+                {'jahr': 2020, monat: 5, geber: 'jopi, Juzzle', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2020, monat: 6, geber: 'Juzzle', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2020, monat: 7, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
+		{'jahr': 2020, monat: 8, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
         ];
-        $scope.geber = [ 
-                {name: 'Robert Heim', anzahl: 56, trinkgeld: 950.9399999999998},
-                {name: 'Uxz', anzahl: 1, trinkgeld: 50.0},
-                {name: 'Yi-Quang', anzahl: 3, trinkgeld: 40.0},
-                {name: ':) peda :)', anzahl: 3, trinkgeld: 25.009999999999998},
-                {name: 'Huy aka Skiller', anzahl: 1, trinkgeld: 25.0},
-                {name: 'jopi', anzahl: 1, trinkgeld: 20.0},
-                {name: 'ChainBreak', anzahl: 1, trinkgeld: 16.0},
-                {name: 'BBR', anzahl: 1, trinkgeld: 15.0},
-                {name: 'Vega', anzahl: 1, trinkgeld: 10.0},
-                {name: 'president', anzahl: 1, trinkgeld: 10.0},
-                {name: 'Maniok', anzahl: 1, trinkgeld: 10.0},
-                {name: 'KerlPinselTreibholz', anzahl: 1, trinkgeld: 8.0},
-                {name: 'InfinityMass', anzahl: 1, trinkgeld: 7.0},
-                {name: 'Syrti', anzahl: 1, trinkgeld: 5.0},
-                {name: 'deathfish', anzahl: 1, trinkgeld: 5.0},
-                {name: 'computer70', anzahl: 1, trinkgeld: 5.0},
-                {name: 'taichi1082', anzahl: 1, trinkgeld: 4.0},
-                {name: 'Comssa Penna', anzahl: 2, trinkgeld: 4.0},
-                {name: 'Sponge', anzahl: 1, trinkgeld: 4.0},
-                {name: 'sparking', anzahl: 1, trinkgeld: 4.0},
-                {name: 'Buddenhein', anzahl: 1, trinkgeld: 3.5},
-                {name: 'syntax_error', anzahl: 1, trinkgeld: 3.0},
-                {name: 'wazzabi', anzahl: 1, trinkgeld: 2.0},
-                {name: 'Mayu', anzahl: 1, trinkgeld: 1.56}
-        ];
-	$scope.standDatum = "06.02.2020";
+	$scope.geber = [
+		{name: 'Robert Heim', anzahl: 56, trinkgeld: 950.9399999999998},
+		{name: 'Uxz', anzahl: 1, trinkgeld: 50.0},
+		{name: 'Yi-Quang', anzahl: 3, trinkgeld: 40.0},
+		{name: ':) peda :)', anzahl: 3, trinkgeld: 25.009999999999998},
+		{name: 'Huy aka Skiller', anzahl: 1, trinkgeld: 25.0},
+		{name: 'jopi', anzahl: 1, trinkgeld: 20.0},
+		{name: 'ChainBreak', anzahl: 1, trinkgeld: 16.0},
+		{name: 'BBR', anzahl: 1, trinkgeld: 15.0},
+		{name: 'Juzzle', anzahl: 1, trinkgeld: 10.82},
+		{name: 'Vega', anzahl: 1, trinkgeld: 10.0},
+		{name: 'president', anzahl: 1, trinkgeld: 10.0},
+		{name: 'Maniok', anzahl: 1, trinkgeld: 10.0},
+		{name: 'KerlPinselTreibholz', anzahl: 1, trinkgeld: 8.0},
+		{name: 'InfinityMass', anzahl: 1, trinkgeld: 7.0},
+		{name: 'Syrti', anzahl: 1, trinkgeld: 5.0},
+		{name: 'deathfish', anzahl: 1, trinkgeld: 5.0},
+		{name: 'computer70', anzahl: 1, trinkgeld: 5.0},
+		{name: 'taichi1082', anzahl: 1, trinkgeld: 4.0},
+		{name: 'Comssa Penna', anzahl: 2, trinkgeld: 4.0},
+		{name: 'Sponge', anzahl: 1, trinkgeld: 4.0},
+		{name: 'sparking', anzahl: 1, trinkgeld: 4.0},
+		{name: 'Buddenhein', anzahl: 1, trinkgeld: 3.5},
+		{name: 'syntax_error', anzahl: 1, trinkgeld: 3.0},
+		{name: 'wazzabi', anzahl: 1, trinkgeld: 2.0},
+		{name: 'Mayu', anzahl: 1, trinkgeld: 1.56}
+	];
+	$scope.standDatum = "10.02.2020";
 };
 
