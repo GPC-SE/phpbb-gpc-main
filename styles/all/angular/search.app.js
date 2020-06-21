@@ -7,7 +7,7 @@ $.fn.flash = function(duration, iterations) {
         this.fadeOut(iterationDuration).fadeIn(iterationDuration);
     }
     return this;
-}
+};
 
 angular.module('searchApp', ['ngTagsInput'])
 	.config(function($interpolateProvider, $httpProvider) {
@@ -18,30 +18,34 @@ angular.module('searchApp', ['ngTagsInput'])
 		$scope.tags = [];
 		$scope.tutorials = [];
 		$scope.init = function (initTags, initTutorials) {
-			if ('' != initTags) {
+			if ('' !== initTags) {
 				initTags = JSON.parse(atob(initTags));
 				for (var i = 0; i < initTags.length; i++) {
 					this.tags.push(initTags[i]);
 				}
 			}
-			if ('' != initTutorials) {
+			if ('' !== initTutorials) {
 				initTutorials = JSON.parse(atob(initTutorials));
 				for (var i = 0; i < initTutorials.length; i++) {
 					this.tutorials.push(initTutorials[i]);
 				}
 			}
-		}
+		};
 		$scope.getSearchLink = function (baseUrl) {
-			var query = [];
+			var terms = [];
 			for (var i = 0; i < this.tags.length; i++) {
-				query.push(encodeURIComponent(this.tags[i].text));
+				terms.push(encodeURIComponent(this.tags[i].text));
 			}
-			var link = baseUrl;
-			if (query.length>0) {
-				link += '/' + query.join(',');
+			/* baseUrl might contain a query string, e.g. `xxxx?sid=xxxxx` and rather than building a
+		     `xxxx?sid=xxxxx/term1,term2` we need to build `xxxx/term1,term2?sid=xxxxx` */
+			var base = baseUrl.split("?");
+			var queryStr = base.length > 1 ? ('?' + base[1]) : '';
+			var link = base[0];
+			if (terms.length>0) {
+				link += '/' + terms.join(',');
 			}
-			return link;
-		}
+			return link + queryStr;
+		};
 		$scope.loadTags = function(query) {
 			var data = {
 				'query': query,
@@ -54,7 +58,7 @@ angular.module('searchApp', ['ngTagsInput'])
 		$scope.addTag = function(tag) {
 			var found = false;
 			this.tags.every(function(element, index, array) {
-				if (element.text == tag) {
+				if (element.text === tag) {
 					found = true;
 					return false;
 				}

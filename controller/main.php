@@ -685,7 +685,6 @@ class main
 				'U_SEARCH_ROUTE' => $form_action_route
 			));
 
-		// TODO
 		$tag_suggestions = array(
 			'beginner',
 			'trick',

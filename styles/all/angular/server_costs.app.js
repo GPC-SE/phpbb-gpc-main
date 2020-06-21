@@ -10,7 +10,7 @@ function PsCtrl($scope) {
 	$scope.trinkgeld = 5;
 	$scope.geberName = "";
 	$scope.updateTrinkgeldMsg = function() {
-		if ($scope.geberName == "") {
+		if ($scope.geberName === "") {
 			$scope.trinkgeldMessage = "Anonymes Trinkgeld";
 		} else {
 			$scope.trinkgeldMessage = "Trinkgeld von " + $scope.geberName;

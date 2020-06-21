@@ -32,11 +32,11 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="inputTags" class="col-sm-2 control-label">Häufige Tags</label>
+										<label class="col-sm-2 control-label">Häufige Tags</label>
 										<div class="col-sm-9">
 											<div class="rh_topictags_suggestions">
 												<!-- BEGIN rh_topictags_suggestions -->
-												{% include '../../../../../robertheim/topictags/styles/all/template/simple_tag.html' with {'NAME' : rh_topictags_suggestions.NAME, 'LINK' : rh_topictags_suggestions.LINK} only %}
+												{% include '@robertheim_topictags/simple_tag.html' with {'NAME' : rh_topictags_suggestions.NAME, 'LINK' : rh_topictags_suggestions.LINK} only %}
 												<!-- END rh_topictags_suggestions -->
 											</div>
 										</div>
@@ -46,7 +46,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
-										<label for="inputTags" class="col-sm-2 control-label">Tags</label>
+										<label class="col-sm-2 control-label">Tags</label>
 										<div class="col-sm-9">
 											<!-- allowed-tags-pattern="{RH_TOPICTAGS_ALLOWED_TAGS_REGEX}" -->
 											<tags-input ng-model="tags" add-on-comma="true"
