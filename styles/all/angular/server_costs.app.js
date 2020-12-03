@@ -22,7 +22,7 @@ function PsCtrl($scope) {
 		}
 	};
 	$scope.updateTrinkgeldMsg();
-			$scope.data = [
+	$scope.data = [
 		{'jahr': 2011, monat: 1, geber: 'Robert Heim', werbung: 0.80734694, trinkgeld: 0.19204082, status: 'finanziert'},
 		{'jahr': 2011, monat: 2, geber: 'Robert Heim', werbung: 0.93204082, trinkgeld: 0.04775510, status: 'finanziert'},
 		{'jahr': 2011, monat: 3, geber: 'Robert Heim', werbung: 0.64836735, trinkgeld: 0.35122449, status: 'finanziert'},
@@ -124,29 +124,37 @@ function PsCtrl($scope) {
 		{'jahr': 2019, monat: 3, geber: 'Yi-Quang', werbung: 0.16808770, trinkgeld: 0.83191230, status: 'finanziert'},
 		{'jahr': 2019, monat: 4, geber: 'Yi-Quang', werbung: 0.11693057, trinkgeld: 0.88306943, status: 'finanziert'},
 		{'jahr': 2019, monat: 5, geber: 'Yi-Quang', werbung: 0.30085262, trinkgeld: 0.69914738, status: 'finanziert'},
-		{'jahr': 2019, monat: 6, geber: 'Yi-Quang, Robert Heim', werbung: 0.10475030, trinkgeld: 0.89524970, status: 'finanziert'},
-		{'jahr': 2019, monat: 7, geber: 'Uxz', werbung: 0.16808770, trinkgeld: 0.83191230, status: 'finanziert'},
-		{'jahr': 2019, monat: 8, geber: 'Uxz', werbung: 0.20097442, trinkgeld: 0.79902558, status: 'finanziert'},
-		{'jahr': 2019, monat: 9, geber: 'Uxz', werbung: 0.15814319, trinkgeld: 0.84185681, status: 'finanziert'},
+		{'jahr': 2019, monat: 6, geber: 'Yi-Quang, Robert Heim, N!uK', werbung: 0.10475030, trinkgeld: 0.89524970, status: 'finanziert'},
+		{'jahr': 2019, monat: 7, geber: 'N!uK', werbung: 0.16808770, trinkgeld: 0.83191230, status: 'finanziert'},
+		{'jahr': 2019, monat: 8, geber: 'N!uK', werbung: 0.20097442, trinkgeld: 0.79902558, status: 'finanziert'},
+		{'jahr': 2019, monat: 9, geber: 'N!uK, Uxz', werbung: 0.15814319, trinkgeld: 0.84185681, status: 'finanziert'},
 		{'jahr': 2019, monat: 10, geber: 'Uxz', werbung: 0.77358491, trinkgeld: 0.22641509, status: 'finanziert'},
 		{'jahr': 2019, monat: 11, geber: 'Uxz', werbung: 0.46483705, trinkgeld: 0.53516295, status: 'finanziert'},
 		{'jahr': 2019, monat: 12, geber: 'Uxz', werbung: 0.24830393, trinkgeld: 0.75169607, status: 'finanziert'},
 		{'jahr': 2020, monat: 1, geber: 'Uxz', werbung: 0.30572473, trinkgeld: 0.69427527, status: 'finanziert'},
 		{'jahr': 2020, monat: 2, geber: 'Uxz', werbung: 0.14250914, trinkgeld: 0.85749086, status: 'finanziert'},
-		{'jahr': 2020, monat: 3, geber: 'Uxz, jopi', werbung: 0.16808770, trinkgeld: 0.83191230, status: 'finanziert'},
-		{'jahr': 2020, monat: 4, geber: 'jopi', werbung: 0.14494519, trinkgeld: 0.85505481, status: 'finanziert'},
-		{'jahr': 2020, monat: 5, geber: 'jopi', werbung: 0.19853837, trinkgeld: 0.80146163, status: 'finanziert'},
-		{'jahr': 2020, monat: 6, geber: 'jopi, Juzzle', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2020, monat: 7, geber: 'Juzzle, LinkinPark', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2020, monat: 8, geber: 'LinkinPark', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2020, monat: 9, geber: 'LinkinPark, Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2020, monat: 10, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2020, monat: 11, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2020, monat: 12, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2021, monat: 1, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2021, monat: 2, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 0.19610231, status: '6.60 € offen'},
-		{'jahr': 2021, monat: 3, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-		{'jahr': 2021, monat: 4, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
+		{'jahr': 2020, monat: 3, geber: 'Uxz', werbung: 0.16808770, trinkgeld: 0.83191230, status: 'finanziert'},
+		{'jahr': 2020, monat: 4, geber: 'Uxz', werbung: 0.14494519, trinkgeld: 0.85505481, status: 'finanziert'},
+		{'jahr': 2020, monat: 5, geber: 'Uxz', werbung: 0.19853837, trinkgeld: 0.80146163, status: 'finanziert'},
+		{'jahr': 2020, monat: 6, geber: 'Uxz, jopi', werbung: 0.11693057, trinkgeld: 0.88306943, status: 'finanziert'},
+		{'jahr': 2020, monat: 7, geber: 'jopi', werbung: 0.10962241, trinkgeld: 0.89037759, status: 'finanziert'},
+		{'jahr': 2020, monat: 8, geber: 'jopi', werbung: 0.25500000, trinkgeld: 0.74500000, status: 'finanziert'},
+		{'jahr': 2020, monat: 9, geber: 'jopi, Juzzle', werbung: 0.13310868, trinkgeld: 0.86689132, status: 'finanziert'},
+		{'jahr': 2020, monat: 10, geber: 'Juzzle, LinkinPark', werbung: 0.24250000, trinkgeld: 0.75750000, status: 'finanziert'},
+		{'jahr': 2020, monat: 11, geber: 'LinkinPark', werbung: 0.25875000, trinkgeld: 0.74125000, status: 'finanziert'},
+		{'jahr': 2020, monat: 12, geber: 'LinkinPark', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 1, geber: 'LinkinPark, Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 2, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 3, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 4, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 5, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 6, geber: 'Weatherman', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 7, geber: 'Weatherman, m1ch1', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 8, geber: 'm1ch1', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 9, geber: 'm1ch1, wasamasa', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 10, geber: 'wasamasa', werbung: 0.00000000, trinkgeld: 0.64311815, status: '2.93 € offen'},
+		{'jahr': 2021, monat: 11, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
+		{'jahr': 2021, monat: 12, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
 	];
 	$scope.geber = [
 		{name: 'Robert Heim', anzahl: 56, trinkgeld: 950.9399999999998},
@@ -155,10 +163,13 @@ function PsCtrl($scope) {
 		{name: 'Yi-Quang', anzahl: 3, trinkgeld: 40.0},
 		{name: ':) peda :)', anzahl: 3, trinkgeld: 25.009999999999998},
 		{name: 'Huy aka Skiller', anzahl: 1, trinkgeld: 25.0},
+		{name: 'N!uK', anzahl: 1, trinkgeld: 21.1},
 		{name: 'jopi', anzahl: 1, trinkgeld: 20.0},
+		{name: 'm1ch1', anzahl: 1, trinkgeld: 20.0},
 		{name: 'LinkinPark', anzahl: 1, trinkgeld: 16.42},
 		{name: 'ChainBreak', anzahl: 1, trinkgeld: 16.0},
 		{name: 'BBR', anzahl: 1, trinkgeld: 15.0},
+		{name: 'wasamasa', anzahl: 1, trinkgeld: 13.37},
 		{name: 'Juzzle', anzahl: 1, trinkgeld: 10.82},
 		{name: 'Vega', anzahl: 1, trinkgeld: 10.0},
 		{name: 'president', anzahl: 1, trinkgeld: 10.0},
@@ -177,6 +188,6 @@ function PsCtrl($scope) {
 		{name: 'wazzabi', anzahl: 1, trinkgeld: 2.0},
 		{name: 'Mayu', anzahl: 1, trinkgeld: 1.56}
 	];
-	$scope.standDatum = "15.06.2020";
+	$scope.standDatum = "03.12.2020";
 };
 
