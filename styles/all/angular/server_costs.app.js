@@ -152,9 +152,10 @@ function PsCtrl($scope) {
 		{'jahr': 2021, monat: 7, geber: 'Weatherman, m1ch1', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2021, monat: 8, geber: 'm1ch1', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2021, monat: 9, geber: 'm1ch1, wasamasa', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2021, monat: 10, geber: 'wasamasa', werbung: 0.00000000, trinkgeld: 0.64311815, status: '2.93 € offen'},
-		{'jahr': 2021, monat: 11, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
-		{'jahr': 2021, monat: 12, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
+		{'jahr': 2021, monat: 10, geber: 'wasamasa, LinkinPark', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 11, geber: 'LinkinPark', werbung: 0.00000000, trinkgeld: 0.08038977, status: '7.55 € offen'},
+		{'jahr': 2021, monat: 12, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
+		{'jahr': 2022, monat: 1, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
 	];
 	$scope.geber = [
 		{name: 'Robert Heim', anzahl: 56, trinkgeld: 950.9399999999998},
@@ -164,9 +165,9 @@ function PsCtrl($scope) {
 		{name: ':) peda :)', anzahl: 3, trinkgeld: 25.009999999999998},
 		{name: 'Huy aka Skiller', anzahl: 1, trinkgeld: 25.0},
 		{name: 'N!uK', anzahl: 1, trinkgeld: 21.1},
+		{name: 'LinkinPark', anzahl: 2, trinkgeld: 20.01},
 		{name: 'jopi', anzahl: 1, trinkgeld: 20.0},
 		{name: 'm1ch1', anzahl: 1, trinkgeld: 20.0},
-		{name: 'LinkinPark', anzahl: 1, trinkgeld: 16.42},
 		{name: 'ChainBreak', anzahl: 1, trinkgeld: 16.0},
 		{name: 'BBR', anzahl: 1, trinkgeld: 15.0},
 		{name: 'wasamasa', anzahl: 1, trinkgeld: 13.37},
@@ -188,6 +189,6 @@ function PsCtrl($scope) {
 		{name: 'wazzabi', anzahl: 1, trinkgeld: 2.0},
 		{name: 'Mayu', anzahl: 1, trinkgeld: 1.56}
 	];
-	$scope.standDatum = "03.12.2020";
+	$scope.standDatum = "17.12.2020";
 };
 
