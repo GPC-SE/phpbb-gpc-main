@@ -152,21 +152,30 @@ function PsCtrl($scope) {
 		{'jahr': 2021, monat: 7, geber: 'Weatherman', werbung: 0.15956151, trinkgeld: 0.84043849, status: 'finanziert'},
 		{'jahr': 2021, monat: 8, geber: 'Weatherman', werbung: 0.12667479, trinkgeld: 0.87332521, status: 'finanziert'},
 		{'jahr': 2021, monat: 9, geber: 'Weatherman, m1ch1', werbung: 0.14781173, trinkgeld: 0.85218827, status: 'finanziert'},
-		{'jahr': 2021, monat: 10, geber: 'm1ch1', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2021, monat: 11, geber: 'm1ch1, wasamasa', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2021, monat: 12, geber: 'wasamasa', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2022, monat: 1, geber: 'wasamasa, LinkinPark, Juzzle', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2022, monat: 2, geber: 'Juzzle', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2022, monat: 3, geber: 'Juzzle, RPD', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2022, monat: 4, geber: 'RPD, :) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2022, monat: 5, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2021, monat: 10, geber: 'm1ch1', werbung: 0.21193666, trinkgeld: 0.78806334, status: 'finanziert'},
+		{'jahr': 2021, monat: 11, geber: 'm1ch1', werbung: 0.44457978, trinkgeld: 0.55542022, status: 'finanziert'},
+		{'jahr': 2021, monat: 12, geber: 'm1ch1, wasamasa', werbung: 0.70036541, trinkgeld: 0.29963459, status: 'finanziert'},
+		{'jahr': 2022, monat: 1, geber: 'wasamasa', werbung: 0.13398295, trinkgeld: 0.86601705, status: 'finanziert'},
+		{'jahr': 2022, monat: 2, geber: 'wasamasa, LinkinPark', werbung: 0.06333739, trinkgeld: 0.93666261, status: 'finanziert'},
+		{'jahr': 2022, monat: 3, geber: 'LinkinPark, Juzzle', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2022, monat: 4, geber: 'Juzzle', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2022, monat: 5, geber: 'Juzzle, RPD, :) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2022, monat: 6, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2022, monat: 7, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 0.78197320, status: '1.79 € offen'},
-		{'jahr': 2022, monat: 8, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
+		{'jahr': 2022, monat: 7, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2022, monat: 8, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2022, monat: 9, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2022, monat: 10, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2022, monat: 11, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2022, monat: 12, geber: '', werbung: 1.00000000, trinkgeld: 0.00000000, status: 'finanziert'},
+		{'jahr': 2023, monat: 1, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2023, monat: 2, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2023, monat: 3, geber: ':) peda :)', werbung: 0.00000000, trinkgeld: 0.26918392, status: '6.00 € offen'},
+		{'jahr': 2023, monat: 4, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'},
+		{'jahr': 2023, monat: 5, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.21 € offen'}
 	];
 	$scope.geber = [
 		{name: 'Robert Heim', anzahl: 56, trinkgeld: 950.9399999999998},
-		{name: ':) peda :)', anzahl: 4, trinkgeld: 55.0},
+		{name: ':) peda :)', anzahl: 5, trinkgeld: 100.0},
 		{name: 'Uxz', anzahl: 1, trinkgeld: 50.0},
 		{name: 'Weatherman', anzahl: 1, trinkgeld: 50.0},
 		{name: 'Yi-Quang', anzahl: 3, trinkgeld: 40.0},
@@ -197,6 +206,6 @@ function PsCtrl($scope) {
 		{name: 'wazzabi', anzahl: 1, trinkgeld: 2.0},
 		{name: 'Mayu', anzahl: 1, trinkgeld: 1.56}
 	];
-	$scope.standDatum = "09.10.2021";
+	$scope.standDatum = "11.03.2022";
 };
 
