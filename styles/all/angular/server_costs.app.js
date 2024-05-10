@@ -22,7 +22,7 @@ function PsCtrl($scope) {
 		}
 	};
 	$scope.updateTrinkgeldMsg();
-	$scope.data = [
+    $scope.data = [
 		{'jahr': 2011, monat: 1, geber: 'Robert Heim', werbung: 0.80734694, trinkgeld: 0.19204082, status: 'finanziert'},
 		{'jahr': 2011, monat: 2, geber: 'Robert Heim', werbung: 0.93204082, trinkgeld: 0.04775510, status: 'finanziert'},
 		{'jahr': 2011, monat: 3, geber: 'Robert Heim', werbung: 0.64836735, trinkgeld: 0.35122449, status: 'finanziert'},
@@ -173,24 +173,25 @@ function PsCtrl($scope) {
 		{'jahr': 2023, monat: 4, geber: ':) peda :), Lee', werbung: 0.03452116, trinkgeld: 0.96547884, status: 'finanziert'},
 		{'jahr': 2023, monat: 5, geber: 'Lee', werbung: 0.03674833, trinkgeld: 0.96325167, status: 'finanziert'},
 		{'jahr': 2023, monat: 6, geber: 'Lee, ChainBreak', werbung: 0.02561247, trinkgeld: 0.97438753, status: 'finanziert'},
-		{'jahr': 2023, monat: 7, geber: 'ChainBreak', werbung: 0.02004454, trinkgeld: 0.97995546, status: 'finanziert'},
-		{'jahr': 2023, monat: 8, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2023, monat: 9, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2023, monat: 10, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2023, monat: 11, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2023, monat: 12, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2024, monat: 1, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2024, monat: 2, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2024, monat: 3, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2024, monat: 4, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2023, monat: 7, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2023, monat: 8, geber: 'ChainBreak', werbung: 0.02115813, trinkgeld: 0.97884187, status: 'finanziert'},
+		{'jahr': 2023, monat: 9, geber: 'ChainBreak', werbung: 0.02132701, trinkgeld: 0.97867299, status: 'finanziert'},
+		{'jahr': 2023, monat: 10, geber: 'ChainBreak', werbung: 0.02895323, trinkgeld: 0.97104677, status: 'finanziert'},
+		{'jahr': 2023, monat: 11, geber: 'ChainBreak', werbung: 0.01893096, trinkgeld: 0.98106904, status: 'finanziert'},
+		{'jahr': 2023, monat: 12, geber: 'ChainBreak', werbung: 0.01002227, trinkgeld: 0.98997773, status: 'finanziert'},
+		{'jahr': 2024, monat: 1, geber: 'ChainBreak', werbung: 0.04120267, trinkgeld: 0.95879733, status: 'finanziert'},
+		{'jahr': 2024, monat: 2, geber: 'ChainBreak', werbung: 0.05011136, trinkgeld: 0.94988864, status: 'finanziert'},
+		{'jahr': 2024, monat: 3, geber: 'ChainBreak', werbung: 0.03674833, trinkgeld: 0.96325167, status: 'finanziert'},
+		{'jahr': 2024, monat: 4, geber: 'ChainBreak', werbung: 0.02115813, trinkgeld: 0.97884187, status: 'finanziert'},
 		{'jahr': 2024, monat: 5, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2024, monat: 6, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2024, monat: 7, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2024, monat: 8, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
 		{'jahr': 2024, monat: 9, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
-		{'jahr': 2024, monat: 10, geber: 'ChainBreak', werbung: 0.00000000, trinkgeld: 0.52783964, status: '4.24 € offen'},
-		{'jahr': 2024, monat: 11, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.98 € offen'},
-		{'jahr': 2024, monat: 12, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.98 € offen'}
+		{'jahr': 2024, monat: 10, geber: 'ChainBreak, Robin', werbung: 0.00000000, trinkgeld: 1.00000000, status: 'finanziert'},
+		{'jahr': 2024, monat: 11, geber: 'Robin', werbung: 0.00000000, trinkgeld: 0.32293987, status: '6.08 € offen'},
+		{'jahr': 2024, monat: 12, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.98 € offen'},
+		{'jahr': 2025, monat: 1, geber: '', werbung: 0.00000000, trinkgeld: 0.00000000, status: '8.98 € offen'}
 	];
 	$scope.geber = [
 		{name: 'Robert Heim', anzahl: 56, trinkgeld: 950.9399999999998},
@@ -217,6 +218,7 @@ function PsCtrl($scope) {
 		{name: 'deathfish', anzahl: 1, trinkgeld: 5.0},
 		{name: 'computer70', anzahl: 1, trinkgeld: 5.0},
 		{name: 'RPD', anzahl: 1, trinkgeld: 5.0},
+		{name: 'Robin', anzahl: 1, trinkgeld: 5.0},
 		{name: 'taichi1082', anzahl: 1, trinkgeld: 4.0},
 		{name: 'Comssa Penna', anzahl: 2, trinkgeld: 4.0},
 		{name: 'Sponge', anzahl: 1, trinkgeld: 4.0},
@@ -226,6 +228,6 @@ function PsCtrl($scope) {
 		{name: 'wazzabi', anzahl: 1, trinkgeld: 2.0},
 		{name: 'Mayu', anzahl: 1, trinkgeld: 1.56}
 	];
-	$scope.standDatum = "16.08.2023";
+	$scope.standDatum = "10.05.2024";
 };
 
